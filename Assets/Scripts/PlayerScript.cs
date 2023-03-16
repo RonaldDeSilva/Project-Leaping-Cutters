@@ -43,7 +43,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //This if is asking if there is any activity in the controllers stick
-        if (controllerRot.y > 0.15 || controllerRot.y < -0.15 || controllerRot.x > 0.15 || controllerRot.x < -0.15)
+        if (Input.GetAxis("Vertical") > 0.15 || Input.GetAxis("Vertical") < -0.15 || Input.GetAxis("Horizontal") > 0.15 || Input.GetAxis("Horizontal") < -0.15)
         {
             //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
             //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
