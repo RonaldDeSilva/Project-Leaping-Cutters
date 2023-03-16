@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
+public class Player2Script : MonoBehaviour
 {
     private HingeJoint2D hinge;
     private JointMotor2D motorRef1;
@@ -13,8 +13,8 @@ public class PlayerScript : MonoBehaviour
     //private Vector2 movement;
     //public InputActionReference PlayerControls;
 
-    
-    
+
+
     private void Awake()
     {
         //Setting the hinge as the correct one and also setting up motor references to allow the motor to be turned off and on and change direction
@@ -33,9 +33,9 @@ public class PlayerScript : MonoBehaviour
         var armRot = arm.transform.eulerAngles;
 
         //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI) - 90f);
+        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
 
-        
+
         //Align the controllers angle numbers to the arms angle numbers
         if (controllerRot.z + 360f < 360f)
         {
@@ -43,7 +43,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //This if is asking if there is any activity in the controllers stick
-        if (Input.GetAxis("Vertical") > 0.5 || Input.GetAxis("Vertical") < -0.5 || Input.GetAxis("Horizontal") > 0.5 || Input.GetAxis("Horizontal") < -0.5)
+        if (Input.GetAxis("Vertical2") > 0.15 || Input.GetAxis("Vertical2") < -0.15 || Input.GetAxis("Horizontal2") > 0.15 || Input.GetAxis("Horizontal2") < -0.15)
         {
             //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
             //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
@@ -73,7 +73,7 @@ public class PlayerScript : MonoBehaviour
             {
                 hinge.motor = motorRef3;
             }
-            
+
 
         }
         else
