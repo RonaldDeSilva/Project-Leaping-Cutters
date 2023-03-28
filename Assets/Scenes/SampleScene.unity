@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arm: {fileID: 1086810675}
-  spd: 10
+  spd: 250
 --- !u!50 &1728096445
 Rigidbody2D:
   serializedVersion: 4
@@ -774,7 +774,7 @@ HingeJoint2D:
   m_ConnectedAnchor: {x: 0, y: -1}
   m_UseMotor: 1
   m_Motor:
-    m_MotorSpeed: 10
+    m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
   m_UseLimits: 0
   m_AngleLimits:

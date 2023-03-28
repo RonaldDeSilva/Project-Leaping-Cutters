@@ -33,7 +33,7 @@ public class Player2Script : MonoBehaviour
         var armRot = arm.transform.eulerAngles;
 
         //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
+        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
 
 
         //Align the controllers angle numbers to the arms angle numbers
