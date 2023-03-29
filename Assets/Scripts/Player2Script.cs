@@ -10,8 +10,8 @@ public class Player2Script : MonoBehaviour
     private JointMotor2D motorRef3;
     public GameObject arm;
     public float spd;
-    //private Vector2 movement;
-    //public InputActionReference PlayerControls;
+    public Transform Respawn;
+    public GameObject Player;
 
 
 
@@ -22,7 +22,10 @@ public class Player2Script : MonoBehaviour
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
         motorRef3 = new JointMotor2D { motorSpeed = 0, maxMotorTorque = 10000 };
-
+        if (Respawn == null)
+        {
+            Respawn = GameObject.Find("Respawn").transform;
+        }
     }
 
     void FixedUpdate()
@@ -79,6 +82,15 @@ public class Player2Script : MonoBehaviour
         else
         {
             hinge.motor = motorRef3;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Deathbox"))
+        {
+            Destroy(this.gameObject);
+            Instantiate(Player, Respawn.position, this.transform.rotation);
         }
     }
 }
