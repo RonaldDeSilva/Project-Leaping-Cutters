@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player2Script : MonoBehaviour
+public class Player4Script : MonoBehaviour
 {
     private HingeJoint2D hinge;
     private JointMotor2D motorRef1;
@@ -40,7 +40,7 @@ public class Player2Script : MonoBehaviour
         var armRot = arm.transform.eulerAngles;
 
         //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
+        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical4"), Input.GetAxis("Horizontal4")) * 180 / Mathf.PI) - 90f);
 
 
         //Align the controllers angle numbers to the arms angle numbers
@@ -50,7 +50,7 @@ public class Player2Script : MonoBehaviour
         }
 
         //This if is asking if there is any activity in the controllers stick
-        if (Input.GetAxis("Vertical2") > 0.15 || Input.GetAxis("Vertical2") < -0.15 || Input.GetAxis("Horizontal2") > 0.15 || Input.GetAxis("Horizontal2") < -0.15)
+        if (Input.GetAxis("Vertical4") > 0.15 || Input.GetAxis("Vertical4") < -0.15 || Input.GetAxis("Horizontal4") > 0.15 || Input.GetAxis("Horizontal4") < -0.15)
         {
             //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
             //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering

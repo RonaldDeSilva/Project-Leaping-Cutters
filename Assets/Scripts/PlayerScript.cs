@@ -26,6 +26,10 @@ public class PlayerScript : MonoBehaviour
         {
             Respawn = GameObject.Find("Respawn").transform;
         }
+        if (Player == null)
+        {
+            Player = this.gameObject;
+        }
     }
 
     void FixedUpdate()
@@ -89,8 +93,9 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.CompareTag("Deathbox"))
         {
-            Destroy(this.gameObject);
             Instantiate(Player, Respawn.position, this.transform.rotation);
+            Destroy(this.gameObject);
+            
         }
     }
 }

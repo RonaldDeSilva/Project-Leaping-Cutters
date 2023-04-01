@@ -217,7 +217,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 5783824789046007165}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c5e121fd93915514bbe6012337cb6694, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -292,6 +292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arm: {fileID: 5783824788282222477}
-  spd: 200
+  spd: 315
   Respawn: {fileID: 0}
-  Player: {fileID: 0}
+  Player: {fileID: 5783824789046007165}
