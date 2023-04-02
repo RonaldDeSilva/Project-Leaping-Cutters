@@ -96,14 +96,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: af7244dd8697deb45b9aa9d033de7b72, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!70 &5783824788282222479
 CapsuleCollider2D:
@@ -131,12 +131,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5783824789046007163}
   - component: {fileID: 5783824789046007162}
-  - component: {fileID: 5783824789046007160}
+  - component: {fileID: 5783824789046007161}
   - component: {fileID: 5783824789046007167}
   - component: {fileID: 5783824789046007166}
-  - component: {fileID: 5783824789046007161}
+  - component: {fileID: 5096767272801538781}
   m_Layer: 0
-  m_Name: Player (1)
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,32 +208,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5783824789046007160
-BoxCollider2D:
+--- !u!114 &5783824789046007161
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5783824789046007165}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: c5e121fd93915514bbe6012337cb6694, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b489930b5fb23648a891ca9f9766a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arm: {fileID: 5783824788282222477}
+  Respawn: {fileID: 0}
+  Player: {fileID: 5783824789046007165}
+  spd: 315
+  DashDistance: 0.2
+  DashSpd: 10
+  DashCooldown: 3
 --- !u!50 &5783824789046007167
 Rigidbody2D:
   serializedVersion: 4
@@ -246,14 +239,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_GravityScale: 2.5
+  m_Material: {fileID: 6200000, guid: c5e121fd93915514bbe6012337cb6694, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!233 &5783824789046007166
 HingeJoint2D:
@@ -279,19 +272,19 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
---- !u!114 &5783824789046007161
-MonoBehaviour:
+--- !u!70 &5096767272801538781
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5783824789046007165}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b489930b5fb23648a891ca9f9766a66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arm: {fileID: 5783824788282222477}
-  spd: 315
-  Respawn: {fileID: 0}
-  Player: {fileID: 5783824789046007165}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0

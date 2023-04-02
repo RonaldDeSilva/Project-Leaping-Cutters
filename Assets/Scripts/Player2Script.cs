@@ -9,22 +9,28 @@ public class Player2Script : MonoBehaviour
     private JointMotor2D motorRef2;
     private JointMotor2D motorRef3;
     public GameObject arm;
-    public float spd;
     public Transform Respawn;
     public GameObject Player;
-
-
+    private Rigidbody2D rb;
+    public float spd;
+    public float DashDistance;
+    public float DashSpd;
+    public float DashCooldown;
+    private bool Dashed = false;
+    private bool Dashing = false;
+    private Vector2 DashDir;
 
     private void Awake()
     {
         //Setting the hinge as the correct one and also setting up motor references to allow the motor to be turned off and on and change direction
         hinge = GetComponent<HingeJoint2D>();
+        rb = GetComponent<Rigidbody2D>();
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
         motorRef3 = new JointMotor2D { motorSpeed = 0, maxMotorTorque = 10000 };
         if (Respawn == null)
         {
-            Respawn = GameObject.Find("Respawn").transform;
+            Respawn = GameObject.Find("Respawn2").transform;
         }
         if (Player == null)
         {
@@ -87,15 +93,49 @@ public class Player2Script : MonoBehaviour
         {
             hinge.motor = motorRef3;
         }
+
+        //Input for the dash ability
+        if (Input.GetAxis("Dash2") > 0 && !Dashed && !Dashing)
+        {
+            Debug.Log("Dash");
+            StartCoroutine("Dash");
+        }
+
+        //Movement Code for Dashing
+        if (Dashing)
+        {
+            Debug.Log("Dashing");
+            rb.velocity = DashDir;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Deathbox"))
         {
+            Dashing = false;
+            Dashed = false;
             Instantiate(Player, Respawn.position, this.transform.rotation);
             Destroy(this.gameObject);
             
         }
+    }
+
+    IEnumerator Dash()
+    {
+        rb.velocity = new Vector2(0, 0);
+        DashDir = new Vector2(Input.GetAxis("Horizontal2") * DashSpd, -Input.GetAxis("Vertical2") * DashSpd);
+        Dashing = true;
+        Debug.Log(DashDir);
+        yield return new WaitForSeconds(DashDistance);
+        Dashed = true;
+        StartCoroutine("DashCooldownTimer");
+    }
+
+    IEnumerator DashCooldownTimer()
+    {
+        Dashing = false;
+        yield return new WaitForSeconds(DashCooldown);
+        Dashed = false;
     }
 }

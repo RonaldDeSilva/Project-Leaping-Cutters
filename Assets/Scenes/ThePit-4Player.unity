@@ -1656,14 +1656,6 @@ PrefabInstance:
       propertyPath: Respawn
       value: 
       objectReference: {fileID: 1662866414}
-    - target: {fileID: 8483227654590474383, guid: 04e8ead80c627fe4280efbf245ab65f3, type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8483227654590474383, guid: 04e8ead80c627fe4280efbf245ab65f3, type: 3}
-      propertyPath: m_GravityScale
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8483227655106554373, guid: 04e8ead80c627fe4280efbf245ab65f3, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
