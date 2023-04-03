@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Player3Script : MonoBehaviour
 {
+    #region Hinge
     private HingeJoint2D hinge;
     private JointMotor2D motorRef1;
     private JointMotor2D motorRef2;
     private JointMotor2D motorRef3;
+    #endregion
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Components
     public GameObject arm;
     public Transform Respawn;
     public GameObject Player;
     private Rigidbody2D rb;
+    #endregion
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Attributes & Abilities
     public float spd;
+
     public float DashDistance;
     public float DashSpd;
     public float DashCooldown;
@@ -20,16 +28,34 @@ public class Player3Script : MonoBehaviour
     private bool Dashing = false;
     private Vector2 DashDir;
 
-
+    public GameObject Proj;
+    public float ProjSpd;
+    public float RecoilDistance;
+    public float RecoilSpd;
+    public float ReloadTime;
+    private bool Recoiling = false;
+    private bool Reloading = false;
+    private Vector2 RecoilDir;
+    private Vector2 ProjDir;
+    #endregion
 
     private void Awake()
     {
+        #region Initialization
         //Setting the hinge as the correct one and also setting up motor references to allow the motor to be turned off and on and change direction
         hinge = GetComponent<HingeJoint2D>();
         rb = GetComponent<Rigidbody2D>();
+        arm.transform.rotation = new Quaternion(0, 0, 0, 0);
+        arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1, 0);
+
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
         motorRef3 = new JointMotor2D { motorSpeed = 0, maxMotorTorque = 10000 };
+        Recoiling = false;
+        Dashed = false;
+        Dashing = false;
+        Reloading = false;
+
         if (Respawn == null)
         {
             Respawn = GameObject.Find("Respawn").transform;
@@ -38,11 +64,12 @@ public class Player3Script : MonoBehaviour
         {
             Player = this.gameObject;
         }
+        #endregion
     }
 
     void FixedUpdate()
     {
-        //movement = PlayerControls.action.ReadValue<Vector2>();
+        #region Arm Movement
 
         //Calculating the rotational position of the arm, and converting the input axes into rotation
         var armRot = arm.transform.eulerAngles;
@@ -95,38 +122,59 @@ public class Player3Script : MonoBehaviour
         {
             hinge.motor = motorRef3;
         }
+        #endregion
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        #region Dashing Input
 
         //Input for the dash ability
-        if (Input.GetAxis("Dash3") > 0 && !Dashed && !Dashing)
+        if (Input.GetAxis("Dash3") > 0 && !Dashed && !Dashing && !Recoiling)
         {
-            Debug.Log("Dash");
             StartCoroutine("Dash");
         }
 
         //Movement Code for Dashing
         if (Dashing)
         {
-            Debug.Log("Dashing");
             rb.velocity = DashDir;
         }
+
+        #endregion
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        #region Projectile Input
+
+        //Input for the Shoot ability
+        if (Input.GetAxis("Shoot3") > 0 && !Recoiling && !Reloading && !Dashing)
+        {
+            StartCoroutine("Shoot");
+        }
+
+        //Movement Code for recoiling after shooting
+        if (Recoiling)
+        {
+            rb.velocity = RecoilDir;
+        }
+
+        #endregion
     }
 
+    #region Death
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Deathbox"))
         {
+            Dashing = false;
+            Dashed = false;
             Instantiate(Player, Respawn.position, this.transform.rotation);
             Destroy(this.gameObject);
-            
         }
     }
-
+    #endregion
+    //---------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Dashing Coroutines
     IEnumerator Dash()
     {
-        rb.velocity = new Vector2(0, 0);
         DashDir = new Vector2(Input.GetAxis("Horizontal3") * DashSpd, -Input.GetAxis("Vertical3") * DashSpd);
         Dashing = true;
-        Debug.Log(DashDir);
         yield return new WaitForSeconds(DashDistance);
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
@@ -138,4 +186,26 @@ public class Player3Script : MonoBehaviour
         yield return new WaitForSeconds(DashCooldown);
         Dashed = false;
     }
+    #endregion
+    //-------------------------------------------------------------------------------------------------------------------------------
+    #region Shooting Coroutines
+    IEnumerator Shoot()
+    {
+        RecoilDir = new Vector2(-Input.GetAxis("Horizontal3") * RecoilSpd, Input.GetAxis("Vertical3") * RecoilSpd);
+        ProjDir = new Vector2(Input.GetAxis("Horizontal3") * ProjSpd, -Input.GetAxis("Vertical3") * ProjSpd);
+        var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
+        pj.GetComponent<Projectile>().Awaken(ProjDir);
+        Recoiling = true;
+        yield return new WaitForSeconds(RecoilDistance);
+        Reloading = true;
+        StartCoroutine("ShootCooldownTimer");
+    }
+
+    IEnumerator ShootCooldownTimer()
+    {
+        Recoiling = false;
+        yield return new WaitForSeconds(ReloadTime);
+        Reloading = false;
+    }
+    #endregion
 }
