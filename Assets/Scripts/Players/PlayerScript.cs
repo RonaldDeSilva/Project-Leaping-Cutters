@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -14,13 +15,15 @@ public class PlayerScript : MonoBehaviour
     #region Components
     public GameObject arm;
     public Transform Respawn;
-    public GameObject Player;
+    private GameObject Player;
     private Rigidbody2D rb;
+    private GameObject Can;
     #endregion
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     #region Attributes & Abilities
     public float spd;
 
+    //Attributes for the Dash ability
     public float DashDistance;
     public float DashSpd;
     public float DashCooldown;
@@ -28,6 +31,7 @@ public class PlayerScript : MonoBehaviour
     private bool Dashing = false;
     private Vector2 DashDir;
 
+    //Attributes for the Projectile ability
     public GameObject Proj;
     public float ProjSpd;
     public float RecoilDistance;
@@ -38,6 +42,7 @@ public class PlayerScript : MonoBehaviour
     private Vector2 RecoilDir;
     private Vector2 ProjDir;
     #endregion
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     private void Awake()
     {
@@ -47,6 +52,9 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         arm.transform.rotation = new Quaternion(0,0,0,0);
         arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1, 0);
+        Player = this.gameObject;
+        Can = GameObject.Find("Canvas");
+
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
@@ -60,10 +68,7 @@ public class PlayerScript : MonoBehaviour
         {
             Respawn = GameObject.Find("Respawn").transform;
         }
-        if (Player == null)
-        {
-            Player = this.gameObject;
-        }
+
         #endregion
     }
 
@@ -164,7 +169,11 @@ public class PlayerScript : MonoBehaviour
         {
             Dashing = false;
             Dashed = false;
-            Instantiate(Player, Respawn.position, this.transform.rotation);
+            //if (Can.lives > 0)
+            //{
+                Instantiate(Player, Respawn.position, this.transform.rotation);
+                //Can.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = lives.ToString();
+            //}
             Destroy(this.gameObject);
         }
     }
