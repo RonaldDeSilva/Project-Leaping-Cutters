@@ -22,6 +22,7 @@ public class PlayerScript : MonoBehaviour
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     #region Attributes & Abilities
     public float spd;
+    private int lives;
 
     //Attributes for the Dash ability
     public float DashDistance;
@@ -54,7 +55,7 @@ public class PlayerScript : MonoBehaviour
         arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1, 0);
         Player = this.gameObject;
         Can = GameObject.Find("Canvas");
-
+        lives = int.Parse(Can.transform.GetChild(0).gameObject.GetComponent<Text>().text);
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
@@ -169,12 +170,14 @@ public class PlayerScript : MonoBehaviour
         {
             Dashing = false;
             Dashed = false;
-            //if (Can.lives > 0)
-            //{
+            if (lives > 0)
+            {
+                lives -= 1;
+                Can.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
-                //Can.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = lives.ToString();
-            //}
-            Destroy(this.gameObject);
+                Destroy(this.gameObject);
+            }
+            
         }
     }
     #endregion
