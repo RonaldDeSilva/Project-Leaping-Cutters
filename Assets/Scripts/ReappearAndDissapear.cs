@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ReappearAndDissapear : MonoBehaviour
 {
+    //This script is to make platforms that disappear and reappear at set intervals
+
     public float Timer;
     private Collider2D col;
     private SpriteRenderer sprite;

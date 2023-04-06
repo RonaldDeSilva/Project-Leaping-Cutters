@@ -75,93 +75,99 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        #region Arm Movement
+        #region Movement and Ability Inputs
 
-        //Calculating the rotational position of the arm, and converting the input axes into rotation
-        var armRot = arm.transform.eulerAngles;
+            #region Arm Movement
 
-        //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI) - 90f);
+            //Calculating the rotational position of the arm, and converting the input axes into rotation
+            var armRot = arm.transform.eulerAngles;
+
+            //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
+            var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI) - 90f);
 
 
-        //Align the controllers angle numbers to the arms angle numbers
-        if (controllerRot.z + 360f < 360f)
-        {
-            controllerRot.z = controllerRot.z + 360f;
-        }
-
-        //This if is asking if there is any activity in the controllers stick
-        if (Input.GetAxis("Vertical") > 0.15 || Input.GetAxis("Vertical") < -0.15 || Input.GetAxis("Horizontal") > 0.15 || Input.GetAxis("Horizontal") < -0.15)
-        {
-            //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
-            //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
-            if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+            //Align the controllers angle numbers to the arms angle numbers
+            if (controllerRot.z + 360f < 360f)
             {
-                if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
-                {
-                    hinge.motor = motorRef1;
-                }
-                else
-                {
-                    hinge.motor = motorRef2;
-                }
+                controllerRot.z = controllerRot.z + 360f;
             }
-            else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+
+            //This if is asking if there is any activity in the controllers stick
+            if (Input.GetAxis("Vertical") > 0.15 || Input.GetAxis("Vertical") < -0.15 || Input.GetAxis("Horizontal") > 0.15 || Input.GetAxis("Horizontal") < -0.15)
             {
-                if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
+                //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
+                if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
                 {
-                    hinge.motor = motorRef2;
+                    if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                    {
+                        hinge.motor = motorRef1;
+                    }
+                    else
+                    {
+                        hinge.motor = motorRef2;
+                    }
+                }
+                else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+                {
+                    if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                    {
+                        hinge.motor = motorRef2;
+                    }
+                    else
+                    {
+                        hinge.motor = motorRef1;
+                    }
                 }
                 else
                 {
-                    hinge.motor = motorRef1;
+                    hinge.motor = motorRef3;
                 }
+
+
             }
             else
             {
                 hinge.motor = motorRef3;
             }
-            
+            #endregion
+            //--------------------------------------------------------------------------------------------------------------------------------------------------------
+            #region Dashing Input
 
-        }
-        else
-        {
-            hinge.motor = motorRef3;
-        }
-        #endregion
-        //--------------------------------------------------------------------------------------------------------------------------------------------------------
-        #region Dashing Input
+            //Input for the dash ability
+            if (Input.GetAxis("Dash") > 0 && !Dashed && !Dashing && !Recoiling)
+            {
+                StartCoroutine("Dash");
+            }
 
-        //Input for the dash ability
-        if (Input.GetAxis("Dash") > 0 && !Dashed && !Dashing && !Recoiling)
-        {
-            StartCoroutine("Dash");
-        }
+            //Movement Code for Dashing
+            if (Dashing)
+            {
+                rb.velocity = DashDir;
+            }
 
-        //Movement Code for Dashing
-        if (Dashing)
-        {
-            rb.velocity = DashDir;
-        }
+            #endregion
+            //--------------------------------------------------------------------------------------------------------------------------------------------------------
+            #region Projectile Input
 
-        #endregion
-        //--------------------------------------------------------------------------------------------------------------------------------------------------------
-        #region Projectile Input
+            //Input for the Shoot ability
+            if (Input.GetAxis("Shoot") > 0 && !Recoiling && !Reloading && !Dashing)
+            {
+                StartCoroutine("Shoot");
+            }
 
-        //Input for the Shoot ability
-        if (Input.GetAxis("Shoot") > 0 && !Recoiling && !Reloading && !Dashing)
-        {
-            StartCoroutine("Shoot");
-        }
+            //Movement Code for recoiling after shooting
+            if (Recoiling)
+            {
+                rb.velocity = RecoilDir;
+            }
 
-        //Movement Code for recoiling after shooting
-        if (Recoiling)
-        {
-            rb.velocity = RecoilDir;
-        }
-
+            #endregion
+        
         #endregion
     }
+
+    #region Coroutines
 
     #region Death
     private void OnTriggerExit2D(Collider2D collision)
@@ -175,6 +181,8 @@ public class PlayerScript : MonoBehaviour
                 lives -= 1;
                 Can.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
+                Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 Destroy(this.gameObject);
             }
             
@@ -187,6 +195,7 @@ public class PlayerScript : MonoBehaviour
     {
         DashDir = new Vector2(Input.GetAxis("Horizontal") * DashSpd, -Input.GetAxis("Vertical") * DashSpd);
         Dashing = true;
+        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
@@ -196,6 +205,7 @@ public class PlayerScript : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
+        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         Dashed = false;
     }
     #endregion
@@ -208,6 +218,7 @@ public class PlayerScript : MonoBehaviour
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
         pj.GetComponent<Projectile>().Awaken(ProjDir);
         Recoiling = true;
+        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(RecoilDistance);
         Reloading = true;
         StartCoroutine("ShootCooldownTimer");
@@ -217,7 +228,10 @@ public class PlayerScript : MonoBehaviour
     {
         Recoiling = false;
         yield return new WaitForSeconds(ReloadTime);
+        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         Reloading = false;
     }
+    #endregion
+    
     #endregion
 }

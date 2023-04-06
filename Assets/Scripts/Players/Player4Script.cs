@@ -71,6 +71,8 @@ public class Player4Script : MonoBehaviour
 
     void FixedUpdate()
     {
+        #region Movement and Ability Inputs
+
         #region Arm Movement
 
         //Calculating the rotational position of the arm, and converting the input axes into rotation
@@ -157,7 +159,11 @@ public class Player4Script : MonoBehaviour
         }
 
         #endregion
+
+        #endregion
     }
+
+    #region Coroutines
 
     #region Death
     private void OnTriggerExit2D(Collider2D collision)
@@ -171,6 +177,8 @@ public class Player4Script : MonoBehaviour
                 lives -= 1;
                 Can.gameObject.transform.GetChild(3).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
+                Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 Destroy(this.gameObject);
             }
         }
@@ -182,6 +190,7 @@ public class Player4Script : MonoBehaviour
     {
         DashDir = new Vector2(Input.GetAxis("Horizontal4") * DashSpd, -Input.GetAxis("Vertical4") * DashSpd);
         Dashing = true;
+        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
@@ -191,6 +200,7 @@ public class Player4Script : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
+        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         Dashed = false;
     }
     #endregion
@@ -203,6 +213,7 @@ public class Player4Script : MonoBehaviour
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
         pj.GetComponent<Projectile>().Awaken(ProjDir);
         Recoiling = true;
+        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(RecoilDistance);
         Reloading = true;
         StartCoroutine("ShootCooldownTimer");
@@ -212,7 +223,10 @@ public class Player4Script : MonoBehaviour
     {
         Recoiling = false;
         yield return new WaitForSeconds(ReloadTime);
+        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         Reloading = false;
     }
+    #endregion
+
     #endregion
 }

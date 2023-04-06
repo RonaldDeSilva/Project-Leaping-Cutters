@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186184920415181076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8483227655106554374}
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arm: {fileID: 8483227655106554369}
   Respawn: {fileID: 0}
-  Player: {fileID: 8483227654590474379}
   spd: 315
   DashDistance: 0.2
   DashSpd: 10

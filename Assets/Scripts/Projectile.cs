@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    //Projectile script which makes the projectiles fly through the air in the proper direction
+    //and speed and also delete after hitting an object
+
     private Vector2 Dir;
     private Rigidbody2D rb;
     public void Awaken(Vector2 Direction)

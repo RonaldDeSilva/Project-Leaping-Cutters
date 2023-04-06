@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DeleteAfter5 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // This is a function which makes the object it is placed on destroy itself after 5 seconds,
+    // its pretty stupid just whipped it up so that I could make levels with platforms
     void Start()
     {
         StartCoroutine("Death");
