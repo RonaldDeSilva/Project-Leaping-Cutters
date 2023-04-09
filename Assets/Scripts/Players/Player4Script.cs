@@ -177,8 +177,8 @@ public class Player4Script : MonoBehaviour
                 lives -= 1;
                 Can.gameObject.transform.GetChild(3).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
-                Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-                Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                 Destroy(this.gameObject);
             }
         }
@@ -200,7 +200,7 @@ public class Player4Script : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
-        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         Dashed = false;
     }
     #endregion
@@ -223,7 +223,7 @@ public class Player4Script : MonoBehaviour
     {
         Recoiling = false;
         yield return new WaitForSeconds(ReloadTime);
-        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         Reloading = false;
     }
     #endregion

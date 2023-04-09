@@ -177,8 +177,8 @@ public class Player2Script : MonoBehaviour
                 lives -= 1;
                 Can.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
-                Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-                Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                 Destroy(this.gameObject);
             }
 
@@ -201,7 +201,7 @@ public class Player2Script : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
-        Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         Dashed = false;
     }
     #endregion
@@ -224,7 +224,7 @@ public class Player2Script : MonoBehaviour
     {
         Recoiling = false;
         yield return new WaitForSeconds(ReloadTime);
-        Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         Reloading = false;
     }
     #endregion
