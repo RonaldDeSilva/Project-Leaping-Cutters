@@ -162,12 +162,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4557510747915617539}
   - component: {fileID: 4557510747915617538}
-  - component: {fileID: 7069739791060795424}
+  - component: {fileID: 671098384289626475}
   - component: {fileID: 4557510747915617541}
   - component: {fileID: 4557510747915617543}
   - component: {fileID: 7261540456739569539}
   m_Layer: 0
-  m_Name: Player3
+  m_Name: Player3Shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,7 +239,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7069739791060795424
+--- !u!114 &671098384289626475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4557510747915617537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b120da8e506cd34ebdc5e7f367baf81, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b5d176e273c772489dc4486720050df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arm: {fileID: 4557510747324598155}

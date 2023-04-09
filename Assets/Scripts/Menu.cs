@@ -6,30 +6,59 @@ public class Menu : MonoBehaviour
 {
     // This script controls menus and also level management and stuff like that
     private bool paused = false;
+    public GameObject PauseMenuButton1;
+    public GameObject PauseMenuButton2;
 
     void Update()
     {
-        if (Input.GetKeyUp("Pause") && paused == false)
+        if (paused)
         {
-            Pause();
+            if (Input.GetAxisRaw("Pause") > 0)
+            {
+                Resume();
+            }
         }
-        
-        if (Input.GetKeyUp("Pause") && paused == true)
+        else
         {
-            Resume();
+            if (Input.GetAxisRaw("Pause") > 0)
+            {
+                Pause();
+            }
         }
 
+        
     }
 
     void Pause()
     {
-        paused = true;
+        StartCoroutine("Wait1");
+        PauseMenuButton1.SetActive(true);
+        PauseMenuButton2.SetActive(true);
         Time.timeScale = 0;
     }
 
-    void Resume()
+    public void Resume()
     {
-        paused = false;
+        StartCoroutine("Wait2");
+        PauseMenuButton1.SetActive(false);
+        PauseMenuButton2.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    IEnumerator Wait1()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        paused = true;
+    }
+
+    IEnumerator Wait2()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        paused = false;
     }
 }
