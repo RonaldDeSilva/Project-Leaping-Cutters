@@ -182,6 +182,10 @@ public class Player3_Shooter : MonoBehaviour
                 Can.transform.GetChild(2).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                 Destroy(this.gameObject);
             }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
     #endregion
