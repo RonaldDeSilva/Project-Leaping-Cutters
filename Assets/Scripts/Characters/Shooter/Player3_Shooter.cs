@@ -64,7 +64,7 @@ public class Player3_Shooter : MonoBehaviour
 
         if (Respawn == null)
         {
-            Respawn = GameObject.Find("Respawn").transform;
+            Respawn = GameObject.Find("Respawn3").transform;
         }
 
         #endregion

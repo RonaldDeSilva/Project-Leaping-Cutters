@@ -9,6 +9,10 @@ public class Projectile : MonoBehaviour
 
     private Vector2 Dir;
     private Rigidbody2D rb;
+    public float Pushtime;
+    private bool flying = true;
+    private bool Destroying = false;
+
     public void Awaken(Vector2 Direction)
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
@@ -16,11 +20,26 @@ public class Projectile : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity = Dir;
+        if (flying)
+        {
+            rb.velocity = Dir;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        StartCoroutine("Destroy");
+        if (!Destroying)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                StartCoroutine("Destroy");
+                Destroying = true;
+            }
+            else
+            {
+                StartCoroutine("Destroy2");
+                Destroying = true;
+            }
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -31,7 +50,17 @@ public class Projectile : MonoBehaviour
     }
     IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(1f);
+        
+        yield return new WaitForSeconds(Pushtime);
+        flying = false;
+        yield return new WaitForSeconds(2f);
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator Destroy2()
+    {
+        flying = false;
+        yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
 
