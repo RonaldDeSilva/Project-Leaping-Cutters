@@ -19,6 +19,11 @@ public class PlayerSpawner : MonoBehaviour
     public GameObject BabyBeard2;
     public GameObject BabyBeard3;
     public GameObject BabyBeard4;
+    //--------------------------------------------------------------------------------------------------
+    public GameObject InflatableGuy1;
+    public GameObject InflatableGuy2;
+    public GameObject InflatableGuy3;
+    public GameObject InflatableGuy4;
 
     void Start()
     {
@@ -33,11 +38,16 @@ public class PlayerSpawner : MonoBehaviour
         if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
         {
             Instantiate(MysteriousStranger1, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
-        }else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "BabyBeard")
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "BabyBeard")
         {
             Instantiate(BabyBeard1, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
         }
-        
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "InflatableGuy")
+        {
+            Instantiate(InflatableGuy1, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+        }
+
         //Player 2 Stuff --------------------------------------------------------------------------------------------------
 
         if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
@@ -48,7 +58,11 @@ public class PlayerSpawner : MonoBehaviour
         {
             Instantiate(BabyBeard2, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
         }
-        
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "InflatableGuy")
+        {
+            Instantiate(InflatableGuy2, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+        }
+
         //Player 3 Stuff --------------------------------------------------------------------------------------------------
 
         if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "MysteriousStranger")
@@ -58,6 +72,10 @@ public class PlayerSpawner : MonoBehaviour
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "BabyBeard")
         {
             Instantiate(BabyBeard3, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "InflatableGuy")
+        {
+            Instantiate(InflatableGuy3, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
         }
 
         //Player 4 Stuff --------------------------------------------------------------------------------------------------
@@ -69,6 +87,10 @@ public class PlayerSpawner : MonoBehaviour
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "BabyBeard")
         {
             Instantiate(BabyBeard4, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "InflatableGuy")
+        {
+            Instantiate(InflatableGuy4, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
         }
     }
 

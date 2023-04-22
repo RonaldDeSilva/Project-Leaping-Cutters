@@ -7,6 +7,9 @@ TagManager:
   - Deathbox
   - MysteriousStranger
   - BabyBeard
+  - InflatableGuy
+  - ThePit
+  - NoGround
   layers:
   - Default
   - TransparentFX

@@ -223,6 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arm: {fileID: 1676579838239087048}
   Respawn: {fileID: 0}
+  Player: {fileID: 1676579838646115138}
   spd: 330
   DashDistance: 0.24
   DashSpd: 12

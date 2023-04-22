@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player1Extender : MonoBehaviour
+public class Player2Extender : MonoBehaviour
 {
     #region Hinge
     private HingeJoint2D hinge;
@@ -55,7 +55,7 @@ public class Player1Extender : MonoBehaviour
         arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 2, 0);
         arm.transform.localScale = new Vector3(0.5f, 2, 1);
         Can = GameObject.Find("Canvas");
-        lives = int.Parse(Can.transform.GetChild(0).gameObject.GetComponent<Text>().text);
+        lives = int.Parse(Can.transform.GetChild(1).gameObject.GetComponent<Text>().text);
         OriginalArmLength = arm.transform.localScale.y;
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
@@ -88,7 +88,7 @@ public class Player1Extender : MonoBehaviour
                 var armRot = arm.transform.eulerAngles;
 
                 //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-                var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI) - 90f);
+                var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
 
 
                 //Align the controllers angle numbers to the arms angle numbers
@@ -98,7 +98,7 @@ public class Player1Extender : MonoBehaviour
                 }
 
                 //This if is asking if there is any activity in the controllers stick
-                if (Input.GetAxis("Vertical") > 0.15 || Input.GetAxis("Vertical") < -0.15 || Input.GetAxis("Horizontal") > 0.15 || Input.GetAxis("Horizontal") < -0.15)
+                if (Input.GetAxis("Vertical2") > 0.15 || Input.GetAxis("Vertical2") < -0.15 || Input.GetAxis("Horizontal2") > 0.15 || Input.GetAxis("Horizontal2") < -0.15)
                 {
                     //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
                     //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
@@ -140,7 +140,7 @@ public class Player1Extender : MonoBehaviour
                 #region Dashing Input
 
                 //Input for the dash ability
-                if (Input.GetAxis("Dash") > 0 && !Dashed && !Dashing && !Retracting && !Extending)
+                if (Input.GetAxis("Dash2") > 0 && !Dashed && !Dashing && !Retracting && !Extending)
                 {
                     StartCoroutine("Dash");
                 }
@@ -156,7 +156,7 @@ public class Player1Extender : MonoBehaviour
             #region Extending Input
 
             //Input for the Extend ability
-            if (Input.GetAxis("Shoot") > 0 && !Extending && !Extended && !Retracting && !Dashing)
+            if (Input.GetAxis("Shoot2") > 0 && !Extending && !Extended && !Retracting && !Dashing)
             {
                 StartCoroutine("Extend");
             }
@@ -184,7 +184,7 @@ public class Player1Extender : MonoBehaviour
             var armRot = arm.transform.eulerAngles;
 
             //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-            var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * 180 / Mathf.PI) - 90f);
+            var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
 
 
             //Align the controllers angle numbers to the arms angle numbers
@@ -194,7 +194,7 @@ public class Player1Extender : MonoBehaviour
             }
 
             //This if is asking if there is any activity in the controllers stick
-            if (Input.GetAxis("Vertical") > 0.15 || Input.GetAxis("Vertical") < -0.15 || Input.GetAxis("Horizontal") > 0.15 || Input.GetAxis("Horizontal") < -0.15)
+            if (Input.GetAxis("Vertical2") > 0.15 || Input.GetAxis("Vertical2") < -0.15 || Input.GetAxis("Horizontal2") > 0.15 || Input.GetAxis("Horizontal2") < -0.15)
             {
                 //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
                 //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
@@ -237,12 +237,12 @@ public class Player1Extender : MonoBehaviour
             #region Dashing Input
 
             //Input for the dash ability
-            if (Input.GetAxis("Dash") > 0 && !Dashed && !Dashing && !Extending && !Retracting)
+            if (Input.GetAxis("Dash2") > 0 && !Dashed && !Dashing && !Extending && !Retracting)
             {
                 StartCoroutine("Dash");
             }
 
-                //Movement Code for Dashing
+            //Movement Code for Dashing
             if (Dashing)
             {
                 rb.velocity = DashDir;
@@ -253,24 +253,25 @@ public class Player1Extender : MonoBehaviour
             #region Extending Input
 
             //Input for the Extend ability
-            if (Input.GetAxis("Shoot") > 0 && !Extending && !Extended && !Retracting && !Dashing)
+            if (Input.GetAxis("Shoot2") > 0 && !Extending && !Extended && !Retracting && !Dashing)
             {
                 StartCoroutine("Extend");
             }
 
             if (Extending)
             {
-                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y + ((ArmExtendLength/ArmExtendPeriod) * Time.deltaTime), arm.transform.localScale.x);
+                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y + ((ArmExtendLength / ArmExtendPeriod) * Time.deltaTime), arm.transform.localScale.x);
             }
 
             if (Retracting)
             {
-                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y - ((ArmExtendLength / (ArmExtendPeriod/3)) * Time.deltaTime), arm.transform.localScale.x);
+                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y - ((ArmExtendLength / (ArmExtendPeriod / 3)) * Time.deltaTime), arm.transform.localScale.x);
             }
 
             #endregion
         }
         #endregion
+
     }
 
     #region Coroutines
@@ -285,16 +286,16 @@ public class Player1Extender : MonoBehaviour
             if (lives != 1)
             {
                 lives -= 1;
-                Can.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = lives.ToString();
+                Can.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
-                Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                 Destroy(this.gameObject);
             }
             else
             {
                 lives -= 1;
-                Can.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = lives.ToString();
+                Can.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = lives.ToString();
                 Destroy(this.gameObject);
             }
 
@@ -305,9 +306,9 @@ public class Player1Extender : MonoBehaviour
     #region Dashing Coroutines
     IEnumerator Dash()
     {
-        DashDir = new Vector2(Input.GetAxis("Horizontal") * DashSpd, -Input.GetAxis("Vertical") * DashSpd);
+        DashDir = new Vector2(Input.GetAxis("Horizontal2") * DashSpd, -Input.GetAxis("Vertical2") * DashSpd);
         Dashing = true;
-        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
@@ -317,7 +318,7 @@ public class Player1Extender : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
-        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         Dashed = false;
     }
     #endregion
@@ -327,7 +328,7 @@ public class Player1Extender : MonoBehaviour
     {
 
         Extending = true;
-        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(ArmExtendPeriod);
         Retracting = true;
         StartCoroutine("Retract");
@@ -336,8 +337,8 @@ public class Player1Extender : MonoBehaviour
     IEnumerator Retract()
     {
         Extending = false;
-        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        yield return new WaitForSeconds(ArmExtendPeriod/3);
+        Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(ArmExtendPeriod / 3);
         Extended = true;
         StartCoroutine("ExtendCooldownTimer");
     }
@@ -348,7 +349,7 @@ public class Player1Extender : MonoBehaviour
         arm.transform.localPosition = new Vector3(Mathf.Clamp(arm.transform.localPosition.x, -2, 2), Mathf.Clamp(arm.transform.localPosition.y, -2, 2), 0);
         Retracting = false;
         yield return new WaitForSeconds(ExtendCooldown);
-        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         Extended = false;
     }
     #endregion

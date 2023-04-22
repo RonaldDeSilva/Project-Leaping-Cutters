@@ -10,6 +10,10 @@ public class CharacterSelector2 : MonoBehaviour
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
+        if (PlayerTrackerThing == null)
+        {
+            PlayerTrackerThing = GameObject.Find("PlayerTrackerThing");
+        }
     }
 
     void Update()
@@ -26,6 +30,10 @@ public class CharacterSelector2 : MonoBehaviour
         else if (collision.gameObject.CompareTag("BabyBeard"))
         {
             PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = "BabyBeard";
+        }
+        else if (collision.gameObject.CompareTag("InflatableGuy"))
+        {
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = "InflatableGuy";
         }
     }
 }

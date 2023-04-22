@@ -15,7 +15,7 @@ public class Player2_Shooter : MonoBehaviour
     #region Components
     public GameObject arm;
     public Transform Respawn;
-    private GameObject Player;
+    public GameObject Player;
     private Rigidbody2D rb;
     private GameObject Can;
     #endregion
@@ -50,7 +50,6 @@ public class Player2_Shooter : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         arm.transform.rotation = new Quaternion(0, 0, 0, 0);
         arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1, 0);
-        Player = this.gameObject;
         Can = GameObject.Find("Canvas");
         lives = int.Parse(Can.transform.GetChild(1).gameObject.GetComponent<Text>().text);
 
@@ -172,7 +171,7 @@ public class Player2_Shooter : MonoBehaviour
         {
             Dashing = false;
             Dashed = false;
-            if (lives > 0)
+            if (lives != 1)
             {
                 lives -= 1;
                 Can.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = lives.ToString();
@@ -183,6 +182,8 @@ public class Player2_Shooter : MonoBehaviour
             }
             else
             {
+                lives -= 1;
+                Can.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = lives.ToString();
                 Destroy(this.gameObject);
             }
 

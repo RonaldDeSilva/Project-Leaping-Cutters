@@ -51,3 +51,7 @@ MonoBehaviour:
   BabyBeard2: {fileID: 1676579838646115138, guid: 7a51ad8974f68284d931592bb43e783f, type: 3}
   BabyBeard3: {fileID: 6785477876449578424, guid: 504fb93d6f15ade4793e077f5420667e, type: 3}
   BabyBeard4: {fileID: 7343800502554706637, guid: 61721c40233caa04280140b8c6197760, type: 3}
+  InflatableGuy1: {fileID: 1049774768567525496, guid: 72c5ed9d533d74a42867b1a826301c28, type: 3}
+  InflatableGuy2: {fileID: 2542009977425895469, guid: 786090fe0ad417341b49f03401f9d487, type: 3}
+  InflatableGuy3: {fileID: 3932169875079726153, guid: 5f59b7843b4873640a534011f4467e74, type: 3}
+  InflatableGuy4: {fileID: 4688338428132350704, guid: bbfe9b723fec49d4ba644cac9230bbd0, type: 3}
