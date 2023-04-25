@@ -26,5 +26,9 @@ public class SelectorScript : MonoBehaviour
         {
             SceneManager.LoadScene("NoGround-4Player");
         }
+        else if (collision.gameObject.CompareTag("Spinner"))
+        {
+            SceneManager.LoadScene("Spinner");
+        }
     }
 }

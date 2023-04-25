@@ -347,6 +347,7 @@ public class Player2Extender : MonoBehaviour
     {
         arm.transform.localScale = new Vector3(arm.transform.localScale.x, OriginalArmLength, arm.transform.localScale.z);
         arm.transform.localPosition = new Vector3(Mathf.Clamp(arm.transform.localPosition.x, -2, 2), Mathf.Clamp(arm.transform.localPosition.y, -2, 2), 0);
+        arm.transform.localRotation = new Quaternion(0, 0, (this.transform.position.y - arm.transform.position.y) / (this.transform.position.x - arm.transform.position.x), arm.transform.rotation.w);
         Retracting = false;
         yield return new WaitForSeconds(ExtendCooldown);
         Can.transform.GetChild(1).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;

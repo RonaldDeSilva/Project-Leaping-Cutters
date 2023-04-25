@@ -10,6 +10,7 @@ TagManager:
   - InflatableGuy
   - ThePit
   - NoGround
+  - Spinner
   layers:
   - Default
   - TransparentFX

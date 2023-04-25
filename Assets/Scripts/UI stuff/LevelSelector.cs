@@ -33,7 +33,7 @@ public class LevelSelector : MonoBehaviour
         {
             if (cont)
             {
-                if (SceneManager.GetActiveScene().name == "ThePit-4Player" || SceneManager.GetActiveScene().name == "NoGround-4Player")
+                if (SceneManager.GetActiveScene().name == "ThePit-4Player" || SceneManager.GetActiveScene().name == "NoGround-4Player" || SceneManager.GetActiveScene().name == "Spinner")
                 {
                     if (Can == null)
                     {
