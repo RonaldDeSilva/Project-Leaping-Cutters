@@ -11,6 +11,7 @@ TagManager:
   - ThePit
   - NoGround
   - Spinner
+  - SpinningMoon
   layers:
   - Default
   - TransparentFX

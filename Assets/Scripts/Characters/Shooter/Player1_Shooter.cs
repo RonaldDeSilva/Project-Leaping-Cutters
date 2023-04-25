@@ -199,6 +199,16 @@ public class Player1_Shooter : MonoBehaviour
     IEnumerator Dash()
     {
         DashDir = new Vector2(Input.GetAxis("Horizontal") * DashSpd, -Input.GetAxis("Vertical") * DashSpd);
+        /*
+        var angle = arm.transform.eulerAngles.z * Mathf.PI / 180 + 90;
+        var newX = Mathf.Cos(angle) * 10;
+        Debug.Log(Input.GetAxis("Horizontal") / newX);
+        var newY = Mathf.Sin(angle) * 10;
+        Debug.Log(Input.GetAxis("Vertical") / newY);
+        DashDir = new Vector2(newX * DashSpd, -newY * DashSpd);
+        */
+        
+        Debug.Log(DashDir);
         Dashing = true;
         Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);

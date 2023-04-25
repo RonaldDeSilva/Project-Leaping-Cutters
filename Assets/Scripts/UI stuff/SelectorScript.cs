@@ -30,5 +30,9 @@ public class SelectorScript : MonoBehaviour
         {
             SceneManager.LoadScene("Spinner");
         }
+        else if (collision.gameObject.CompareTag("SpinningMoon"))
+        {
+            SceneManager.LoadScene("SpinningMoon");
+        }
     }
 }
