@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BetterSpining : MonoBehaviour
@@ -13,7 +11,7 @@ public class BetterSpining : MonoBehaviour
     }
     void Update()
     {
-        transform.Rotate(new Vector3(0,0,1), thing * Time.deltaTime, Space.Self);
+        transform.Rotate(new Vector3(0, 0, 1), thing * Time.deltaTime, Space.Self);
         rb.isKinematic = true;
     }
 }

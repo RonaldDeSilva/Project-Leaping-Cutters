@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -50,7 +49,7 @@ public class Projectile : MonoBehaviour
     }
     IEnumerator Destroy()
     {
-        
+
         yield return new WaitForSeconds(Pushtime);
         flying = false;
         yield return new WaitForSeconds(2f);

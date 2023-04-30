@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
@@ -32,7 +30,7 @@ public class PlayerSpawner : MonoBehaviour
         Spawn3 = GameObject.Find("Respawn3").transform;
         Spawn4 = GameObject.Find("Respawn4").transform;
         PlayerTracker = GameObject.Find("PlayerTrackerThing");
-        
+
         //Player1 Stuff ---------------------------------------------------------------------------------------
 
         if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")

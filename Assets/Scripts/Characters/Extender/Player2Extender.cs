@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +35,6 @@ public class Player2Extender : MonoBehaviour
     public float ArmExtendLength;
     public float ArmExtendPeriod;
     public float ExtendCooldown;
-    public bool isArmStationary;
     private float OriginalArmLength;
     private bool Extending = false;
     private bool Extended = false;
@@ -78,198 +76,168 @@ public class Player2Extender : MonoBehaviour
     void FixedUpdate()
     {
         #region Movement and Ability Inputs
-        if (isArmStationary)
+
+        #region Arm Movement
+
+
+
+        //Calculating the rotational position of the arm, and converting the input axes into rotation
+        var armRot = arm.transform.eulerAngles;
+
+        //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
+        var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
+
+
+        //Align the controllers angle numbers to the arms angle numbers
+        if (controllerRot.z + 360f < 360f)
         {
-            if (!Extending && !Retracting)
-            {
-                #region Arm Movement
-
-                //Calculating the rotational position of the arm, and converting the input axes into rotation
-                var armRot = arm.transform.eulerAngles;
-
-                //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-                var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
-
-
-                //Align the controllers angle numbers to the arms angle numbers
-                if (controllerRot.z + 360f < 360f)
-                {
-                    controllerRot.z = controllerRot.z + 360f;
-                }
-
-                //This if is asking if there is any activity in the controllers stick
-                if (Input.GetAxis("Vertical2") > 0.15 || Input.GetAxis("Vertical2") < -0.15 || Input.GetAxis("Horizontal2") > 0.15 || Input.GetAxis("Horizontal2") < -0.15)
-                {
-                    //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
-                    //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
-                    if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
-                    {
-                        if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
-                        {
-                            hinge.motor = motorRef1;
-                        }
-                        else
-                        {
-                            hinge.motor = motorRef2;
-                        }
-                    }
-                    else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
-                    {
-                        if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
-                        {
-                            hinge.motor = motorRef2;
-                        }
-                        else
-                        {
-                            hinge.motor = motorRef1;
-                        }
-                    }
-                    else
-                    {
-                        hinge.motor = motorRef3;
-                    }
-
-
-                }
-                else
-                {
-                    hinge.motor = motorRef3;
-                }
-                #endregion
-                //--------------------------------------------------------------------------------------------------------------------------------------------------------
-                #region Dashing Input
-
-                //Input for the dash ability
-                if (Input.GetAxis("Dash2") > 0 && !Dashed && !Dashing && !Retracting && !Extending)
-                {
-                    StartCoroutine("Dash");
-                }
-
-                //Movement Code for Dashing
-                if (Dashing)
-                {
-                    rb.velocity = DashDir;
-                }
-
-                #endregion
-            }
-            #region Extending Input
-
-            //Input for the Extend ability
-            if (Input.GetAxis("Shoot2") > 0 && !Extending && !Extended && !Retracting && !Dashing)
-            {
-                StartCoroutine("Extend");
-            }
-
-            if (Extending)
-            {
-                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y + ((ArmExtendLength / ArmExtendPeriod) * Time.deltaTime), arm.transform.localScale.x);
-            }
-
-            if (Retracting)
-            {
-                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y - ((ArmExtendLength / (ArmExtendPeriod / 3)) * Time.deltaTime), arm.transform.localScale.x);
-            }
-
-            #endregion
+            controllerRot.z = controllerRot.z + 360f;
         }
-        else if (!isArmStationary)
+
+        //This if is asking if there is any activity in the controllers stick
+        if (Input.GetAxis("Vertical2") > 0.15 || Input.GetAxis("Vertical2") < -0.15 || Input.GetAxis("Horizontal2") > 0.15 || Input.GetAxis("Horizontal2") < -0.15)
         {
-
-            #region Arm Movement
-
-
-
-            //Calculating the rotational position of the arm, and converting the input axes into rotation
-            var armRot = arm.transform.eulerAngles;
-
-            //Atan2 is a function to get the angle between a point on a circle and the positive X axis, 
-            var controllerRot = new Vector3(0, 0, (Mathf.Atan2(-Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * 180 / Mathf.PI) - 90f);
-
-
-            //Align the controllers angle numbers to the arms angle numbers
-            if (controllerRot.z + 360f < 360f)
+            //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
+            //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
+            if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 2))
             {
-                controllerRot.z = controllerRot.z + 360f;
+                if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
+                {
+                    if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                    {
+                        hinge.motor = motorRef1;
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 20f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 10f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 2, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 8f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 4, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 6, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 3.5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
+                    }
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 2, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 8f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 4, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 5f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 6, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 3.5f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
+                }
             }
-
-            //This if is asking if there is any activity in the controllers stick
-            if (Input.GetAxis("Vertical2") > 0.15 || Input.GetAxis("Vertical2") < -0.15 || Input.GetAxis("Horizontal2") > 0.15 || Input.GetAxis("Horizontal2") < -0.15)
+            else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 2))
             {
-                //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
-                //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
-                if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
-                {
-                    if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
-                    {
-                        hinge.motor = motorRef1;
-                    }
-                    else
-                    {
-                        hinge.motor = motorRef2;
-                    }
-                }
-                else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+                if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                 {
                     if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
                     {
                         hinge.motor = motorRef2;
                     }
-                    else
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 20f))
                     {
-                        hinge.motor = motorRef1;
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 10f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 2, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 8f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 4, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 6, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 3.5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
                     }
                 }
-                else
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                 {
-                    hinge.motor = motorRef3;
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 2, maxMotorTorque = 10000 };
                 }
-
-
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 15f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 4, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 6, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 5f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
+                }
             }
             else
             {
                 hinge.motor = motorRef3;
             }
-            #endregion
-
-            //--------------------------------------------------------------------------------------------------------------------------------------------------------
-            #region Dashing Input
-
-            //Input for the dash ability
-            if (Input.GetAxis("Dash2") > 0 && !Dashed && !Dashing && !Extending && !Retracting)
-            {
-                StartCoroutine("Dash");
-            }
-
-            //Movement Code for Dashing
-            if (Dashing)
-            {
-                rb.velocity = DashDir;
-            }
-
-            #endregion
-
-            #region Extending Input
-
-            //Input for the Extend ability
-            if (Input.GetAxis("Shoot2") > 0 && !Extending && !Extended && !Retracting && !Dashing)
-            {
-                StartCoroutine("Extend");
-            }
-
-            if (Extending)
-            {
-                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y + ((ArmExtendLength / ArmExtendPeriod) * Time.deltaTime), arm.transform.localScale.x);
-            }
-
-            if (Retracting)
-            {
-                arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y - ((ArmExtendLength / (ArmExtendPeriod / 3)) * Time.deltaTime), arm.transform.localScale.x);
-            }
-
-            #endregion
         }
+        else
+        {
+            hinge.motor = motorRef3;
+        }
+        #endregion
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        #region Dashing Input
+
+        //Input for the dash ability
+        if (Input.GetAxis("Dash2") > 0 && !Dashed && !Dashing && !Extending && !Retracting)
+        {
+            StartCoroutine("Dash");
+        }
+
+        //Movement Code for Dashing
+        if (Dashing)
+        {
+            rb.velocity = DashDir;
+        }
+
+        #endregion
+
+        #region Extending Input
+
+        //Input for the Extend ability
+        if (Input.GetAxis("Shoot2") > 0 && !Extending && !Extended && !Retracting && !Dashing)
+        {
+            StartCoroutine("Extend");
+        }
+
+        if (Extending)
+        {
+            arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y + ((ArmExtendLength / ArmExtendPeriod) * Time.deltaTime), arm.transform.localScale.x);
+        }
+
+        if (Retracting)
+        {
+            arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y - ((ArmExtendLength / (ArmExtendPeriod / 3)) * Time.deltaTime), arm.transform.localScale.x);
+        }
+
+        #endregion
         #endregion
 
     }
@@ -306,7 +274,10 @@ public class Player2Extender : MonoBehaviour
     #region Dashing Coroutines
     IEnumerator Dash()
     {
-        DashDir = new Vector2(Input.GetAxis("Horizontal2") * DashSpd, -Input.GetAxis("Vertical2") * DashSpd);
+        var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+        var newX = Mathf.Cos(angle);
+        var newY = Mathf.Sin(angle);
+        DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
         Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);
@@ -323,7 +294,7 @@ public class Player2Extender : MonoBehaviour
     }
     #endregion
     //-------------------------------------------------------------------------------------------------------------------------------
-    #region Shooting Coroutines
+    #region Extending Coroutines
     IEnumerator Extend()
     {
 

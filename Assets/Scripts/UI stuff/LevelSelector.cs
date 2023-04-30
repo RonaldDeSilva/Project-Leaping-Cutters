@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,10 +18,21 @@ public class LevelSelector : MonoBehaviour
     void Update()
     {
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
+
+        /* Unmerged change from project 'Assembly-CSharp.Player'
+        Before:
+                {
+
+                    if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " && 
+        After:
+                {
+
+                    if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " && 
+        */
         {
-            
-            if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " && 
-                PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " && 
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
+                PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " &&
                 PlayerTracker.GetComponent<PlayerTracker>().Player3 != " " && PlayerTracker.GetComponent<PlayerTracker>().Player4 != " ")
             {
                 cont = true;
@@ -56,7 +66,8 @@ public class LevelSelector : MonoBehaviour
                         cont = false;
                     }
                 }
-            }else if (SceneManager.GetActiveScene().name == "StartScreen")
+            }
+            else if (SceneManager.GetActiveScene().name == "StartScreen")
             {
                 SceneManager.LoadScene("CharacterSelect");
             }

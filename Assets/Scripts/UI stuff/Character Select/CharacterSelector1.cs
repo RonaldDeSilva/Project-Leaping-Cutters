@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSelector1 : MonoBehaviour
@@ -14,7 +12,7 @@ public class CharacterSelector1 : MonoBehaviour
         {
             PlayerTrackerThing = GameObject.Find("PlayerTrackerThing");
         }
-}
+    }
 
     void Update()
     {
@@ -26,7 +24,8 @@ public class CharacterSelector1 : MonoBehaviour
         if (collision.gameObject.CompareTag("MysteriousStranger"))
         {
             PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = "MysteriousStranger";
-        } else if (collision.gameObject.CompareTag("BabyBeard"))
+        }
+        else if (collision.gameObject.CompareTag("BabyBeard"))
         {
             PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = "BabyBeard";
         }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,34 +91,102 @@ public class Player2_Shooter : MonoBehaviour
         {
             //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
             //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
-            if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+            if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 2))
             {
-                if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                 {
-                    hinge.motor = motorRef1;
+                    if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                    {
+                        hinge.motor = motorRef1;
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 20f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 10f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 2, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 8f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 4, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 6, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 3.5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
+                    }
                 }
-                else
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
                 {
-                    hinge.motor = motorRef2;
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 2, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 8f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 4, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 5f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 6, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 3.5f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
                 }
             }
-            else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+            else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 2))
             {
-                if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                 {
-                    hinge.motor = motorRef2;
+                    if (Mathf.Abs(armRot.z - controllerRot.z) < 180)
+                    {
+                        hinge.motor = motorRef2;
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 20f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 10f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 2, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 8f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 4, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 6, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 3.5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
+                    }
                 }
-                else
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                 {
-                    hinge.motor = motorRef1;
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 2, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 15f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 4, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 6, maxMotorTorque = 10000 };
+                }
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 5f))
+                {
+                    hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
                 }
             }
             else
             {
                 hinge.motor = motorRef3;
             }
-
-
         }
         else
         {
@@ -194,7 +261,10 @@ public class Player2_Shooter : MonoBehaviour
     #region Dashing Coroutines
     IEnumerator Dash()
     {
-        DashDir = new Vector2(Input.GetAxis("Horizontal2") * DashSpd, -Input.GetAxis("Vertical2") * DashSpd);
+        var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+        var newX = Mathf.Cos(angle);
+        var newY = Mathf.Sin(angle);
+        DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
         Can.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);
@@ -214,8 +284,11 @@ public class Player2_Shooter : MonoBehaviour
     #region Shooting Coroutines
     IEnumerator Shoot()
     {
-        RecoilDir = new Vector2(-Input.GetAxis("Horizontal2") * RecoilSpd, Input.GetAxis("Vertical2") * RecoilSpd);
-        ProjDir = new Vector2(Input.GetAxis("Horizontal2") * ProjSpd, -Input.GetAxis("Vertical2") * ProjSpd);
+        var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+        var newX = Mathf.Cos(angle);
+        var newY = Mathf.Sin(angle);
+        RecoilDir = new Vector2(-newX * RecoilSpd, -newY * RecoilSpd);
+        ProjDir = new Vector2(newX * ProjSpd, newY * ProjSpd);
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
         pj.GetComponent<Projectile>().Awaken(ProjDir);
         Recoiling = true;
