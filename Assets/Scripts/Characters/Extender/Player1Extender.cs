@@ -253,8 +253,8 @@ public class Player1Extender : MonoBehaviour
                 lives -= 1;
                 Can.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
-                Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
+                Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
                 Destroy(this.gameObject);
             }
             else
@@ -276,7 +276,7 @@ public class Player1Extender : MonoBehaviour
         var newY = Mathf.Sin(angle);
         DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
-        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
@@ -286,7 +286,7 @@ public class Player1Extender : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
-        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        Can.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Dashed = false;
     }
     #endregion
@@ -296,7 +296,7 @@ public class Player1Extender : MonoBehaviour
     {
 
         Extending = true;
-        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Image>().color = Color.red;
         yield return new WaitForSeconds(ArmExtendPeriod);
         Retracting = true;
         StartCoroutine("Retract");
@@ -305,7 +305,7 @@ public class Player1Extender : MonoBehaviour
     IEnumerator Retract()
     {
         Extending = false;
-        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Image>().color = Color.red;
         yield return new WaitForSeconds(ArmExtendPeriod / 3);
         Extended = true;
         StartCoroutine("ExtendCooldownTimer");
@@ -314,11 +314,11 @@ public class Player1Extender : MonoBehaviour
     IEnumerator ExtendCooldownTimer()
     {
         arm.transform.localScale = new Vector3(arm.transform.localScale.x, OriginalArmLength, arm.transform.localScale.z);
-        arm.transform.localPosition = new Vector3(Mathf.Clamp(arm.transform.localPosition.x, -2, 2), Mathf.Clamp(arm.transform.localPosition.y, -2, 2), 0);
-        arm.transform.localRotation = new Quaternion(0, 0, (this.transform.position.y - arm.transform.position.y) / (this.transform.position.x - arm.transform.position.x), arm.transform.rotation.w);
+        arm.transform.localPosition = new Vector3(0, 2, 0);
+        //arm.transform.localRotation = new Quaternion(0, 0, (this.transform.position.y - arm.transform.position.y) / (this.transform.position.x - arm.transform.position.x), arm.transform.rotation.w);
         Retracting = false;
         yield return new WaitForSeconds(ExtendCooldown);
-        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
         Extended = false;
     }
     #endregion

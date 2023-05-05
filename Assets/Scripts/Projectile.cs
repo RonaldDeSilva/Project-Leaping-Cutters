@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     public float Pushtime;
     private bool flying = true;
     private bool Destroying = false;
+    public float Life;
 
     public void Awaken(Vector2 Direction)
     {
@@ -52,14 +53,14 @@ public class Projectile : MonoBehaviour
 
         yield return new WaitForSeconds(Pushtime);
         flying = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(Life);
         Destroy(this.gameObject);
     }
 
     IEnumerator Destroy2()
     {
         flying = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(Life);
         Destroy(this.gameObject);
     }
 

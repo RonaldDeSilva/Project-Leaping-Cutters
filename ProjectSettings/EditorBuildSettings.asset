@@ -18,12 +18,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Maps/4 Player/ThePit-4Player.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Maps/4 Player/NoGround-4Player.unity
-    guid: 82e13148c66422748ab2d51cf9c0e39b
-  - enabled: 1
     path: Assets/Scenes/Maps/4 Player/SpinningMoon.unity
     guid: 971626558cd9a2b439742d2d4a8d5136
-  - enabled: 1
-    path: Assets/Scenes/Maps/4 Player/Spinner.unity
-    guid: 8e16638fd5afbd941b6c17952e8c54d8
   m_configObjects: {}

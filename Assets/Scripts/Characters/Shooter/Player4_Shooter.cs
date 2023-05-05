@@ -243,8 +243,8 @@ public class Player4_Shooter : MonoBehaviour
                 lives -= 1;
                 Can.gameObject.transform.GetChild(3).gameObject.GetComponent<Text>().text = lives.ToString();
                 Instantiate(Player, Respawn.position, this.transform.rotation);
-                Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
+                Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
                 Destroy(this.gameObject);
             }
             else
@@ -265,7 +265,7 @@ public class Player4_Shooter : MonoBehaviour
         var newY = Mathf.Sin(angle);
         DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
-        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<Image>().color = Color.red;
         yield return new WaitForSeconds(DashDistance);
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
@@ -275,7 +275,7 @@ public class Player4_Shooter : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
-        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        Can.transform.GetChild(3).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Dashed = false;
     }
     #endregion
@@ -291,7 +291,7 @@ public class Player4_Shooter : MonoBehaviour
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
         pj.GetComponent<Projectile>().Awaken(ProjDir);
         Recoiling = true;
-        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<Image>().color = Color.red;
         yield return new WaitForSeconds(RecoilDistance);
         Reloading = true;
         StartCoroutine("ShootCooldownTimer");
@@ -301,7 +301,7 @@ public class Player4_Shooter : MonoBehaviour
     {
         Recoiling = false;
         yield return new WaitForSeconds(ReloadTime);
-        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        Can.transform.GetChild(3).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
         Reloading = false;
     }
     #endregion
