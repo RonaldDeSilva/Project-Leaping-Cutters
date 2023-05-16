@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player1Extender : MonoBehaviour
+public class Player1Chatix : MonoBehaviour
 {
     #region Hinge
     private HingeJoint2D hinge;
@@ -31,15 +31,16 @@ public class Player1Extender : MonoBehaviour
     private bool Dashing = false;
     private Vector2 DashDir;
 
-    //Attributes for the Arm Extension ability
-    public float ArmExtendLength;
-    public float ArmExtendPeriod;
-    public float ExtendCooldown;
-    private float OriginalArmLength;
-    private bool Extending = false;
-    private bool Extended = false;
-    private bool Retracting = false;
-
+    //Attributes for the Projectile ability
+    public GameObject Proj;
+    public float ProjSpd;
+    public float RecoilDistance;
+    public float RecoilSpd;
+    public float ReloadTime;
+    public float Spread;
+    private bool Gliding = false;
+    private bool Reloading = false;
+    private Vector2 GlidingDir;
     #endregion
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -50,20 +51,17 @@ public class Player1Extender : MonoBehaviour
         hinge = GetComponent<HingeJoint2D>();
         rb = GetComponent<Rigidbody2D>();
         arm.transform.rotation = new Quaternion(0, 0, 0, 0);
-        arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 2, 0);
-        arm.transform.localScale = new Vector3(0.5f, 2, 1);
+        arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1.042f, 0);
         Can = GameObject.Find("Canvas");
         lives = int.Parse(Can.transform.GetChild(0).gameObject.GetComponent<Text>().text);
-        OriginalArmLength = arm.transform.localScale.y;
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
         motorRef3 = new JointMotor2D { motorSpeed = 0, maxMotorTorque = 10000 };
-
+        Gliding = false;
         Dashed = false;
         Dashing = false;
-        Extending = false;
-        Extended = false;
+        Reloading = false;
 
         if (Respawn == null)
         {
@@ -199,12 +197,11 @@ public class Player1Extender : MonoBehaviour
             hinge.motor = motorRef3;
         }
         #endregion
-
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
         #region Dashing Input
 
         //Input for the dash ability
-        if (Input.GetAxis("Dash") > 0 && !Dashed && !Dashing && !Extending && !Retracting)
+        if (Input.GetAxis("Dash") > 0 && !Dashed && !Dashing && !Gliding)
         {
             StartCoroutine("Dash");
         }
@@ -216,26 +213,27 @@ public class Player1Extender : MonoBehaviour
         }
 
         #endregion
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        #region Projectile Input
 
-        #region Extending Input
-
-        //Input for the Extend ability
-        if (Input.GetAxis("Shoot") > 0 && !Extending && !Extended && !Retracting && !Dashing)
+        //Input for the Shoot ability
+        if (Input.GetAxis("Shoot") > 0 && !Gliding && !Reloading && !Dashing)
         {
-            StartCoroutine("Extend");
+            StartCoroutine("Shoot");
         }
 
-        if (Extending)
+        //Movement Code for Gliding after shooting
+        if (Gliding)
         {
-            arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y + ((ArmExtendLength / ArmExtendPeriod) * Time.deltaTime), arm.transform.localScale.x);
-        }
-
-        if (Retracting)
-        {
-            arm.transform.localScale = new Vector3(arm.transform.localScale.x, arm.transform.localScale.y - ((ArmExtendLength / (ArmExtendPeriod / 3)) * Time.deltaTime), arm.transform.localScale.x);
+            var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+            var newX = Mathf.Cos(angle);
+            var newY = Mathf.Sin(angle);
+            GlidingDir = new Vector2(-newX * RecoilSpd, -newY * RecoilSpd);
+            rb.velocity = GlidingDir;
         }
 
         #endregion
+
         #endregion
     }
 
@@ -291,34 +289,41 @@ public class Player1Extender : MonoBehaviour
     }
     #endregion
     //-------------------------------------------------------------------------------------------------------------------------------
-    #region Extending Coroutines
-    IEnumerator Extend()
+    #region Shooting Coroutines
+    IEnumerator Shoot()
     {
-
-        Extending = true;
+        var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+        var newX = Mathf.Cos(angle);
+        var newY = Mathf.Sin(angle);
+        GlidingDir = new Vector2(-newX * RecoilSpd, -newY * RecoilSpd);
+        var ProjDir = new Vector2(newX * ProjSpd, newY * ProjSpd);
+        var angle2 = ((arm.transform.localEulerAngles.z + 90 + Spread) * Mathf.Deg2Rad);
+        var newX2 = Mathf.Cos(angle2);
+        var newY2 = Mathf.Sin(angle2);
+        var ProjDir2 = new Vector2(newX2 * ProjSpd, newY2 * ProjSpd);
+        var angle3 = ((arm.transform.localEulerAngles.z + 90 + -Spread) * Mathf.Deg2Rad);
+        var newX3 = Mathf.Cos(angle3);
+        var newY3 = Mathf.Sin(angle3);
+        var ProjDir3 = new Vector2(newX3 * ProjSpd, newY3 * ProjSpd);
+        var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), new Quaternion(0, 0, arm.transform.GetChild(0).transform.rotation.z, arm.transform.rotation.w));
+        pj.GetComponent<Projectile>().Awaken(ProjDir2);
+        var pj2 = Instantiate(Proj, new Vector3(arm.transform.GetChild(1).transform.position.x, arm.transform.GetChild(1).transform.position.y, 0), arm.transform.rotation);
+        pj2.GetComponent<Projectile>().Awaken(ProjDir);
+        var pj3 = Instantiate(Proj, new Vector3(arm.transform.GetChild(2).transform.position.x, arm.transform.GetChild(2).transform.position.y, 0), new Quaternion(0, 0, arm.transform.GetChild(0).transform.rotation.z, arm.transform.rotation.w));
+        pj3.GetComponent<Projectile>().Awaken(ProjDir3);
+        Gliding = true;
         Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Image>().color = Color.red;
-        yield return new WaitForSeconds(ArmExtendPeriod);
-        Retracting = true;
-        StartCoroutine("Retract");
+        yield return new WaitForSeconds(RecoilDistance);
+        Reloading = true;
+        StartCoroutine("ShootCooldownTimer");
     }
 
-    IEnumerator Retract()
+    IEnumerator ShootCooldownTimer()
     {
-        Extending = false;
-        Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Image>().color = Color.red;
-        yield return new WaitForSeconds(ArmExtendPeriod / 3);
-        Extended = true;
-        StartCoroutine("ExtendCooldownTimer");
-    }
-
-    IEnumerator ExtendCooldownTimer()
-    {
-        arm.transform.localScale = new Vector3(arm.transform.localScale.x, OriginalArmLength, arm.transform.localScale.z);
-        //arm.transform.localRotation = new Quaternion(0, 0, (this.transform.position.y - arm.transform.position.y) / (this.transform.position.x - arm.transform.position.x), arm.transform.rotation.w);
-        Retracting = false;
-        yield return new WaitForSeconds(ExtendCooldown);
+        Gliding = false;
+        yield return new WaitForSeconds(ReloadTime);
         Can.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
-        Extended = false;
+        Reloading = false;
     }
     #endregion
 
