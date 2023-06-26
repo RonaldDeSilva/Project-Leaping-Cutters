@@ -95,7 +95,7 @@ public class Player1_Shooter : MonoBehaviour
         {
             //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
             //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
-            if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 2))
+            if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 1.5f))
             {
                 if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                 {
@@ -141,7 +141,7 @@ public class Player1_Shooter : MonoBehaviour
                     hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
                 }
             }
-            else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 2))
+            else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 1.5f))
             {
                 if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                 {
@@ -229,7 +229,6 @@ public class Player1_Shooter : MonoBehaviour
         }
 
         #endregion
-
         #endregion
     }
 
