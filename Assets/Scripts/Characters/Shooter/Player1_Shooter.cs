@@ -170,19 +170,19 @@ public class Player1_Shooter : MonoBehaviour
                         hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
                     }
                 }
-                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
                 {
                     hinge.motor = new JointMotor2D { motorSpeed = spd / 2, maxMotorTorque = 10000 };
                 }
-                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 15f))
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 8f))
                 {
                     hinge.motor = new JointMotor2D { motorSpeed = spd / 4, maxMotorTorque = 10000 };
                 }
-                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 5f))
                 {
                     hinge.motor = new JointMotor2D { motorSpeed = spd / 6, maxMotorTorque = 10000 };
                 }
-                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 5f))
+                else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 3.5f))
                 {
                     hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
                 }
