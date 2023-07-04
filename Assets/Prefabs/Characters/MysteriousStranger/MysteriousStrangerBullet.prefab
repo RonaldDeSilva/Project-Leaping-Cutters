@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pushtime: 0.75
-  Life: 30
+  Life: 10
 --- !u!50 &1998655745904788718
 Rigidbody2D:
   serializedVersion: 4
