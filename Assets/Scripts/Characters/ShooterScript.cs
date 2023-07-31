@@ -31,9 +31,10 @@ public class ShooterScript : MonoBehaviour
     private Vector2 ProjDir;
 
     //Player number specific Attributes
-    public int childNum;
-    public string dashInput;
-    public string shootInput;
+    public int playerNum;
+    private int childNum;
+    private string dashInput;
+    private string shootInput;
 
     #endregion
 
@@ -48,6 +49,31 @@ public class ShooterScript : MonoBehaviour
         Dashed = false;
         Dashing = false;
         Reloading = false;
+
+        if (playerNum == 1)
+        {
+            childNum = 0;
+            dashInput = "Dash";
+            shootInput = "Shoot";
+        } 
+        else if (playerNum == 2)
+        {
+            childNum = 1;
+            dashInput = "Dash2";
+            shootInput = "Shoot2";
+        }
+        else if (playerNum == 3)
+        {
+            childNum = 2;
+            dashInput = "Dash3";
+            shootInput = "Shoot3";
+        }
+        else if (playerNum == 4)
+        {
+            childNum = 3;
+            dashInput = "Dash4";
+            shootInput = "Shoot4";
+        }
     }
 
     #endregion

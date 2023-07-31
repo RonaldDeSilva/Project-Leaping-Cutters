@@ -100,7 +100,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 0
+  m_GravityScale: 2.5
   m_Material: {fileID: 6200000, guid: af7244dd8697deb45b9aa9d033de7b72, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -224,11 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 3255020065626969433}
   spd: 315
-  childNum: 0
+  playerNum: 1
   armHeight: 1
-  respawnName: Respawn
-  Vertical: Vertical
-  Horizontal: Horizontal
 --- !u!114 &3255020065626969436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,9 +246,7 @@ MonoBehaviour:
   RecoilDistance: 0.1
   RecoilSpd: 12
   ReloadTime: 4
-  childNum: 0
-  dashInput: Dash
-  shootInput: Shoot
+  playerNum: 1
 --- !u!50 &3255020065626969437
 Rigidbody2D:
   serializedVersion: 4

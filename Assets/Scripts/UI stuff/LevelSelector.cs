@@ -18,17 +18,6 @@ public class LevelSelector : MonoBehaviour
     void Update()
     {
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
-
-        /* Unmerged change from project 'Assembly-CSharp.Player'
-        Before:
-                {
-
-                    if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " && 
-        After:
-                {
-
-                    if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " && 
-        */
         {
 
             if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
@@ -43,7 +32,7 @@ public class LevelSelector : MonoBehaviour
         {
             if (cont)
             {
-                if (SceneManager.GetActiveScene().name == "ThePit-4Player" || SceneManager.GetActiveScene().name == "NoGround-4Player" || SceneManager.GetActiveScene().name == "Spinner" || SceneManager.GetActiveScene().name == "SpinningMoon")
+                if (SceneManager.GetActiveScene().name == "ThePit-4Player" || SceneManager.GetActiveScene().name == "SpinningMoon")
                 {
                     if (Can == null)
                     {

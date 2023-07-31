@@ -132,11 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 7026105804518922237}
   spd: 330
-  childNum: 0
+  playerNum: 1
   armHeight: 0.93
-  respawnName: Respawn
-  Vertical: Vertical
-  Horizontal: Horizontal
 --- !u!114 &7026105804518922226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,9 +154,7 @@ MonoBehaviour:
   RecoilDistance: 0.1
   RecoilSpd: 15
   ReloadTime: 6
-  childNum: 0
-  dashInput: Dash
-  shootInput: Shoot
+  playerNum: 1
 --- !u!50 &7026105804518922233
 Rigidbody2D:
   serializedVersion: 4

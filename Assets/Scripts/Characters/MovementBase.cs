@@ -22,11 +22,12 @@ public class MovementBase : MonoBehaviour
     private int lives;
 
     //Player number specific attributes
-    public int childNum;
+    public int playerNum;
+    private int childNum;
     public float armHeight;
-    public string respawnName;
-    public string Vertical;
-    public string Horizontal;
+    private string respawnName;
+    private string Vertical;
+    private string Horizontal;
 
     #endregion
 
@@ -34,6 +35,35 @@ public class MovementBase : MonoBehaviour
 
     void Start()
     {
+        if (playerNum == 1)
+        {
+            childNum = 0;
+            respawnName = "Respawn";
+            Vertical = "Vertical";
+            Horizontal = "Horizontal";
+        } 
+        else if (playerNum == 2)
+        {
+            childNum = 1;
+            respawnName = "Respawn2";
+            Vertical = "Vertical2";
+            Horizontal = "Horizontal2";
+        }
+        else if (playerNum == 3)
+        {
+            childNum = 2;
+            respawnName = "Respawn3";
+            Vertical = "Vertical3";
+            Horizontal = "Horizontal3";
+        }
+        else if (playerNum == 4)
+        {
+            childNum = 3;
+            respawnName = "Respawn4";
+            Vertical = "Vertical4";
+            Horizontal = "Horizontal4";
+        }
+
         hinge = GetComponent<HingeJoint2D>();
         Can = GameObject.Find("Canvas");
         lives = int.Parse(Can.transform.GetChild(childNum).gameObject.GetComponent<Text>().text);

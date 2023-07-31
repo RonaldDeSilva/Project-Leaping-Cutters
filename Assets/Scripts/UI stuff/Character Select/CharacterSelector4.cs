@@ -16,7 +16,7 @@ public class CharacterSelector4 : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal4") * 2.5f, -Input.GetAxis("Vertical4") * 2.5f);
+        rb.velocity = new Vector2(Input.GetAxis("Horizontal4") * 10f, -Input.GetAxis("Vertical4") * 10f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
