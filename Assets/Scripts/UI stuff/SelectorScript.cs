@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 public class SelectorScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private GameObject PlayerTracker;
+    public string collider;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        PlayerTracker = GameObject.Find("PlayerTrackerThing");
     }
     void Update()
     {
@@ -66,15 +66,10 @@ public class SelectorScript : MonoBehaviour
 
     }
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("ThePit"))
-        {
-            SceneManager.LoadScene("ThePit-4Player");
-        }
-        else if (collision.gameObject.CompareTag("SpinningMoon"))
-        {
-            SceneManager.LoadScene("SpinningMoon");
-        }
+        collider = collision.gameObject.tag;
     }
+    
 }
