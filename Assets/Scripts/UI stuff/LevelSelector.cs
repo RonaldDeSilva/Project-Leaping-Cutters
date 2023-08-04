@@ -28,13 +28,13 @@ public class LevelSelector : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "LevelSelect")
         {
             var Selector = GameObject.Find("Selector");
-            if (Selector.GetComponent<SelectorScript>().collider != null)
+            if (Selector.GetComponent<SelectorScript>().collided != null)
             {
-                if (Selector.GetComponent<SelectorScript>().collider == "ThePit")
+                if (Selector.GetComponent<SelectorScript>().collided == "ThePit")
                 {
                     SceneManager.LoadScene("ThePit-4Player");
                 }
-                else if (Selector.GetComponent<SelectorScript>().collider == "SpinningMoon")
+                else if (Selector.GetComponent<SelectorScript>().collided == "SpinningMoon")
                 {
                     SceneManager.LoadScene("SpinningMoon");
                 }
