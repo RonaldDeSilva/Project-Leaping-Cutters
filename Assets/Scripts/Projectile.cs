@@ -53,13 +53,29 @@ public class Projectile : MonoBehaviour
 
         yield return new WaitForSeconds(Pushtime);
         flying = false;
+        if (this.gameObject.GetComponent<CapsuleCollider2D>() != null)
+        {
+            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        }
+        else
+        {
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        }
         yield return new WaitForSeconds(Life);
         Destroy(this.gameObject);
     }
 
     IEnumerator Destroy2()
     {
-        flying = false;
+        flying = false; 
+        if (this.gameObject.GetComponent<CapsuleCollider2D>() != null)
+        {
+            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        }
+        else
+        {
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        }
         yield return new WaitForSeconds(Life);
         Destroy(this.gameObject);
     }
