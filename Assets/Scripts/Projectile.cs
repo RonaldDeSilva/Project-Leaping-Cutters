@@ -40,6 +40,12 @@ public class Projectile : MonoBehaviour
                 Destroying = true;
             }
         }
+
+        if (!collision.gameObject.CompareTag("Player") && Destroying)
+        {
+            StopAllCoroutines();
+            StartCoroutine("Destroy2");
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -55,11 +61,11 @@ public class Projectile : MonoBehaviour
         flying = false;
         if (this.gameObject.GetComponent<CapsuleCollider2D>() != null)
         {
-            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            this.gameObject.GetComponent<CapsuleCollider2D>().isTrigger = true;
         }
         else
         {
-            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            this.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
         }
         yield return new WaitForSeconds(Life);
         Destroy(this.gameObject);
@@ -70,11 +76,11 @@ public class Projectile : MonoBehaviour
         flying = false; 
         if (this.gameObject.GetComponent<CapsuleCollider2D>() != null)
         {
-            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            this.gameObject.GetComponent<CapsuleCollider2D>().isTrigger = true;
         }
         else
         {
-            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            this.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
         }
         yield return new WaitForSeconds(Life);
         Destroy(this.gameObject);

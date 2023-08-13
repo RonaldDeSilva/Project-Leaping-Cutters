@@ -7,10 +7,9 @@ public class CopyRot : MonoBehaviour
     private GameObject thing;
     void Start()
     {
-        thing = transform.parent.transform.GetChild(1).gameObject;
+        thing = transform.parent.GetChild(0).gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.rotation = thing.transform.rotation;

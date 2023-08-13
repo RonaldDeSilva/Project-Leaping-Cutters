@@ -146,13 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd9ce1ee63e4ed40837f02d16ce3ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DashDistance: 0.2
-  DashSpd: 10
-  DashCooldown: 2.5
+  DashDistance: 0.1
+  DashSpd: 20
+  DashCooldown: 3
   Proj: {fileID: 6828719154857336920, guid: 84eb9e9f8a22df04fa20b351e6cbb20a, type: 3}
-  ProjSpd: 15
+  ProjSpd: 30
   RecoilDistance: 0.1
-  RecoilSpd: 12
+  RecoilSpd: 30
   ReloadTime: 4
   playerNum: 2
 --- !u!50 &620570762605558166

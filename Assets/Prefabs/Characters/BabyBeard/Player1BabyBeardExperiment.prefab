@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 476146246699851688}
   - component: {fileID: 476146246699851689}
-  - component: {fileID: 7908488574734631196}
+  - component: {fileID: 4239985055199475694}
+  - component: {fileID: 4239985055199474707}
   - component: {fileID: 476146246699851694}
   - component: {fileID: 476146246699851692}
   - component: {fileID: 476146246699851686}
@@ -29,11 +30,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476146246699851690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.725464, y: 0.110581875, z: 0}
+  m_LocalPosition: {x: -6.21, y: -0.834, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3052602441627461376}
   - {fileID: 476146247114808615}
+  - {fileID: 3052602441627461376}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7908488574734631196
+--- !u!114 &4239985055199475694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,13 +98,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 476146246699851690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c23650f99d90838449343fc05a64cf5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0171a00ad3f1c9a4c88e027c3ec0cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arm: {fileID: 476146247114808608}
-  Respawn: {fileID: 0}
   Player: {fileID: 476146246699851690}
   spd: 330
+  playerNum: 1
+  armHeight: 1.029
+--- !u!114 &4239985055199474707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476146246699851690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd9ce1ee63e4ed40837f02d16ce3ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   DashDistance: 0.24
   DashSpd: 12
   DashCooldown: 3
@@ -112,6 +125,7 @@ MonoBehaviour:
   RecoilDistance: 0.1
   RecoilSpd: 15
   ReloadTime: 6
+  playerNum: 1
 --- !u!50 &476146246699851694
 Rigidbody2D:
   serializedVersion: 4
@@ -206,7 +220,7 @@ Transform:
   m_Children:
   - {fileID: 191280150642605197}
   m_Father: {fileID: 476146246699851688}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &476146247114808614
 SpriteRenderer:
@@ -348,7 +362,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 476146246699851688}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -12.88}
 --- !u!212 &3052602441627461407
 SpriteRenderer:
