@@ -122,7 +122,7 @@ MonoBehaviour:
   Proj: {fileID: 6828719154857336920, guid: 84eb9e9f8a22df04fa20b351e6cbb20a, type: 3}
   ProjSpd: 30
   RecoilDistance: 0.1
-  RecoilSpd: 30
+  RecoilSpd: 25
   ReloadTime: 4
   playerNum: 3
 --- !u!50 &2051824439907780678
