@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5245672620034258907}
   - component: {fileID: 5245672620034258908}
   - component: {fileID: 5245672620034258909}
-  - component: {fileID: 5245672620034258910}
   - component: {fileID: 5245672620034258911}
+  - component: {fileID: 5245672620034258910}
   m_Layer: 0
   m_Name: Player3BabyBeard
   m_TagString: Player
@@ -147,6 +147,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!70 &5245672620034258911
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245672620034258880}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.028252602, y: -0.034451485}
+  m_Size: {x: 0.7817936, y: 2.931097}
+  m_Direction: 0
 --- !u!233 &5245672620034258910
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -171,22 +187,6 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
---- !u!70 &5245672620034258911
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5245672620034258880}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.028252602, y: -0.034451485}
-  m_Size: {x: 0.7817936, y: 2.931097}
-  m_Direction: 0
 --- !u!1 &5245672621641726880
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,16 +320,16 @@ SpringJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 5245672621687929605}
+  m_ConnectedRigidBody: {fileID: 5245672620034258909}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.022505214, y: 0.3597376}
+  m_Anchor: {x: -0.15, y: -1.18}
+  m_ConnectedAnchor: {x: -0.13199997, y: -0.1509999}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.62142295
-  m_DampingRatio: 0.01
-  m_Frequency: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.1
+  m_Frequency: 50
 --- !u!1 &5245672621687929606
 GameObject:
   m_ObjectHideFlags: 0

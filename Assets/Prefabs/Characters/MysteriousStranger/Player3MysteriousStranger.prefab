@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 2051824440507681486}
   - component: {fileID: 2051824440507681484}
   - component: {fileID: 2051824440507681485}
+  - component: {fileID: 6216812762083566778}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Player
@@ -308,6 +309,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!231 &6216812762083566778
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051824440507681480}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 2051824439907780678}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: -1}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.1
+  m_Frequency: 50
 --- !u!1 &2541862876595898895
 GameObject:
   m_ObjectHideFlags: 0
