@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 5245672620034258880}
-  spd: 330
+  spd: 400
   playerNum: 3
   armHeight: 1.029
 --- !u!114 &5245672620034258908
@@ -328,7 +328,7 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: -0.13199997, y: -0.1509999}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
-  m_DampingRatio: 0.1
+  m_DampingRatio: 0.5
   m_Frequency: 50
 --- !u!1 &5245672621687929606
 GameObject:
