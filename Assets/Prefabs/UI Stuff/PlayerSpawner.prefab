@@ -43,15 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc5de5d9d901d24c8f85e59b66601bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MysteriousStranger1: {fileID: 3255020065626969433, guid: 04e8ead80c627fe4280efbf245ab65f3, type: 3}
-  MysteriousStranger2: {fileID: 620570762605558164, guid: 253b9bc25498a07498608de69959168f, type: 3}
-  MysteriousStranger3: {fileID: 2051824439907780674, guid: 9a21f1b9c9b6bb747b895a7c78dab7cc, type: 3}
-  MysteriousStranger4: {fileID: 6968334863109824278, guid: b169541d1a0b6e04ea32ff7f822494d2, type: 3}
-  BabyBeard1: {fileID: 7026105804518922237, guid: 107ba64a34bdfcb4ea22b5789a86161a, type: 3}
-  BabyBeard2: {fileID: 8905755357407831798, guid: 7a51ad8974f68284d931592bb43e783f, type: 3}
-  BabyBeard3: {fileID: 3440935416685569227, guid: 504fb93d6f15ade4793e077f5420667e, type: 3}
-  BabyBeard4: {fileID: 3745997040564756543, guid: 61721c40233caa04280140b8c6197760, type: 3}
-  InflatableGuy1: {fileID: 1049774768567525496, guid: 72c5ed9d533d74a42867b1a826301c28, type: 3}
-  InflatableGuy2: {fileID: 2542009977425895469, guid: 786090fe0ad417341b49f03401f9d487, type: 3}
-  InflatableGuy3: {fileID: 3932169875079726153, guid: 5f59b7843b4873640a534011f4467e74, type: 3}
-  InflatableGuy4: {fileID: 4688338428132350704, guid: bbfe9b723fec49d4ba644cac9230bbd0, type: 3}
+  MysteriousStranger1: {fileID: 3395498467942670208, guid: 970145f3361b7484e817615ef8997415, type: 3}
+  MysteriousStranger2: {fileID: 4333655517226580149, guid: 352f976d5ef59024dbd9d7b9a35793eb, type: 3}
+  MysteriousStranger3: {fileID: 4743482780514840560, guid: 935d5d42467a12847ac066b84f8ed093, type: 3}
+  MysteriousStranger4: {fileID: 1332311828941687956, guid: b545d1103ed1d284e9cb9a39bbfc14b4, type: 3}
+  BabyBeard1: {fileID: 476146246699851690, guid: cf4bd660902287f43babffb03f1cbc84, type: 3}
+  BabyBeard2: {fileID: 2673667667683416840, guid: 20648e4fe97fbb3459fecb4e4a76c228, type: 3}
+  BabyBeard3: {fileID: 5245672620034258880, guid: 7c0f3d9db04af434db1ac9aab392c3b4, type: 3}
+  BabyBeard4: {fileID: 7019833406366739428, guid: 395e5229c21c739469486b7eab258358, type: 3}

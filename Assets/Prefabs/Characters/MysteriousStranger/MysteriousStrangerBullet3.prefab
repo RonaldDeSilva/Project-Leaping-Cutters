@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6828719154857336919}
   - component: {fileID: 6634501903694756149}
   - component: {fileID: 1998655745904788718}
-  - component: {fileID: 1523539932208116447}
+  - component: {fileID: 1916407163120554507}
   m_Layer: 0
-  m_Name: CannonBall
+  m_Name: MysteriousStrangerBullet3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,13 +73,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4a14d21ae27c77b4f9536716e3165b57, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 798603e7de7985340a353198be144972, type: 3}
+  m_Color: {r: 0.16078432, g: 0.6156863, b: 0.7254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.75, y: 0.75}
+  m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pushtime: 2
-  Life: 5
+  Life: 10
 --- !u!50 &1998655745904788718
 Rigidbody2D:
   serializedVersion: 4
@@ -111,17 +111,17 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 15
+  m_Mass: 5
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 2.5
-  m_Material: {fileID: 6200000, guid: 518eb91017c9cd94a885e5cccc2db114, type: 2}
+  m_Material: {fileID: 6200000, guid: 38c5ec395a60902479759cef0c7bf9ed, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &1523539932208116447
-CircleCollider2D:
+--- !u!70 &1916407163120554507
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -133,6 +133,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0023162365}
-  serializedVersion: 2
-  m_Radius: 0.23363769
+  m_Offset: {x: 0.0011935234, y: 0.0016753078}
+  m_Size: {x: 0.29541445, y: 0.34226215}
+  m_Direction: 0

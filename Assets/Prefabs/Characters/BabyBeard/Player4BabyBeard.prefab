@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6783340988353240134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1168087821066248131}
+  m_Layer: 0
+  m_Name: LookPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1168087821066248131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783340988353240134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.026, y: -0.158, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7019833406258528349}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7019833405578112480
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +105,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: e0cf99cd271a95341a6fef1329ca5175, type: 3}
-  m_Color: {r: 0.07450981, g: 0.6039216, b: 0.22745098, a: 1}
+  m_Color: {r: 0.07058824, g: 0.6039216, b: 0.22352941, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -118,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c7366ee91a70b4d9dce38d144a7906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reverse: 0
 --- !u!233 &7019833405578112486
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -200,10 +231,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7019833406258528346}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.018, y: 1.029, z: 0}
+  m_LocalPosition: {x: 0.018, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7019833406182052222}
+  - {fileID: 1168087821066248131}
   m_Father: {fileID: 7019833406366739437}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -248,7 +280,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f9f8f6ca56f244d47867535fd1d0f602, type: 3}
-  m_Color: {r: 0.8867924, g: 0.45594516, b: 0.870172, a: 1}
+  m_Color: {r: 0.8862745, g: 0.45490196, b: 0.87058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -292,8 +324,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010336399, y: 0.49585903}
-  m_Size: {x: 1.1038027, y: 2.051782}
+  m_Offset: {x: -0.014100075, y: -0.049880028}
+  m_Size: {x: 0.9908905, y: 3.0378757}
   m_Direction: 0
 --- !u!231 &7019833406258528344
 SpringJoint2D:
@@ -312,7 +344,7 @@ SpringJoint2D:
   m_Anchor: {x: -0.15, y: -1.18}
   m_ConnectedAnchor: {x: -0.13199997, y: -0.1509999}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.005
+  m_Distance: 0.12900019
   m_DampingRatio: 0.5
   m_Frequency: 65
 --- !u!1 &7019833406366739428
@@ -345,7 +377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7019833406366739428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.58, y: -0.834, z: 0}
+  m_LocalPosition: {x: 1, y: -2.7925947, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7019833406258528349}
@@ -394,7 +426,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 70c49b0a5bcdf8946983a7470c2e1ed0, type: 3}
-  m_Color: {r: 0.07119971, g: 0.6037736, b: 0.2238258, a: 1}
+  m_Color: {r: 0.07058824, g: 0.6039216, b: 0.22352941, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -419,7 +451,7 @@ MonoBehaviour:
   Player: {fileID: 7019833406366739428}
   spd: 400
   playerNum: 4
-  armHeight: 1.029
+  armHeight: 0.9
 --- !u!114 &7019833406366739432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +467,7 @@ MonoBehaviour:
   DashDistance: 0.24
   DashSpd: 12
   DashCooldown: 3
-  Proj: {fileID: 6828719154857336920, guid: 9d00d73d0b3cbd04b84e87bff72a5456, type: 3}
+  Proj: {fileID: 6828719154857336920, guid: 4cb141c1f88ee6f4793ecb8cb383fef4, type: 3}
   ProjSpd: 20
   RecoilDistance: 0.1
   RecoilSpd: 15
@@ -493,7 +525,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.14375019, y: -0.16171744}
-  m_ConnectedAnchor: {x: -0.16175008, y: -1.1907175}
+  m_ConnectedAnchor: {x: -0.1617502, y: -1.0617174}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
