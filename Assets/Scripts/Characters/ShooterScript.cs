@@ -30,11 +30,20 @@ public class ShooterScript : MonoBehaviour
     private Vector2 RecoilDir;
     private Vector2 ProjDir;
 
+    //Attributes for Punch ability
+    public float PunchSpd;
+    public float PunchLen;
+    public float PunchCooldown;
+    private bool Punching = false;
+    private bool Punched = false;
+    private Vector2 PunchDir;
+
     //Player number specific Attributes
     public int playerNum;
     private int childNum;
     private string dashInput;
     private string shootInput;
+    private string punchInput;
 
     #endregion
 
@@ -49,30 +58,36 @@ public class ShooterScript : MonoBehaviour
         Dashed = false;
         Dashing = false;
         Reloading = false;
+        Punching = false;
+        Punched = false;
 
         if (playerNum == 1)
         {
             childNum = 0;
             dashInput = "Dash";
             shootInput = "Shoot";
-        } 
+            punchInput = "Punch";
+        }
         else if (playerNum == 2)
         {
             childNum = 1;
             dashInput = "Dash2";
             shootInput = "Shoot2";
+            punchInput = "Punch2";
         }
         else if (playerNum == 3)
         {
             childNum = 2;
             dashInput = "Dash3";
             shootInput = "Shoot3";
+            punchInput = "Punch3";
         }
         else if (playerNum == 4)
         {
             childNum = 3;
             dashInput = "Dash4";
             shootInput = "Shoot4";
+            punchInput = "Punch4";
         }
     }
 
@@ -106,6 +121,19 @@ public class ShooterScript : MonoBehaviour
         if (Recoiling)
         {
             rb.velocity = RecoilDir;
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------------
+
+        //Input for the Punch ability
+        if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Reloading && !Dashing)
+        {
+            StartCoroutine("Punch");
+        }
+
+        if (Punching)
+        {
+
         }
     }
 
@@ -159,4 +187,30 @@ public class ShooterScript : MonoBehaviour
         Reloading = false;
     }
     #endregion
+    //------------------------------------------------------------------------------------------------------------------------------
+    #region Punch Coroutines
+    /*
+    IEnumerator Punch()
+    {
+        var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+        var newX = Mathf.Cos(angle);
+        var newY = Mathf.Sin(angle);
+        PunchDir = new Vector2(newX * PunchSpd, newY * PunchSpd);
+        Punching = true;
+        //Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.red;
+        yield return new WaitForSeconds(PunchCooldown);
+        Dashed = true;
+        StartCoroutine("PunchCooldownTimer");
+    }
+
+    IEnumerator PunchCooldownTimer()
+    {
+        Dashing = false;
+        yield return new WaitForSeconds(DashCooldown);
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
+        Dashed = false;
+    }
+    */
+    #endregion
+
 }
