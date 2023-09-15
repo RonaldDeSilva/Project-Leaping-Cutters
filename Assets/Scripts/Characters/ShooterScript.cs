@@ -32,11 +32,12 @@ public class ShooterScript : MonoBehaviour
 
     //Attributes for Punch ability
     public float PunchSpd;
-    public float PunchLen;
     public float PunchCooldown;
+    public float PunchDuration;
     private bool Punching = false;
     private bool Punched = false;
     private Vector2 PunchDir;
+    //private SpringJoint2D ArmSpringJoint;
 
     //Player number specific Attributes
     public int playerNum;
@@ -54,6 +55,7 @@ public class ShooterScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Can = GameObject.Find("Canvas");
         arm = gameObject.transform.GetChild(0).gameObject;
+        //ArmSpringJoint = arm.GetComponent<SpringJoint2D>();
         Recoiling = false;
         Dashed = false;
         Dashing = false;
@@ -98,7 +100,7 @@ public class ShooterScript : MonoBehaviour
     void FixedUpdate()
     {
         //Input for the dash ability
-        if (Input.GetAxis(dashInput) > 0 && !Dashed && !Dashing && !Recoiling)
+        if (Input.GetAxis(dashInput) > 0 && !Dashed && !Dashing && !Recoiling && !Punching)
         {
             StartCoroutine("Dash");
         }
@@ -112,7 +114,7 @@ public class ShooterScript : MonoBehaviour
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //Input for the Shoot ability
-        if (Input.GetAxis(shootInput) > 0 && !Recoiling && !Reloading && !Dashing)
+        if (Input.GetAxis(shootInput) > 0 && !Recoiling && !Reloading && !Dashing && !Punching)
         {
             StartCoroutine("Shoot");
         }
@@ -126,14 +128,15 @@ public class ShooterScript : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------
 
         //Input for the Punch ability
-        if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Reloading && !Dashing)
+        if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Reloading && !Dashing && !Punching && !Punched)
         {
             StartCoroutine("Punch");
         }
 
         if (Punching)
         {
-
+            //Make a short range projectile that just moves away from the player not too far and then comes back to the player
+            //Possibly make the punch projectile attached to the player through a spring joint
         }
     }
 
@@ -189,28 +192,30 @@ public class ShooterScript : MonoBehaviour
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------
     #region Punch Coroutines
-    /*
+    
     IEnumerator Punch()
     {
         var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
         var newX = Mathf.Cos(angle);
         var newY = Mathf.Sin(angle);
         PunchDir = new Vector2(newX * PunchSpd, newY * PunchSpd);
+        //ArmSpringJoint.enabled = false;
         Punching = true;
         //Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.red;
-        yield return new WaitForSeconds(PunchCooldown);
-        Dashed = true;
+        yield return new WaitForSeconds(PunchDuration);
+        Punched = true;
         StartCoroutine("PunchCooldownTimer");
     }
 
     IEnumerator PunchCooldownTimer()
     {
-        Dashing = false;
-        yield return new WaitForSeconds(DashCooldown);
-        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
-        Dashed = false;
+        //ArmSpringJoint.enabled = true;
+        Punching = false;
+        yield return new WaitForSeconds(PunchCooldown);
+        //Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
+        Punched = false;
     }
-    */
+    
     #endregion
 
 }
