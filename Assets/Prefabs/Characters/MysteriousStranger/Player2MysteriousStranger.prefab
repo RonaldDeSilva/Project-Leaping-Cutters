@@ -32,7 +32,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4333655516944024333}
-  - {fileID: 4333655515849914429}
   m_Father: {fileID: 4333655517226580154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -144,36 +143,6 @@ SpringJoint2D:
   m_Distance: 0.005
   m_DampingRatio: 0.5
   m_Frequency: 65
---- !u!1 &4333655515849914426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4333655515849914429}
-  m_Layer: 0
-  m_Name: LookPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4333655515849914429
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4333655515849914426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.023, y: -0.205, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4333655515306524237}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4333655515885382197
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +156,7 @@ GameObject:
   - component: {fileID: 4333655515885382201}
   - component: {fileID: 4333655515885382198}
   - component: {fileID: 4333655515885382199}
+  - component: {fileID: 1692996853506105193}
   m_Layer: 0
   m_Name: FrontArm
   m_TagString: Untagged
@@ -292,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c7366ee91a70b4d9dce38d144a7906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reverse: 1
+  Off: 0
 --- !u!233 &4333655515885382199
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -317,6 +287,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!70 &1692996853506105193
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333655515885382197}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.007508278, y: 0.0075079203}
+  m_Size: {x: 0.3609581, y: 0.9549515}
+  m_Direction: 0
 --- !u!1 &4333655516944024330
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4333655517226580149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.26, y: -2.1519403, z: 0}
+  m_LocalPosition: {x: -10.93, y: -3.3132439, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4333655515306524237}
@@ -468,10 +454,14 @@ MonoBehaviour:
   DashSpd: 20
   DashCooldown: 3
   Proj: {fileID: 6828719154857336920, guid: d3fac619db64de34c939bd6d8b314138, type: 3}
-  ProjSpd: 30
+  ProjSpd: 29
   RecoilDistance: 0.075
   RecoilSpd: 20
   ReloadTime: 4
+  PunchSpd: 16
+  PunchCooldown: 1.4
+  PunchDuration: 0.3
+  FistWeight: 40
   playerNum: 2
 --- !u!50 &4333655517226580150
 Rigidbody2D:

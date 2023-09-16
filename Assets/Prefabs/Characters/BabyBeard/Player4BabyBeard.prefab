@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6783340988353240134
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1168087821066248131}
-  m_Layer: 0
-  m_Name: LookPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1168087821066248131
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6783340988353240134}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.026, y: -0.158, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7019833406258528349}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7019833405578112480
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,6 +13,7 @@ GameObject:
   - component: {fileID: 7019833405578112487}
   - component: {fileID: 7019833405578112485}
   - component: {fileID: 7019833405578112486}
+  - component: {fileID: 5678672095291492333}
   m_Layer: 0
   m_Name: FrontArm
   m_TagString: Untagged
@@ -148,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c7366ee91a70b4d9dce38d144a7906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reverse: 0
+  Off: 0
 --- !u!233 &7019833405578112486
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -173,6 +144,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!70 &5678672095291492333
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7019833405578112480}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.00000023841858}
+  m_Size: {x: 0.29999998, y: 0.84999996}
+  m_Direction: 0
 --- !u!1 &7019833406182052223
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +222,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7019833406182052222}
-  - {fileID: 1168087821066248131}
   m_Father: {fileID: 7019833406366739437}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -377,7 +363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7019833406366739428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -2.7925947, z: 0}
+  m_LocalPosition: {x: 3.89, y: -3.0681565, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7019833406258528349}
@@ -472,6 +458,10 @@ MonoBehaviour:
   RecoilDistance: 0.1
   RecoilSpd: 15
   ReloadTime: 6
+  PunchSpd: 18
+  PunchCooldown: 1.3
+  PunchDuration: 0.3
+  FistWeight: 40
   playerNum: 4
 --- !u!50 &7019833406366739433
 Rigidbody2D:
@@ -525,7 +515,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.14375019, y: -0.16171744}
-  m_ConnectedAnchor: {x: -0.1617502, y: -1.0617174}
+  m_ConnectedAnchor: {x: -0.16175008, y: -1.0617173}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0

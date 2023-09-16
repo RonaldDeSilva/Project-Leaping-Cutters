@@ -34,10 +34,14 @@ public class ShooterScript : MonoBehaviour
     public float PunchSpd;
     public float PunchCooldown;
     public float PunchDuration;
+    public float FistWeight;
     private bool Punching = false;
     private bool Punched = false;
+    private bool Returning = false;
     private Vector2 PunchDir;
-    //private SpringJoint2D ArmSpringJoint;
+    private Transform FistLocation;
+    private GameObject Fist;
+    private HingeJoint2D ArmJoint;
 
     //Player number specific Attributes
     public int playerNum;
@@ -55,13 +59,16 @@ public class ShooterScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Can = GameObject.Find("Canvas");
         arm = gameObject.transform.GetChild(0).gameObject;
-        //ArmSpringJoint = arm.GetComponent<SpringJoint2D>();
+        Fist = gameObject.transform.GetChild(1).gameObject;
+        ArmJoint = Fist.GetComponent<HingeJoint2D>();
+        FistLocation = Fist.transform;
         Recoiling = false;
         Dashed = false;
         Dashing = false;
         Reloading = false;
         Punching = false;
         Punched = false;
+        Returning = false;
 
         if (playerNum == 1)
         {
@@ -128,15 +135,20 @@ public class ShooterScript : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------
 
         //Input for the Punch ability
-        if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Reloading && !Dashing && !Punching && !Punched)
+        if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
         {
             StartCoroutine("Punch");
         }
 
         if (Punching)
         {
-            //Make a short range projectile that just moves away from the player not too far and then comes back to the player
-            //Possibly make the punch projectile attached to the player through a spring joint
+            Fist.GetComponent<Rigidbody2D>().velocity = PunchDir;
+        }
+
+        if (Returning)
+        {
+            var returnVel = new Vector2((this.transform.position.x - Fist.transform.position.x) * (PunchSpd/2), (this.transform.position.y - Fist.transform.position.y) * (PunchSpd/2));
+            Fist.GetComponent<Rigidbody2D>().velocity = returnVel;
         }
     }
 
@@ -199,20 +211,30 @@ public class ShooterScript : MonoBehaviour
         var newX = Mathf.Cos(angle);
         var newY = Mathf.Sin(angle);
         PunchDir = new Vector2(newX * PunchSpd, newY * PunchSpd);
-        //ArmSpringJoint.enabled = false;
+        ArmJoint.enabled = false;
+        Fist.GetComponent<CopyRot>().Off = true;
         Punching = true;
-        //Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.red;
+        yield return new WaitForSeconds(0.05f);
+        Fist.GetComponent<Rigidbody2D>().mass = FistWeight;
+        Fist.GetComponent<CapsuleCollider2D>().isTrigger = false;
         yield return new WaitForSeconds(PunchDuration);
-        Punched = true;
-        StartCoroutine("PunchCooldownTimer");
+        Punched = true; 
+        Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
+        Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
+        StartCoroutine("Return");
     }
 
-    IEnumerator PunchCooldownTimer()
+    IEnumerator Return()
     {
-        //ArmSpringJoint.enabled = true;
         Punching = false;
+        Returning = true;
+        yield return new WaitForSeconds(PunchDuration/2);
+        Returning = false;
+        Fist.transform.position = FistLocation.position;
+        Fist.transform.rotation = FistLocation.rotation;
+        ArmJoint.enabled = true;
+        Fist.GetComponent<CopyRot>().Off = false;
         yield return new WaitForSeconds(PunchCooldown);
-        //Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Punched = false;
     }
     
