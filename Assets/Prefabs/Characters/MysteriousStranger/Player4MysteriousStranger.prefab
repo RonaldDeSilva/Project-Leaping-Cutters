@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 1332311828941687982}
   - component: {fileID: 1332311828941687953}
   - component: {fileID: 1332311828941687952}
+  - component: {fileID: 43694181615662887}
   - component: {fileID: 1332311828941687955}
   - component: {fileID: 1332311828941687954}
   - component: {fileID: 1332311828941687957}
@@ -173,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332311828941687956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.24, y: -3.3132439, z: 0}
+  m_LocalPosition: {x: -5.81, y: -2.3019173, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1332311828427487305}
@@ -272,7 +273,24 @@ MonoBehaviour:
   PunchCooldown: 1.4
   PunchDuration: 0.3
   FistWeight: 40
-  playerNum: 4
+  FistLocation: {fileID: 1332311829957949143}
+--- !u!114 &43694181615662887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332311828941687956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2772b9c9313a9043954fd049068c535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UmbrellaOpen: {fileID: 21300000, guid: 202e6604410d4cc4fbc5984194323a48, type: 3}
+  UmbrellaClosed: {fileID: 21300000, guid: 79121d8ff159e2e44a59bd430bba0e96, type: 3}
+  Cooldown: 15
+  MaxSpd: 8
+  AbilityLen: 8
 --- !u!50 &1332311828941687955
 Rigidbody2D:
   serializedVersion: 4
@@ -518,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332311829964738354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.013, y: 1.239, z: 0}
+  m_LocalPosition: {x: 0.025, y: 1.152, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1332311828427487305}

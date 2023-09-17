@@ -39,12 +39,12 @@ public class ShooterScript : MonoBehaviour
     private bool Punched = false;
     private bool Returning = false;
     private Vector2 PunchDir;
-    private Transform FistLocation;
+    public Transform FistLocation;
     private GameObject Fist;
     private HingeJoint2D ArmJoint;
 
     //Player number specific Attributes
-    public int playerNum;
+    private int playerNum;
     private int childNum;
     private string dashInput;
     private string shootInput;
@@ -56,12 +56,19 @@ public class ShooterScript : MonoBehaviour
 
     void Start()
     {
+        StopAllCoroutines();
         rb = GetComponent<Rigidbody2D>();
         Can = GameObject.Find("Canvas");
         arm = gameObject.transform.GetChild(0).gameObject;
         Fist = gameObject.transform.GetChild(1).gameObject;
         ArmJoint = Fist.GetComponent<HingeJoint2D>();
-        FistLocation = Fist.transform;
+        Fist.transform.position = FistLocation.position;
+        Fist.transform.rotation = FistLocation.rotation;
+        ArmJoint.enabled = true;
+        Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
+        Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
+        Fist.GetComponent<CopyRot>().Off = false;
+        playerNum = GetComponent<MovementBase>().playerNum;
         Recoiling = false;
         Dashed = false;
         Dashing = false;
@@ -150,6 +157,7 @@ public class ShooterScript : MonoBehaviour
             var returnVel = new Vector2((this.transform.position.x - Fist.transform.position.x) * (PunchSpd/2), (this.transform.position.y - Fist.transform.position.y) * (PunchSpd/2));
             Fist.GetComponent<Rigidbody2D>().velocity = returnVel;
         }
+
     }
 
     #endregion
