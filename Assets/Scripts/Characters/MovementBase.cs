@@ -252,6 +252,19 @@ public class MovementBase : MonoBehaviour
         {
             hinge.motor = motorRef3;
         }
+
+        if (armRot.z < 175 && armRot.z > 5)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 
     #endregion

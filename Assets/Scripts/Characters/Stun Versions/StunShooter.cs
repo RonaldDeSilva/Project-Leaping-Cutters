@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShooterScript : MonoBehaviour
+public class StunShooter : MonoBehaviour
 {
     #region Components and Attributes
 
@@ -10,6 +10,7 @@ public class ShooterScript : MonoBehaviour
     private Rigidbody2D rb;
     private GameObject arm;
     private GameObject Can;
+    private bool Stunned;
 
     //Attributes for the Dash ability
     public float DashDistance;
@@ -68,7 +69,7 @@ public class ShooterScript : MonoBehaviour
         Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
         Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
         Fist.GetComponent<CopyRot>().Off = false;
-        playerNum = GetComponent<MovementBase>().playerNum;
+        playerNum = GetComponent<StunMovement>().playerNum;
         Recoiling = false;
         Dashed = false;
         Dashing = false;
@@ -76,6 +77,7 @@ public class ShooterScript : MonoBehaviour
         Punching = false;
         Punched = false;
         Returning = false;
+        Stunned = false;
 
         if (playerNum == 1)
         {
@@ -113,49 +115,54 @@ public class ShooterScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Input for the dash ability
-        if (Input.GetAxis(dashInput) > 0 && !Dashed && !Dashing && !Recoiling && !Punching)
+        Stunned = GetComponent<StunMovement>().Stunned;
+
+        if (!Stunned)
         {
-            StartCoroutine("Dash");
-        }
+            //Input for the dash ability
+            if (Input.GetAxis(dashInput) > 0 && !Dashed && !Dashing && !Recoiling && !Punching)
+            {
+                StartCoroutine("Dash");
+            }
 
-        //Movement Code for Dashing
-        if (Dashing)
-        {
-            rb.velocity = DashDir;
-        }
+            //Movement Code for Dashing
+            if (Dashing)
+            {
+                rb.velocity = DashDir;
+            }
 
-        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        //Input for the Shoot ability
-        if (Input.GetAxis(shootInput) > 0 && !Recoiling && !Reloading && !Dashing && !Punching)
-        {
-            StartCoroutine("Shoot");
-        }
+            //Input for the Shoot ability
+            if (Input.GetAxis(shootInput) > 0 && !Recoiling && !Reloading && !Dashing && !Punching)
+            {
+                StartCoroutine("Shoot");
+            }
 
-        //Movement Code for recoiling after shooting
-        if (Recoiling)
-        {
-            rb.velocity = RecoilDir;
-        }
+            //Movement Code for recoiling after shooting
+            if (Recoiling)
+            {
+                rb.velocity = RecoilDir;
+            }
 
-        //---------------------------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
 
-        //Input for the Punch ability
-        if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
-        {
-            StartCoroutine("Punch");
-        }
+            //Input for the Punch ability
+            if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
+            {
+                StartCoroutine("Punch");
+            }
 
-        if (Punching)
-        {
-            Fist.GetComponent<Rigidbody2D>().velocity = PunchDir;
-        }
+            if (Punching)
+            {
+                Fist.GetComponent<Rigidbody2D>().velocity = PunchDir;
+            }
 
-        if (Returning)
-        {
-            var returnVel = new Vector2((this.transform.position.x - Fist.transform.position.x) * (PunchSpd/2), (this.transform.position.y - Fist.transform.position.y) * (PunchSpd/2));
-            Fist.GetComponent<Rigidbody2D>().velocity = returnVel;
+            if (Returning)
+            {
+                var returnVel = new Vector2((this.transform.position.x - Fist.transform.position.x) * (PunchSpd / 2), (this.transform.position.y - Fist.transform.position.y) * (PunchSpd / 2));
+                Fist.GetComponent<Rigidbody2D>().velocity = returnVel;
+            }
         }
 
     }
@@ -212,7 +219,7 @@ public class ShooterScript : MonoBehaviour
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------
     #region Punch Coroutines
-    
+
     IEnumerator Punch()
     {
         var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
@@ -226,7 +233,7 @@ public class ShooterScript : MonoBehaviour
         Fist.GetComponent<Rigidbody2D>().mass = FistWeight;
         Fist.GetComponent<CapsuleCollider2D>().isTrigger = false;
         yield return new WaitForSeconds(PunchDuration);
-        Punched = true; 
+        Punched = true;
         Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
         Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
         StartCoroutine("Return");
@@ -236,7 +243,7 @@ public class ShooterScript : MonoBehaviour
     {
         Punching = false;
         Returning = true;
-        yield return new WaitForSeconds(PunchDuration/2);
+        yield return new WaitForSeconds(PunchDuration / 2);
         Returning = false;
         Fist.transform.position = FistLocation.position;
         Fist.transform.rotation = FistLocation.rotation;
@@ -245,7 +252,7 @@ public class ShooterScript : MonoBehaviour
         yield return new WaitForSeconds(PunchCooldown);
         Punched = false;
     }
-    
+
     #endregion
 
 }

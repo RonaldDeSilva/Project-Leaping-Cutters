@@ -11,13 +11,16 @@ public class Projectile : MonoBehaviour
     public float Pushtime;
     private bool flying = true;
     private bool Destroying = false;
-    public float Life;
 
+
+    //On Awaken the projectile is given a direction to fly in
     public void Awaken(Vector2 Direction)
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         Dir = Direction;
     }
+
+    //Sends the projectile in the proper direction by setting its velocity
     void FixedUpdate()
     {
         if (flying)
@@ -25,6 +28,8 @@ public class Projectile : MonoBehaviour
             rb.velocity = Dir;
         }
     }
+
+    //This collision checker decides whether the projectile will keep flying or fall through the floor, based on whether it hits a player or the ground
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!Destroying)
@@ -47,6 +52,8 @@ public class Projectile : MonoBehaviour
             StartCoroutine("Destroy2");
         }
     }
+
+    //This Trigger exit check destroys bullets that are off screen to keep clutter in the level to a minimum and keep performance good
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Deathbox"))
@@ -54,9 +61,10 @@ public class Projectile : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    //This first coroutine is for hitting a player and keeps pushing the player for a specified amount of time
     IEnumerator Destroy()
     {
-
         yield return new WaitForSeconds(Pushtime);
         flying = false;
         if (this.gameObject.GetComponent<CapsuleCollider2D>() != null)
@@ -67,13 +75,12 @@ public class Projectile : MonoBehaviour
         {
             this.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
         }
-        yield return new WaitForSeconds(Life);
-        Destroy(this.gameObject);
     }
 
+    //This Coroutine is for hitting a wall and immediately makes the bullet fall instead of hitting the wall for a while
     IEnumerator Destroy2()
     {
-        flying = false; 
+        flying = false;
         if (this.gameObject.GetComponent<CapsuleCollider2D>() != null)
         {
             this.gameObject.GetComponent<CapsuleCollider2D>().isTrigger = true;
@@ -82,8 +89,7 @@ public class Projectile : MonoBehaviour
         {
             this.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
         }
-        yield return new WaitForSeconds(Life);
-        Destroy(this.gameObject);
+        yield return new WaitForSeconds(1f);
     }
 
 }

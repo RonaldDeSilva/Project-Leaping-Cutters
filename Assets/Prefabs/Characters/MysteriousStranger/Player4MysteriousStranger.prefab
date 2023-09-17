@@ -270,7 +270,7 @@ MonoBehaviour:
   RecoilSpd: 20
   ReloadTime: 4
   PunchSpd: 16
-  PunchCooldown: 1.4
+  PunchCooldown: 0.5
   PunchDuration: 0.3
   FistWeight: 40
   FistLocation: {fileID: 1332311829957949143}

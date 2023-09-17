@@ -7,11 +7,9 @@ TagManager:
   - Deathbox
   - MysteriousStranger
   - BabyBeard
-  - InflatableGuy
   - ThePit
-  - NoGround
-  - Spinner
-  - SpinningMoon
+  - Bullet
+  - Arm
   layers:
   - Default
   - TransparentFX

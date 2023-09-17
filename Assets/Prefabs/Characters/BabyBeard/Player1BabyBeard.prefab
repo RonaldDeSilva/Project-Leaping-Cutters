@@ -128,7 +128,7 @@ MonoBehaviour:
   RecoilSpd: 15
   ReloadTime: 6
   PunchSpd: 18
-  PunchCooldown: 1.3
+  PunchCooldown: 0.5
   PunchDuration: 0.3
   FistWeight: 40
   FistLocation: {fileID: 3052602441627461376}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown: 15
-  NewWeight: 125
+  NewWeight: 100
   NewGravityScale: 5
   NewFric: {fileID: 6200000, guid: 4a4ffb3f2f774ea4b949c6c54a56c4ca, type: 2}
   AbilityLen: 8
