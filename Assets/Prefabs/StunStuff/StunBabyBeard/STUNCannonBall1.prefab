@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pushtime: 2
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  hitWall: {fileID: 8300000, guid: 76c3195e8d9f5824696b6b43edf1bc11, type: 3}
+  hitPlayer: {fileID: 8300000, guid: 1e5cd64a63894b846af338284067a013, type: 3}
+  hitWeapon: {fileID: 8300000, guid: 602c5073d20416a4485ed44b681a898a, type: 3}
 --- !u!50 &2363157862885626489
 Rigidbody2D:
   serializedVersion: 4

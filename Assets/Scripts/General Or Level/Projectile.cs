@@ -11,6 +11,11 @@ public class Projectile : MonoBehaviour
     public float Pushtime;
     private bool flying = true;
     private bool Destroying = false;
+    public GameObject AudioPlayer;
+    public AudioClip hitWall;
+    public AudioClip hitPlayer;
+    public AudioClip hitWeapon;
+
 
 
     //On Awaken the projectile is given a direction to fly in
@@ -34,19 +39,31 @@ public class Projectile : MonoBehaviour
     {
         if (!Destroying)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Weapon"))
             {
+                if (collision.gameObject.CompareTag("Player"))
+                {
+                    var inst = Instantiate(AudioPlayer);
+                    inst.GetComponent<SoundPlayer>().Awaken(hitPlayer, 1f);
+                }
+                else
+                {
+                    var inst = Instantiate(AudioPlayer);
+                    inst.GetComponent<SoundPlayer>().Awaken(hitWeapon, 1f);
+                }
                 StartCoroutine("Destroy");
                 Destroying = true;
             }
             else
             {
+                var inst = Instantiate(AudioPlayer);
+                inst.GetComponent<SoundPlayer>().Awaken(hitWall, 1f);
                 StartCoroutine("Destroy2");
                 Destroying = true;
             }
         }
 
-        if (!collision.gameObject.CompareTag("Player") && Destroying)
+        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Weapon") && Destroying)
         {
             StopAllCoroutines();
             StartCoroutine("Destroy2");

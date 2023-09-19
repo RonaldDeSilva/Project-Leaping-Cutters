@@ -10,6 +10,8 @@ TagManager:
   - ThePit
   - Bullet
   - Arm
+  - Weapon
+  - Platform
   layers:
   - Default
   - TransparentFX

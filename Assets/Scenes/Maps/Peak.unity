@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 790792837}
   m_Layer: 0
   m_Name: Plat (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 878294292}
   m_Layer: 0
   m_Name: Plat
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 1196183645}
   m_Layer: 0
   m_Name: Plat (2)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

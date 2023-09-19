@@ -15,9 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/LevelSelect.unity
     guid: bbefd77566826484b87cf4b26a3daee6
   - enabled: 1
-    path: Assets/Scenes/Maps/4 Player/ThePit-4Player.unity
+    path: Assets/Scenes/Maps/ThePit-4Player.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Maps/4 Player/SpinningMoon.unity
+    path: Assets/Trash/SpinningMoon.unity
     guid: 971626558cd9a2b439742d2d4a8d5136
   m_configObjects: {}
