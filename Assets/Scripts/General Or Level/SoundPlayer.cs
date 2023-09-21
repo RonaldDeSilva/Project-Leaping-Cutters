@@ -17,6 +17,6 @@ public class SoundPlayer : MonoBehaviour
     {
         yield return new WaitForSeconds(soundLen);
         GetComponent<AudioSource>().clip = null;
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }

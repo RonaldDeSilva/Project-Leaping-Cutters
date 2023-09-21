@@ -107,6 +107,17 @@ MonoBehaviour:
   spd: 400
   playerNum: 1
   armHeight: 0.9
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  HurtSounds:
+  - {fileID: 8300000, guid: 2ed10742ff45b5c46b6ff8726d2d188a, type: 3}
+  - {fileID: 8300000, guid: dbdfd81c1a6b8134cb6e0671a626f41d, type: 3}
+  - {fileID: 8300000, guid: f8dad28d74649a344b161681b016e8c4, type: 3}
+  - {fileID: 8300000, guid: 9ac455937da8bc548bcf22a0d7f1ff35, type: 3}
+  DeathSound1: {fileID: 8300000, guid: 99263c581427c20479490da7a7b51a02, type: 3}
+  DeathSound2: {fileID: 8300000, guid: 8577b6a3f1348f74ba690e2e776bd9fd, type: 3}
+  RespawningSound: {fileID: 8300000, guid: e960df2bc43cc1d44b6f8b1161aa3d1e, type: 3}
+  LandingSoundGround: {fileID: 8300000, guid: 9e5a3c226d701234796754caf18dac9c, type: 3}
+  LandingSoundPlayer: {fileID: 8300000, guid: 0a826b8718b42954a9ac2bf5d194b533, type: 3}
 --- !u!114 &4239985055199474707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +143,13 @@ MonoBehaviour:
   PunchDuration: 0.3
   FistWeight: 40
   FistLocation: {fileID: 3052602441627461376}
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  GunShotSound: {fileID: 8300000, guid: f9ab3f320f24d364aa2c55ef1f57639f, type: 3}
+  ReloadingSound: {fileID: 8300000, guid: d3248dea439b2c647bbe6167b0be2537, type: 3}
+  ArmShootSound: {fileID: 8300000, guid: fc2818975972eb947a53a4a68b98e479, type: 3}
+  ArmReturnSound: {fileID: 8300000, guid: ced5622ff8eb0a741b2276249a1ba4f9, type: 3}
+  DashingSound: {fileID: 8300000, guid: 7c3c0793888fd1b42a5aa24d3d3e47f6, type: 3}
+  DashCooldownSound: {fileID: 8300000, guid: 29987594a6423514cad079ce077870a4, type: 3}
 --- !u!114 &8993310635059817006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,8 +202,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.028252602, y: -0.034451485}
-  m_Size: {x: 0.7817936, y: 2.931097}
+  m_Offset: {x: -0.0032382011, y: -0.034451485}
+  m_Size: {x: 1.1439381, y: 2.931097}
   m_Direction: 0
 --- !u!233 &476146246699851692
 HingeJoint2D:
@@ -224,6 +242,7 @@ GameObject:
   - component: {fileID: 476146247114808612}
   - component: {fileID: 476146247114808609}
   - component: {fileID: 9035218457604420332}
+  - component: {fileID: 2622996166057628083}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Weapon
@@ -354,6 +373,22 @@ SpringJoint2D:
   m_Distance: 0.12899995
   m_DampingRatio: 0.5
   m_Frequency: 65
+--- !u!114 &2622996166057628083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476146247114808608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa6cdbff6487b344abfe1fb79863daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  WeaponHittingWall: {fileID: 8300000, guid: f1afc7c14a03e0b459e21d147154876c, type: 3}
+  WeaponHittingPlayer: {fileID: 8300000, guid: b303eb99b2a499f44af87c34a98f4ed4, type: 3}
+  WeaponHittingWeapon: {fileID: 8300000, guid: 5440d54165d184b45850c72893a56539, type: 3}
 --- !u!1 &3052602441627461377
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +405,7 @@ GameObject:
   - component: {fileID: 4998949703699836019}
   m_Layer: 0
   m_Name: FrontArm
-  m_TagString: Untagged
+  m_TagString: Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

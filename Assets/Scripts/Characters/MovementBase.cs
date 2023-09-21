@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MovementBase : MonoBehaviour
 {
@@ -28,6 +30,20 @@ public class MovementBase : MonoBehaviour
     private string respawnName;
     private string Vertical;
     private string Horizontal;
+
+    //Sound effects
+    public GameObject AudioPlayer;
+    public AudioClip[] HurtSounds;
+    public AudioClip DeathSound1;
+    public AudioClip DeathSound2;
+    public AudioClip RespawningSound;
+    public AudioClip LandingSoundGround;
+    public AudioClip LandingSoundPlayer;
+    private GameObject AlreadyLandedOn;
+    private GameObject AlreadyHitMe;
+    private GameObject AlreadyHitMe2;
+    private GameObject AlreadyHitMe3;
+    private int HitCount;
 
     #endregion
 
@@ -70,6 +86,11 @@ public class MovementBase : MonoBehaviour
         arm = gameObject.transform.GetChild(0).gameObject;
         arm.transform.rotation = new Quaternion(0, 0, 0, 0);
         arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + armHeight, 0);
+        AlreadyHitMe = null;
+        AlreadyHitMe2 = null;
+        AlreadyHitMe3 = null;
+        AlreadyLandedOn = null;
+        HitCount = 1;
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
@@ -79,6 +100,7 @@ public class MovementBase : MonoBehaviour
         {
             Respawn = GameObject.Find(respawnName).transform;
         }
+
     }
 
     #endregion
@@ -279,19 +301,166 @@ public class MovementBase : MonoBehaviour
             {
                 lives -= 1;
                 Can.gameObject.transform.GetChild(childNum).gameObject.GetComponent<Text>().text = lives.ToString();
-                Instantiate(Player, Respawn.position, this.transform.rotation);
-                Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
-                Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
-                Destroy(this.gameObject);
+                StartCoroutine("Death");
             }
             else
             {
                 lives -= 1;
                 Can.gameObject.transform.GetChild(childNum).gameObject.GetComponent<Text>().text = lives.ToString();
-                Destroy(this.gameObject);
+                StartCoroutine("Death2");
             }
 
         }
+    }
+
+    IEnumerator Death()
+    {
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
+        var sound = Instantiate(AudioPlayer);
+        if (SceneManager.GetActiveScene().name == "BabyBeards_Ship")
+        {
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+        }
+        else
+        {
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+        }
+        yield return new WaitForSeconds(3f);
+        var sound2 = Instantiate(AudioPlayer);
+        sound2.GetComponent<SoundPlayer>().Awaken(RespawningSound, 1f);
+        Instantiate(Player, Respawn.position, this.transform.rotation);
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator Death2()
+    {
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
+        var sound = Instantiate(AudioPlayer); 
+        if (SceneManager.GetActiveScene().name == "BabyBeards_Ship")
+        {
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+        }
+        else
+        {
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+        }
+        Destroy(this.gameObject);
+        yield return new WaitForSeconds(0.1f);
+        
+    }
+
+    #endregion
+
+    #region Collision for SFX
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if (HitCount == 1)
+        {
+            if (collision.gameObject.CompareTag("Bullet") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
+            {
+                AlreadyHitMe = collision.gameObject;
+                HitCount += 1;
+                var rando = Random.Range(0, 3);
+                var sound2 = Instantiate(AudioPlayer);
+                sound2.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+            }
+            else if (collision.gameObject.CompareTag("Arm") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
+            {
+                AlreadyHitMe = collision.gameObject;
+                HitCount += 1;
+                var rando = Random.Range(0, 3);
+                var sound3 = Instantiate(AudioPlayer);
+                sound3.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                StartCoroutine("HitResetter1");
+            }
+        }
+        else if (HitCount == 2)
+        {
+            if (collision.gameObject.CompareTag("Bullet") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
+            {
+                AlreadyHitMe2 = collision.gameObject;
+                HitCount += 1;
+                var rando = Random.Range(0, 3);
+                var sound4 = Instantiate(AudioPlayer);
+                sound4.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+            }
+            else if (collision.gameObject.CompareTag("Arm") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
+            {
+                AlreadyHitMe2 = collision.gameObject;
+                HitCount += 1;
+                var rando = Random.Range(0, 3);
+                var sound5 = Instantiate(AudioPlayer);
+                sound5.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                StartCoroutine("HitResetter2");
+            }
+        }
+        else if (HitCount == 3)
+        {
+            if (collision.gameObject.CompareTag("Bullet") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
+            {
+                AlreadyHitMe3 = collision.gameObject;
+                HitCount = 1;
+                var rando = Random.Range(0, 3);
+                var sound6 = Instantiate(AudioPlayer);
+                sound6.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+            }
+            else if (collision.gameObject.CompareTag("Arm") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
+            {
+                AlreadyHitMe3 = collision.gameObject;
+                HitCount = 1;
+                var rando = Random.Range(0, 3);
+                var sound7 = Instantiate(AudioPlayer);
+                sound7.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                StartCoroutine("HitResetter3");
+            }
+        }
+
+        if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > 1.2f || Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) > 1.2f)
+        {
+            if (collision.gameObject.CompareTag("Platform") && collision.gameObject != AlreadyLandedOn)
+            {
+                AlreadyLandedOn = collision.gameObject;
+                var sound = Instantiate(AudioPlayer);
+                sound.GetComponent<SoundPlayer>().Awaken(LandingSoundGround, 1f);
+                StartCoroutine("LandResetter");
+            }
+            else if(collision.gameObject.CompareTag("Player") && collision.gameObject != AlreadyLandedOn)
+            {
+                AlreadyLandedOn = collision.gameObject;
+                var sound = Instantiate(AudioPlayer);
+                sound.GetComponent<SoundPlayer>().Awaken(LandingSoundPlayer, 1f);
+                StartCoroutine("LandResetter");
+            }
+
+        }
+    }
+
+    IEnumerator HitResetter1()
+    {
+        yield return new WaitForSeconds(0.3f);
+        AlreadyHitMe = null;
+    }
+
+    IEnumerator HitResetter2()
+    {
+        yield return new WaitForSeconds(0.3f);
+        AlreadyHitMe2 = null;
+    }
+
+    IEnumerator HitResetter3()
+    {
+        yield return new WaitForSeconds(0.3f);
+        AlreadyHitMe3 = null;
+    }
+
+    IEnumerator LandResetter()
+    {
+        yield return new WaitForSeconds(1f);
+        AlreadyLandedOn = null;
     }
 
     #endregion

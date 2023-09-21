@@ -36,7 +36,7 @@ public class StunAnchor : MonoBehaviour
         Activated = false;
         CooldownPeriod = false;
         GracePeriod = false;
-        PlayerNum = GetComponent<MovementBase>().playerNum;
+        PlayerNum = GetComponent<StunMovement>().playerNum;
         Anchor = transform.GetChild(2).gameObject;
         Anchor.GetComponent<SpriteRenderer>().enabled = false;
         Anchor.transform.localScale = new Vector3(3f, 3f, 1f);

@@ -51,6 +51,22 @@ public class StunShooter : MonoBehaviour
     private string shootInput;
     private string punchInput;
 
+    //Sound Effects
+    public GameObject AudioPlayer;
+    public AudioClip WeaponHitPlayer;
+    public AudioClip WeaponHitWall;
+    public AudioClip WeaponHitWeapon;
+    public AudioClip GunShotSound;
+    public AudioClip ReloadingSound;
+    public AudioClip ArmShootSound;
+    public AudioClip ArmReturnSound;
+    public AudioClip DashingSound;
+    public AudioClip DashCooldownSound;
+    public AudioClip ArmHittingPlayer;
+    public AudioClip ArmHittingWall;
+    public AudioClip ArmHittingWeapon;
+
+
     #endregion
 
     #region Initialization

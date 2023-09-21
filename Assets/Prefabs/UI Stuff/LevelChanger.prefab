@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTracker: {fileID: 0}
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  WinSound: {fileID: 8300000, guid: afedfec42f72d884699bb0c0da77f300, type: 3}

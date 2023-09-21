@@ -7,6 +7,8 @@ public class LevelSelector : MonoBehaviour
 {
     public GameObject PlayerTracker;
     private Canvas Can;
+    public GameObject AudioPlayer;
+    public AudioClip WinSound;
 
     void Awake()
     {
@@ -78,7 +80,8 @@ public class LevelSelector : MonoBehaviour
         PlayerTracker.GetComponent<PlayerTracker>().Player2 = " ";
         PlayerTracker.GetComponent<PlayerTracker>().Player3 = " ";
         PlayerTracker.GetComponent<PlayerTracker>().Player4 = " ";
-
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(WinSound, 1f);
         yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("CharacterSelect");
     }
