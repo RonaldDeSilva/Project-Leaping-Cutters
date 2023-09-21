@@ -324,7 +324,7 @@ public class MovementBase : MonoBehaviour
         }
         else
         {
-            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound2, 1f);
         }
         yield return new WaitForSeconds(3f);
         var sound2 = Instantiate(AudioPlayer);
@@ -344,7 +344,7 @@ public class MovementBase : MonoBehaviour
         }
         else
         {
-            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound2, 1f);
         }
         Destroy(this.gameObject);
         yield return new WaitForSeconds(0.1f);
