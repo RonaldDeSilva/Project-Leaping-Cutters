@@ -16,6 +16,12 @@ public class UmbrellaOpenMS : MonoBehaviour
     private int PlayerNum;
     private string SpecialButton;
 
+    public GameObject AudioPlayer;
+    public AudioClip CooldownSound;
+    public AudioClip UmbrellaOpenSound;
+    public AudioClip UmbrellaCloseSound;
+
+
 
     void Start()
     {
@@ -58,6 +64,8 @@ public class UmbrellaOpenMS : MonoBehaviour
             StopAllCoroutines();
             Activated = false;
             transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = UmbrellaClosed;
+            var sound2 = Instantiate(AudioPlayer);
+            sound2.GetComponent<SoundPlayer>().Awaken(UmbrellaCloseSound, 1f);
             CooldownPeriod = true;
             StartCoroutine("SpecialCooldown");
 
@@ -74,8 +82,12 @@ public class UmbrellaOpenMS : MonoBehaviour
     {
         Activated = true;
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = UmbrellaOpen;
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(UmbrellaOpenSound, 1f);
         yield return new WaitForSeconds(AbilityLen);
         Activated = false;
+        var sound2 = Instantiate(AudioPlayer);
+        sound2.GetComponent<SoundPlayer>().Awaken(UmbrellaCloseSound, 1f);
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = UmbrellaClosed;
         CooldownPeriod = true;
         StartCoroutine("SpecialCooldown");
@@ -84,6 +96,8 @@ public class UmbrellaOpenMS : MonoBehaviour
     IEnumerator SpecialCooldown()
     {
         yield return new WaitForSeconds(Cooldown);
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(CooldownSound, 1f);
         CooldownPeriod = false;
     }
 

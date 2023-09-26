@@ -112,7 +112,7 @@ public class WeaponSoundEffects : MonoBehaviour
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
                 {
                     AlreadyHitMe3 = collision.gameObject;
-                    HitCount += 1;
+                    HitCount = 1;
                     var sound2 = Instantiate(AudioPlayer);
                     sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWeapon, 1f);
                     HitTimer3 = 0.8f;

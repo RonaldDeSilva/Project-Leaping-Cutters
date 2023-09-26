@@ -324,16 +324,16 @@ SpringJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 2673667667683417079}
+  m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: -0.15, y: -1.18}
-  m_ConnectedAnchor: {x: -0.13199997, y: -0.1509999}
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: -0.16, y: -1.06}
+  m_ConnectedAnchor: {x: -5.232, y: -2.5349069}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.12899995
-  m_DampingRatio: 0.5
-  m_Frequency: 65
+  m_Distance: 0.005
+  m_DampingRatio: 1
+  m_Frequency: 10
 --- !u!114 &1160654327349476240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +500,7 @@ MonoBehaviour:
   ArmReturnSound: {fileID: 8300000, guid: ced5622ff8eb0a741b2276249a1ba4f9, type: 3}
   DashingSound: {fileID: 8300000, guid: 7c3c0793888fd1b42a5aa24d3d3e47f6, type: 3}
   DashCooldownSound: {fileID: 8300000, guid: 29987594a6423514cad079ce077870a4, type: 3}
+  dying: 0
 --- !u!114 &7936696976058878869
 MonoBehaviour:
   m_ObjectHideFlags: 0

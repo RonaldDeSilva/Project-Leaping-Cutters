@@ -336,6 +336,8 @@ public class StunMovement : MonoBehaviour
 
     IEnumerator Death()
     {
+        hinge.motor = motorRef3;
+        Stunned = true;
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
         var sound = Instantiate(AudioPlayer);
@@ -345,7 +347,7 @@ public class StunMovement : MonoBehaviour
         }
         else
         {
-            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound2, 1f);
         }
         yield return new WaitForSeconds(3f);
         var sound2 = Instantiate(AudioPlayer);
@@ -356,6 +358,8 @@ public class StunMovement : MonoBehaviour
 
     IEnumerator Death2()
     {
+        Stunned = true;
+        hinge.motor = motorRef3;
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
         var sound = Instantiate(AudioPlayer);

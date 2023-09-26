@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4743482780196432583}
   - component: {fileID: 4743482780196432580}
   - component: {fileID: 4743482780196432582}
-  - component: {fileID: 4743482780196432581}
+  - component: {fileID: 3490381557751655270}
   - component: {fileID: 913069292273575915}
   m_Layer: 0
   m_Name: Arm
@@ -154,7 +154,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.023896217, y: -0.34651268}
   m_Size: {x: 0.32481384, y: 2.7942097}
   m_Direction: 0
---- !u!231 &4743482780196432581
+--- !u!231 &3490381557751655270
 SpringJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,16 +164,16 @@ SpringJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 4743482780514840563}
+  m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: -1.75}
-  m_ConnectedAnchor: {x: 0.10099983, y: -0.05099988}
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0.019, y: -1.74}
+  m_ConnectedAnchor: {x: -7.54, y: -2.3429174}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
-  m_DampingRatio: 0.5
-  m_Frequency: 65
+  m_DampingRatio: 1
+  m_Frequency: 10
 --- !u!114 &913069292273575915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +516,7 @@ MonoBehaviour:
   ArmReturnSound: {fileID: 8300000, guid: ced5622ff8eb0a741b2276249a1ba4f9, type: 3}
   DashingSound: {fileID: 8300000, guid: 7c3c0793888fd1b42a5aa24d3d3e47f6, type: 3}
   DashCooldownSound: {fileID: 8300000, guid: 29987594a6423514cad079ce077870a4, type: 3}
+  dying: 0
 --- !u!114 &1556299034890236760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +534,10 @@ MonoBehaviour:
   Cooldown: 15
   MaxSpd: 8
   AbilityLen: 8
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  CooldownSound: {fileID: 8300000, guid: 1cd2fd3d873ebc3428758b25e3539e7b, type: 3}
+  UmbrellaOpenSound: {fileID: 8300000, guid: a7f9321031dc53a47b209773a89e4dbc, type: 3}
+  UmbrellaCloseSound: {fileID: 8300000, guid: c610786b2ceb8ff48af886e2304b667c, type: 3}
 --- !u!50 &4743482780514840563
 Rigidbody2D:
   serializedVersion: 4

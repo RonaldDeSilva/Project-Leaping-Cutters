@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 8170338621160712126}
   - component: {fileID: 8170338621160712124}
   - component: {fileID: 8170338621160712125}
-  - component: {fileID: 6278745751615074496}
+  - component: {fileID: 3280318160559702033}
   - component: {fileID: 7177933812565726045}
   m_Layer: 0
   m_Name: Arm
@@ -331,7 +331,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.023896217, y: -0.34651268}
   m_Size: {x: 0.32481384, y: 2.7942097}
   m_Direction: 0
---- !u!231 &6278745751615074496
+--- !u!231 &3280318160559702033
 SpringJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,16 +341,16 @@ SpringJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 8170338621802915126}
+  m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: -1.75}
-  m_ConnectedAnchor: {x: 0.10099983, y: -0.05099988}
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0.019, y: -1.74}
+  m_ConnectedAnchor: {x: -9.236057, y: -1.3442081}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
-  m_DampingRatio: 0.5
-  m_Frequency: 65
+  m_DampingRatio: 1
+  m_Frequency: 10
 --- !u!114 &7177933812565726045
 MonoBehaviour:
   m_ObjectHideFlags: 0

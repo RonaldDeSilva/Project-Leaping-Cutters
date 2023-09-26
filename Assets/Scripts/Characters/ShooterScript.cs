@@ -58,6 +58,7 @@ public class ShooterScript : MonoBehaviour
     public AudioClip ArmReturnSound;
     public AudioClip DashingSound;
     public AudioClip DashCooldownSound;
+    public bool dying;
 
 
     #endregion
@@ -78,6 +79,7 @@ public class ShooterScript : MonoBehaviour
         Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
         Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
         Fist.GetComponent<CopyRot>().Off = false;
+        Fist.SetActive(true);
         playerNum = GetComponent<MovementBase>().playerNum;
         Recoiling = false;
         Dashed = false;
@@ -86,6 +88,7 @@ public class ShooterScript : MonoBehaviour
         Punching = false;
         Punched = false;
         Returning = false;
+        dying = false;
 
         if (playerNum == 1)
         {
@@ -123,51 +126,58 @@ public class ShooterScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Input for the dash ability
-        if (Input.GetAxis(dashInput) > 0 && !Dashed && !Dashing && !Recoiling && !Punching)
+        if (!dying)
         {
-            StartCoroutine("Dash");
-        }
+            //Input for the dash ability
+            if (Input.GetAxis(dashInput) > 0 && !Dashed && !Dashing && !Recoiling && !Punching)
+            {
+                StartCoroutine("Dash");
+            }
 
-        //Movement Code for Dashing
-        if (Dashing)
+            //Movement Code for Dashing
+            if (Dashing)
+            {
+                rb.velocity = DashDir;
+            }
+
+            //--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            //Input for the Shoot ability
+            if (Input.GetAxis(shootInput) > 0 && !Recoiling && !Reloading && !Dashing && !Punching)
+            {
+                StartCoroutine("Shoot");
+            }
+
+            //Movement Code for recoiling after shooting
+            if (Recoiling)
+            {
+                rb.velocity = RecoilDir;
+            }
+
+            //---------------------------------------------------------------------------------------------------------------------------
+
+            //Input for the Punch ability
+            if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
+            {
+                StartCoroutine("Punch");
+            }
+
+            if (Punching)
+            {
+                Fist.GetComponent<Rigidbody2D>().velocity = PunchDir;
+            }
+
+            if (Returning)
+            {
+                var returnVel = new Vector2((this.transform.position.x - Fist.transform.position.x) * (PunchSpd / 2), (this.transform.position.y - Fist.transform.position.y) * (PunchSpd / 2));
+                Fist.GetComponent<Rigidbody2D>().velocity = returnVel;
+            }
+        }
+        else
         {
-            rb.velocity = DashDir;
+            StopAllCoroutines();
+            Fist.SetActive(false);
         }
-
-        //--------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        //Input for the Shoot ability
-        if (Input.GetAxis(shootInput) > 0 && !Recoiling && !Reloading && !Dashing && !Punching)
-        {
-            StartCoroutine("Shoot");
-        }
-
-        //Movement Code for recoiling after shooting
-        if (Recoiling)
-        {
-            rb.velocity = RecoilDir;
-        }
-
-        //---------------------------------------------------------------------------------------------------------------------------
-
-        //Input for the Punch ability
-        if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
-        {
-            StartCoroutine("Punch");
-        }
-
-        if (Punching)
-        {
-            Fist.GetComponent<Rigidbody2D>().velocity = PunchDir;
-        }
-
-        if (Returning)
-        {
-            var returnVel = new Vector2((this.transform.position.x - Fist.transform.position.x) * (PunchSpd/2), (this.transform.position.y - Fist.transform.position.y) * (PunchSpd/2));
-            Fist.GetComponent<Rigidbody2D>().velocity = returnVel;
-        }
-
     }
 
     #endregion
