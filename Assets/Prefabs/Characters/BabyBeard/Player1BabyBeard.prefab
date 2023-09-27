@@ -216,12 +216,12 @@ HingeJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
+  m_ConnectedRigidBody: {fileID: 476146247114808612}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.14375019, y: -0.16171744}
-  m_ConnectedAnchor: {x: -7.6279645, y: -2.5366244}
+  m_ConnectedAnchor: {x: -0.16174984, y: -1.0617174}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0

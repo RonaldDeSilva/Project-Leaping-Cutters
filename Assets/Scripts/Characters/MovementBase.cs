@@ -130,7 +130,8 @@ public class MovementBase : MonoBehaviour
             if (Input.GetAxis(Vertical) > 0.15 || Input.GetAxis(Vertical) < -0.15 || Input.GetAxis(Horizontal) > 0.15 || Input.GetAxis(Horizontal) < -0.15)
             {
                 //This is checking whether the rotation of the arm is greater or less than the rotation of the controller's stick
-                //It also checks if they are within 10 degrees of each other and if so it doesn't keep moving to prevent stuttering
+                //It then determines based on that and also the distance from the controllers rotation to the arms rotation
+                //How fast to move the arm so that it can be moved percisely but also quickly
                 if (armRot.z > controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 1.5f))
                 {
                     if (Mathf.Abs(armRot.z - controllerRot.z) > 345)

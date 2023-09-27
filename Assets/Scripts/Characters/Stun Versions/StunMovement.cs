@@ -23,7 +23,7 @@ public class StunMovement : MonoBehaviour
     public float spd;
     public bool Stunned;
     private int lives;
-    private int Damage;
+    public int Damage;
     public int MaxDamage;
     public float StunTime;
     private GameObject AlreadyHitMe;
@@ -52,12 +52,18 @@ public class StunMovement : MonoBehaviour
     public AudioClip LandingSoundPlayer;
     private GameObject AlreadyLandedOn;
 
+    //Color stuff
+    public Color BodyColor;
+    public Color ArmColor;
+    private Color StunColor = new Color(80, 80, 80, 0.5f);
+
     #endregion
 
     #region Initialization
 
     void Start()
     {
+        
         if (playerNum == 1)
         {
             childNum = 0;
@@ -471,7 +477,13 @@ public class StunMovement : MonoBehaviour
 
     IEnumerator StunCooldown()
     {
+        GetComponent<SpriteRenderer>().color = StunColor;
+        transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = StunColor;
+        transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = StunColor;
         yield return new WaitForSeconds(StunTime);
+        GetComponent<SpriteRenderer>().color = BodyColor;
+        transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = BodyColor;
+        transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = ArmColor;
         Damage = 0;
         Stunned = false;
     }

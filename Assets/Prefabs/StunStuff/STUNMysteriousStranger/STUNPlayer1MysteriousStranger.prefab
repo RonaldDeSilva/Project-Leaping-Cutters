@@ -341,12 +341,12 @@ SpringJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
+  m_ConnectedRigidBody: {fileID: 8170338621802915126}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.019, y: -1.74}
-  m_ConnectedAnchor: {x: -9.236057, y: -1.3442081}
+  m_ConnectedAnchor: {x: 0.119999886, y: -0.04100001}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1
@@ -472,6 +472,7 @@ MonoBehaviour:
   Player: {fileID: 8170338621802915122}
   spd: 400
   Stunned: 0
+  Damage: 0
   MaxDamage: 15
   StunTime: 6.5
   playerNum: 1
@@ -487,6 +488,8 @@ MonoBehaviour:
   RespawningSound: {fileID: 8300000, guid: e960df2bc43cc1d44b6f8b1161aa3d1e, type: 3}
   LandingSoundGround: {fileID: 8300000, guid: 9e5a3c226d701234796754caf18dac9c, type: 3}
   LandingSoundPlayer: {fileID: 8300000, guid: 0a826b8718b42954a9ac2bf5d194b533, type: 3}
+  BodyColor: {r: 1, g: 1, b: 1, a: 1}
+  ArmColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &8170338621802915116
 MonoBehaviour:
   m_ObjectHideFlags: 0

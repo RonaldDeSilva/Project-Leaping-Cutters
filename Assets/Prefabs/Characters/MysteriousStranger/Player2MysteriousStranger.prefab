@@ -134,12 +134,12 @@ SpringJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
+  m_ConnectedRigidBody: {fileID: 4333655517226580150}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.019, y: -1.74}
-  m_ConnectedAnchor: {x: -9.54, y: -2.3429174}
+  m_ConnectedAnchor: {x: 0.119999886, y: -0.041000128}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1

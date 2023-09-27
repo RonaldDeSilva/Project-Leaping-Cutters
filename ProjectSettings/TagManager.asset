@@ -12,6 +12,7 @@ TagManager:
   - Arm
   - Weapon
   - Platform
+  - BabyBeardsShip
   layers:
   - Default
   - TransparentFX
