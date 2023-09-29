@@ -190,7 +190,7 @@ public class ShooterScript : MonoBehaviour
         var newY = Mathf.Sin(angle);
         DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
-        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.red;
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.black;
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(DashingSound, 1f);
         yield return new WaitForSeconds(DashDistance);
@@ -222,7 +222,7 @@ public class ShooterScript : MonoBehaviour
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 1f);
         Recoiling = true;
-        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.red;
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.black;
         yield return new WaitForSeconds(RecoilDistance);
         Reloading = true;
         StartCoroutine("ShootCooldownTimer");
@@ -234,7 +234,7 @@ public class ShooterScript : MonoBehaviour
         yield return new WaitForSeconds(ReloadTime);
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(ReloadingSound, 1f);
-        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.white;
         Reloading = false;
     }
     #endregion

@@ -178,6 +178,10 @@ MonoBehaviour:
   Cooldown: 15
   MaxSpd: 8
   AbilityLen: 8
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  CooldownSound: {fileID: 8300000, guid: 1cd2fd3d873ebc3428758b25e3539e7b, type: 3}
+  UmbrellaOpenSound: {fileID: 8300000, guid: a7f9321031dc53a47b209773a89e4dbc, type: 3}
+  UmbrellaCloseSound: {fileID: 8300000, guid: c610786b2ceb8ff48af886e2304b667c, type: 3}
 --- !u!50 &5090543459030883368
 Rigidbody2D:
   serializedVersion: 4

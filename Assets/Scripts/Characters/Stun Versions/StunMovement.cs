@@ -347,6 +347,8 @@ public class StunMovement : MonoBehaviour
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
         var sound = Instantiate(AudioPlayer);
+        GetComponent<SpriteRenderer>().enabled = false;
+        arm.GetComponent<SpriteRenderer>().enabled = false;
         if (SceneManager.GetActiveScene().name == "BabyBeards_Ship")
         {
             sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);

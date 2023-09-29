@@ -13,6 +13,9 @@ TagManager:
   - Weapon
   - Platform
   - BabyBeardsShip
+  - Stun
+  - Normal
+  - Peak
   layers:
   - Default
   - TransparentFX

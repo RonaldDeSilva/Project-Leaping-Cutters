@@ -629,6 +629,10 @@ MonoBehaviour:
   NewFric: {fileID: 6200000, guid: 4a4ffb3f2f774ea4b949c6c54a56c4ca, type: 2}
   AbilityLen: 8
   OldFric: {fileID: 6200000, guid: b9519d77352018647b519b9c7f127b6d, type: 2}
+  AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
+  CooldownSound: {fileID: 8300000, guid: 1cd2fd3d873ebc3428758b25e3539e7b, type: 3}
+  AnchorSpawnSound: {fileID: 8300000, guid: 1ec6783e1f28b6f44b0d888640a98af4, type: 3}
+  AnchorDespawnSound: {fileID: 8300000, guid: ba1886dbf61ef2b4c80722af52d1b407, type: 3}
 --- !u!50 &8453370194589183355
 Rigidbody2D:
   serializedVersion: 4

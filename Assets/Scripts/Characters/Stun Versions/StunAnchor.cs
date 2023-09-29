@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StunAnchor : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class StunAnchor : MonoBehaviour
     private bool GracePeriod;
     private Rigidbody2D rb;
     private GameObject Anchor;
+    private GameObject Can;
 
     public float Cooldown;
     public float NewWeight;
@@ -24,6 +26,13 @@ public class StunAnchor : MonoBehaviour
     private float rate2;
     public PhysicsMaterial2D OldFric;
     private bool Stunned;
+
+    public GameObject AudioPlayer;
+    public AudioClip CooldownSound;
+    public AudioClip AnchorSpawnSound;
+    public AudioClip AnchorDespawnSound;
+
+    private int childNum;
 
     #endregion
 
@@ -46,22 +55,27 @@ public class StunAnchor : MonoBehaviour
         rate2 = 2 / AbilityLen;
         GetComponent<Rigidbody2D>().sharedMaterial = OldFric;
         Stunned = false;
+        Can = GameObject.Find("Canvas");
 
         if (PlayerNum == 1)
         {
             SpecialButton = "Special";
+            childNum = 0;
         }
         else if (PlayerNum == 2)
         {
             SpecialButton = "Special2";
+            childNum = 1;
         }
         else if (PlayerNum == 3)
         {
             SpecialButton = "Special3";
+            childNum = 2;
         }
         else if (PlayerNum == 4)
         {
             SpecialButton = "Special4";
+            childNum = 3;
         }
     }
 
@@ -90,6 +104,8 @@ public class StunAnchor : MonoBehaviour
                 rb.mass = OrigWeight;
                 rb.gravityScale = OrigGravityScale;
                 rb.GetComponent<Rigidbody2D>().sharedMaterial = OldFric;
+                var sound = Instantiate(AudioPlayer);
+                sound.GetComponent<SoundPlayer>().Awaken(AnchorDespawnSound, 1f);
                 StartCoroutine("SpecialCooldown");
 
             }
@@ -124,6 +140,9 @@ public class StunAnchor : MonoBehaviour
         Anchor.GetComponent<SpriteRenderer>().enabled = true;
         Anchor.transform.localScale = new Vector3(3, 3, 1);
         Activated = true;
+        var sound2 = Instantiate(AudioPlayer);
+        sound2.GetComponent<SoundPlayer>().Awaken(AnchorSpawnSound, 1f);
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.black;
         yield return new WaitForSeconds(AbilityLen);
         rb.GetComponent<Rigidbody2D>().sharedMaterial = OldFric;
         rb.mass = OrigWeight;
@@ -131,12 +150,17 @@ public class StunAnchor : MonoBehaviour
         Activated = false;
         Anchor.GetComponent<SpriteRenderer>().enabled = false;
         CooldownPeriod = true;
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(AnchorDespawnSound, 1f);
         StartCoroutine("SpecialCooldown");
     }
 
     IEnumerator SpecialCooldown()
     {
         yield return new WaitForSeconds(Cooldown);
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.white;
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(CooldownSound, 1f);
         CooldownPeriod = false;
     }
 

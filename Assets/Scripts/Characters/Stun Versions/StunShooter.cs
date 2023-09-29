@@ -193,7 +193,9 @@ public class StunShooter : MonoBehaviour
         var newY = Mathf.Sin(angle);
         DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
-        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.red;
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.black;
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(DashingSound, 1f);
         yield return new WaitForSeconds(DashDistance);
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
@@ -203,6 +205,8 @@ public class StunShooter : MonoBehaviour
     {
         Dashing = false;
         yield return new WaitForSeconds(DashCooldown);
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(DashCooldownSound, 1f);
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Dashed = false;
     }
@@ -218,8 +222,10 @@ public class StunShooter : MonoBehaviour
         ProjDir = new Vector2(newX * ProjSpd, newY * ProjSpd);
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
         pj.GetComponent<Projectile>().Awaken(ProjDir);
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 1f);
         Recoiling = true;
-        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.red;
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.black;
         yield return new WaitForSeconds(RecoilDistance);
         Reloading = true;
         StartCoroutine("ShootCooldownTimer");
@@ -229,7 +235,9 @@ public class StunShooter : MonoBehaviour
     {
         Recoiling = false;
         yield return new WaitForSeconds(ReloadTime);
-        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(ReloadingSound, 1f);
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.white;
         Reloading = false;
     }
     #endregion
@@ -245,6 +253,8 @@ public class StunShooter : MonoBehaviour
         ArmJoint.enabled = false;
         Fist.GetComponent<CopyRot>().Off = true;
         Punching = true;
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(ArmShootSound, 1f);
         yield return new WaitForSeconds(0.08f);
         Fist.GetComponent<Rigidbody2D>().mass = FistWeight;
         Fist.GetComponent<CapsuleCollider2D>().isTrigger = false;
@@ -260,6 +270,8 @@ public class StunShooter : MonoBehaviour
         Punching = false;
         Returning = true;
         yield return new WaitForSeconds(PunchDuration / 2);
+        var sound = Instantiate(AudioPlayer);
+        sound.GetComponent<SoundPlayer>().Awaken(ArmReturnSound, 1f);
         Returning = false;
         Fist.transform.position = FistLocation.position;
         Fist.transform.rotation = FistLocation.rotation;

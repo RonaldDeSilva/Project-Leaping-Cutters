@@ -24,7 +24,7 @@ public class LevelSelector : MonoBehaviour
                 PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " &&
                 PlayerTracker.GetComponent<PlayerTracker>().Player3 != " " && PlayerTracker.GetComponent<PlayerTracker>().Player4 != " ")
             {
-                SceneManager.LoadScene("LevelSelect");
+                SceneManager.LoadScene("StunSelector");
             }
         }
         else if (SceneManager.GetActiveScene().name == "LevelSelect")
@@ -36,17 +36,36 @@ public class LevelSelector : MonoBehaviour
                 {
                     SceneManager.LoadScene("ThePit-4Player");
                 }
-                else if (Selector.GetComponent<SelectorScript>().collided == "SpinningMoon")
+                else if (Selector.GetComponent<SelectorScript>().collided == "BabyBeardsShip")
                 {
-                    SceneManager.LoadScene("SpinningMoon");
+                    SceneManager.LoadScene("BabyBeards_Ship");
+                }
+                else if (Selector.GetComponent<SelectorScript>().collided == "Peak")
+                {
+                    SceneManager.LoadScene("Peak");
                 }
             }
-
-
         }
         else if (SceneManager.GetActiveScene().name == "StartScreen")
         {
             SceneManager.LoadScene("CharacterSelect");
+        }
+        else if (SceneManager.GetActiveScene().name == "StunSelector")
+        {
+            var Selector = GameObject.Find("Selector");
+            if (Selector.GetComponent<SelectorScript>().collided != null)
+            {
+                if (Selector.GetComponent<SelectorScript>().collided == "Stun")
+                {
+                    PlayerTracker.GetComponent<PlayerTracker>().Stun = true;
+                    SceneManager.LoadScene("LevelSelect");
+                }
+                else if (Selector.GetComponent<SelectorScript>().collided == "Normal")
+                {
+                    PlayerTracker.GetComponent<PlayerTracker>().Stun = false;
+                    SceneManager.LoadScene("LevelSelect");
+                }
+            }
         }
         else
         {

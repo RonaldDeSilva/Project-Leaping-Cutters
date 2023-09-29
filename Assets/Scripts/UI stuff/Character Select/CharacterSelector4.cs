@@ -16,7 +16,14 @@ public class CharacterSelector4 : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal4") * 10f, -Input.GetAxis("Vertical4") * 10f);
+        if (Input.GetAxis("Horizontal4") > 0.15 || Input.GetAxis("Horizontal4") < -0.15 || Input.GetAxis("Vertical4") > 0.15 || Input.GetAxis("Vertical4") < -0.15)
+        {
+            rb.velocity = new Vector2(Input.GetAxis("Horizontal4") * 10f, -Input.GetAxis("Vertical4") * 10f);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,10 +35,6 @@ public class CharacterSelector4 : MonoBehaviour
         else if (collision.gameObject.CompareTag("BabyBeard"))
         {
             PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = "BabyBeard";
-        }
-        else if (collision.gameObject.CompareTag("InflatableGuy"))
-        {
-            PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = "InflatableGuy";
         }
     }
 }

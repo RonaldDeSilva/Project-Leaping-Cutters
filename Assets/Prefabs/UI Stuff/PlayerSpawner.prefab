@@ -51,3 +51,11 @@ MonoBehaviour:
   BabyBeard2: {fileID: 2673667667683416840, guid: 20648e4fe97fbb3459fecb4e4a76c228, type: 3}
   BabyBeard3: {fileID: 5245672620034258880, guid: 7c0f3d9db04af434db1ac9aab392c3b4, type: 3}
   BabyBeard4: {fileID: 7019833406366739428, guid: 395e5229c21c739469486b7eab258358, type: 3}
+  STUNMysteriousStranger1: {fileID: 8170338621802915122, guid: fcf1abc5663b70547afeee9fa29a9cee, type: 3}
+  STUNMysteriousStranger2: {fileID: 8545151243283504490, guid: 4d58e7e2c54132c469b398e2d02a8d26, type: 3}
+  STUNMysteriousStranger3: {fileID: 4023837075125967993, guid: 2ea30c40bd939ff47bf7a164ccf7b1e5, type: 3}
+  STUNMysteriousStranger4: {fileID: 5090543459030883543, guid: 648b5b2a201ad494e97b5cc8b9e35674, type: 3}
+  STUNBabyBeard1: {fileID: 8453370194589183359, guid: c939420f987f2934bbd14710f2496a52, type: 3}
+  STUNBabyBeard2: {fileID: 2344144546939701118, guid: f56f10e04f60ca844b079590e7ad99ad, type: 3}
+  STUNBabyBeard3: {fileID: 8233682917699720617, guid: 9d20aa5b0a915f84d87458874318211f, type: 3}
+  STUNBabyBeard4: {fileID: 5989502824510105131, guid: bcdd9bd53622fa04fab899bbfe151287, type: 3}
