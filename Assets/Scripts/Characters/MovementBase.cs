@@ -93,6 +93,8 @@ public class MovementBase : MonoBehaviour
         AlreadyLandedOn = null;
         HitCount = 1;
         dying = false;
+        GetComponent<SpriteRenderer>().enabled = true;
+        arm.GetComponent<SpriteRenderer>().enabled = true;
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };

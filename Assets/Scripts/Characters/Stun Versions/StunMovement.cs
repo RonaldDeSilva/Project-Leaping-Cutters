@@ -107,6 +107,8 @@ public class StunMovement : MonoBehaviour
         AlreadyHitMe3 = null;
         AlreadyLandedOn = null;
         HitCount = 1;
+        GetComponent<SpriteRenderer>().enabled = true;
+        arm.GetComponent<SpriteRenderer>().enabled = true;
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };

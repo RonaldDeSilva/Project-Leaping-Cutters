@@ -65,6 +65,10 @@ public class Menu : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1;
+        GameObject.Find("LevelChanger").GetComponent<LevelSelector>().PlayerTracker.GetComponent<PlayerTracker>().Player1 = " ";
+        GameObject.Find("LevelChanger").GetComponent<LevelSelector>().PlayerTracker.GetComponent<PlayerTracker>().Player2 = " ";
+        GameObject.Find("LevelChanger").GetComponent<LevelSelector>().PlayerTracker.GetComponent<PlayerTracker>().Player3 = " ";
+        GameObject.Find("LevelChanger").GetComponent<LevelSelector>().PlayerTracker.GetComponent<PlayerTracker>().Player4 = " ";
         SceneManager.LoadScene(0);
     }
 
