@@ -33,7 +33,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingPlayer, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingPlayer, 0.9f);
                     StartCoroutine("HitResetter1");
                 }
                 else if (collision.gameObject.CompareTag("Platform") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
@@ -41,7 +41,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWall, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWall, 0.9f);
                     StartCoroutine("HitResetter1");
                 }
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
@@ -49,7 +49,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWeapon, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWeapon, 0.9f);
                     StartCoroutine("HitResetter1");
                 }
             }
@@ -60,7 +60,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe2 = collision.gameObject;
                     HitCount += 1;
                     var sound4 = Instantiate(AudioPlayer);
-                    sound4.GetComponent<SoundPlayer>().Awaken(ArmHittingPlayer, 1f);
+                    sound4.GetComponent<SoundPlayer>().Awaken(ArmHittingPlayer, 0.9f);
                     StartCoroutine("HitResetter2");
                 }
                 else if (collision.gameObject.CompareTag("Platform") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
@@ -68,7 +68,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe2 = collision.gameObject;
                     HitCount += 1;
                     var sound5 = Instantiate(AudioPlayer);
-                    sound5.GetComponent<SoundPlayer>().Awaken(ArmHittingWall, 1f);
+                    sound5.GetComponent<SoundPlayer>().Awaken(ArmHittingWall, 0.9f);
                     StartCoroutine("HitResetter2");
                 }
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
@@ -76,7 +76,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe2 = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWeapon, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWeapon, 0.9f);
                     StartCoroutine("HitResetter2");
                 }
             }
@@ -87,7 +87,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound6 = Instantiate(AudioPlayer);
-                    sound6.GetComponent<SoundPlayer>().Awaken(ArmHittingPlayer, 1f);
+                    sound6.GetComponent<SoundPlayer>().Awaken(ArmHittingPlayer, 0.9f);
                     StartCoroutine("HitResetter3");
                 }
                 else if (collision.gameObject.CompareTag("Platform") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
@@ -95,7 +95,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound7 = Instantiate(AudioPlayer);
-                    sound7.GetComponent<SoundPlayer>().Awaken(ArmHittingWall, 1f);
+                    sound7.GetComponent<SoundPlayer>().Awaken(ArmHittingWall, 0.9f);
                     StartCoroutine("HitResetter3");
                 }
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
@@ -103,7 +103,7 @@ public class ArmSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWeapon, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(ArmHittingWeapon, 0.9f);
                     StartCoroutine("HitResetter3");
                 }
             }

@@ -36,7 +36,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.7f);
                     HitTimer1 = 1f;
                     StartCoroutine("HitResetter1");
                 }
@@ -45,7 +45,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
                     HitTimer1 = 0.3f;
                     StartCoroutine("HitResetter1");
                 }
@@ -54,7 +54,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWeapon, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWeapon, 0.4f);
                     HitTimer1 = 0.8f;
                     StartCoroutine("HitResetter1");
                 }
@@ -66,7 +66,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe2 = collision.gameObject;
                     HitCount += 1;
                     var sound4 = Instantiate(AudioPlayer);
-                    sound4.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 1f);
+                    sound4.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.7f);
                     HitTimer2 = 1f;
                     StartCoroutine("HitResetter2");
                 }
@@ -76,7 +76,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     HitCount += 1;
                     var sound5 = Instantiate(AudioPlayer);
                     HitTimer2 = 0.3f;
-                    sound5.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 1f);
+                    sound5.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
                     StartCoroutine("HitResetter2");
                 }
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
@@ -84,7 +84,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe2 = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWeapon, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWeapon, 0.4f);
                     HitTimer2 = 0.8f;
                     StartCoroutine("HitResetter2");
                 }
@@ -96,7 +96,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound6 = Instantiate(AudioPlayer);
-                    sound6.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 1f);
+                    sound6.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.7f);
                     HitTimer3 = 1f;
                     StartCoroutine("HitResetter3");
                 }
@@ -105,7 +105,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound7 = Instantiate(AudioPlayer);
-                    sound7.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 1f);
+                    sound7.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
                     HitTimer3 = 0.3f;
                     StartCoroutine("HitResetter3");
                 }
@@ -114,7 +114,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWeapon, 1f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWeapon, 0.4f);
                     HitTimer3 = 0.8f;
                     StartCoroutine("HitResetter3");
                 }

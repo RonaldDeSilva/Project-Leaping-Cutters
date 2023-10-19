@@ -220,7 +220,7 @@ public class ShooterScript : MonoBehaviour
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
         pj.GetComponent<Projectile>().Awaken(ProjDir);
         var sound = Instantiate(AudioPlayer);
-        sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 1f);
+        sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 0.6f);
         Recoiling = true;
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.black;
         yield return new WaitForSeconds(RecoilDistance);

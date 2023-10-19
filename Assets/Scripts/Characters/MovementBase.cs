@@ -95,6 +95,7 @@ public class MovementBase : MonoBehaviour
         dying = false;
         GetComponent<SpriteRenderer>().enabled = true;
         arm.GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<CapsuleCollider2D>().enabled = true;
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
@@ -303,19 +304,25 @@ public class MovementBase : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Deathbox"))
+        if (collision.CompareTag("Deathbox") && !dying)
         {
-            if (lives != 1)
+            if (lives >= 1)
             {
                 lives -= 1;
                 Can.gameObject.transform.GetChild(childNum).gameObject.GetComponent<Text>().text = lives.ToString();
+                GetComponent<ShooterScript>().dying = true;
+                GetComponent<CapsuleCollider2D>().enabled = false;
                 StartCoroutine("Death");
+                dying = true;
             }
             else
             {
                 lives -= 1;
                 Can.gameObject.transform.GetChild(childNum).gameObject.GetComponent<Text>().text = lives.ToString();
+                GetComponent<ShooterScript>().dying = true;
+                GetComponent<CapsuleCollider2D>().enabled = false;
                 StartCoroutine("Death2");
+                dying = true;
             }
 
         }
@@ -323,8 +330,6 @@ public class MovementBase : MonoBehaviour
 
     IEnumerator Death()
     {
-        dying = true;
-        GetComponent<ShooterScript>().dying = true;
         hinge.motor = motorRef3;
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
@@ -333,34 +338,35 @@ public class MovementBase : MonoBehaviour
         arm.GetComponent<SpriteRenderer>().enabled = false;
         if (SceneManager.GetActiveScene().name == "BabyBeards_Ship")
         {
-            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 0.9f);
         }
         else
         {
-            sound.GetComponent<SoundPlayer>().Awaken(DeathSound2, 1f);
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound2, 0.9f);
         }
         yield return new WaitForSeconds(3f);
         var sound2 = Instantiate(AudioPlayer);
         sound2.GetComponent<SoundPlayer>().Awaken(RespawningSound, 1f);
-        Instantiate(Player, Respawn.position, this.transform.rotation);
+        if (lives > 0)
+        {
+            Instantiate(Player, Respawn.position, this.transform.rotation);
+        }
         Destroy(this.gameObject);
     }
 
     IEnumerator Death2()
     {
-        dying = true;
-        GetComponent<ShooterScript>().dying = true;
         hinge.motor = motorRef3;
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
         var sound = Instantiate(AudioPlayer); 
         if (SceneManager.GetActiveScene().name == "BabyBeards_Ship")
         {
-            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 1f);
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 0.9f);
         }
         else
         {
-            sound.GetComponent<SoundPlayer>().Awaken(DeathSound2, 1f);
+            sound.GetComponent<SoundPlayer>().Awaken(DeathSound2, 0.9f);
         }
         Destroy(this.gameObject);
         yield return new WaitForSeconds(0.1f);
@@ -382,7 +388,7 @@ public class MovementBase : MonoBehaviour
                 HitCount += 1;
                 var rando = Random.Range(0, 3);
                 var sound2 = Instantiate(AudioPlayer);
-                sound2.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                sound2.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 0.8f);
             }
             else if (collision.gameObject.CompareTag("Arm") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
             {
@@ -390,7 +396,7 @@ public class MovementBase : MonoBehaviour
                 HitCount += 1;
                 var rando = Random.Range(0, 3);
                 var sound3 = Instantiate(AudioPlayer);
-                sound3.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                sound3.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 0.8f);
                 StartCoroutine("HitResetter1");
             }
         }
@@ -402,7 +408,7 @@ public class MovementBase : MonoBehaviour
                 HitCount += 1;
                 var rando = Random.Range(0, 3);
                 var sound4 = Instantiate(AudioPlayer);
-                sound4.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                sound4.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 0.8f);
             }
             else if (collision.gameObject.CompareTag("Arm") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
             {
@@ -410,7 +416,7 @@ public class MovementBase : MonoBehaviour
                 HitCount += 1;
                 var rando = Random.Range(0, 3);
                 var sound5 = Instantiate(AudioPlayer);
-                sound5.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                sound5.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 0.8f);
                 StartCoroutine("HitResetter2");
             }
         }
@@ -422,7 +428,7 @@ public class MovementBase : MonoBehaviour
                 HitCount = 1;
                 var rando = Random.Range(0, 3);
                 var sound6 = Instantiate(AudioPlayer);
-                sound6.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                sound6.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 0.8f);
             }
             else if (collision.gameObject.CompareTag("Arm") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
             {
@@ -430,7 +436,7 @@ public class MovementBase : MonoBehaviour
                 HitCount = 1;
                 var rando = Random.Range(0, 3);
                 var sound7 = Instantiate(AudioPlayer);
-                sound7.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 1f);
+                sound7.GetComponent<SoundPlayer>().Awaken(HurtSounds[rando], 0.8f);
                 StartCoroutine("HitResetter3");
             }
         }
@@ -441,14 +447,14 @@ public class MovementBase : MonoBehaviour
             {
                 AlreadyLandedOn = collision.gameObject;
                 var sound = Instantiate(AudioPlayer);
-                sound.GetComponent<SoundPlayer>().Awaken(LandingSoundGround, 1f);
+                sound.GetComponent<SoundPlayer>().Awaken(LandingSoundGround, 0.8f);
                 StartCoroutine("LandResetter");
             }
             else if(collision.gameObject.CompareTag("Player") && collision.gameObject != AlreadyLandedOn)
             {
                 AlreadyLandedOn = collision.gameObject;
                 var sound = Instantiate(AudioPlayer);
-                sound.GetComponent<SoundPlayer>().Awaken(LandingSoundPlayer, 1f);
+                sound.GetComponent<SoundPlayer>().Awaken(LandingSoundPlayer, 0.8f);
                 StartCoroutine("LandResetter");
             }
 
