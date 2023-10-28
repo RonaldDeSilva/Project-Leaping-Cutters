@@ -78,7 +78,7 @@ public class LevelSelector : MonoBehaviour
             for (int i = 0; i < 4; i++)
             {
                 list[i] = int.Parse(Can.gameObject.transform.GetChild(i).gameObject.GetComponent<Text>().text);
-                if (int.Parse(Can.gameObject.transform.GetChild(i).gameObject.GetComponent<Text>().text) < 1)
+                if (int.Parse(Can.gameObject.transform.GetChild(i).gameObject.GetComponent<Text>().text) <= 0)
                 {
                     dead += 1;
                 }
