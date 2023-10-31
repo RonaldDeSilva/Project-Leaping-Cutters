@@ -9,6 +9,7 @@ public class LevelSelector : MonoBehaviour
     private Canvas Can;
     public GameObject AudioPlayer;
     public AudioClip WinSound;
+    private bool menu = false;
 
     void Awake()
     {
@@ -84,9 +85,10 @@ public class LevelSelector : MonoBehaviour
                 }
             }
 
-            if (dead >= 3)
+            if (dead >= 3 && menu == false)
             {
                 StartCoroutine("Menu");
+                menu = true;
             }
         }
         
@@ -103,5 +105,6 @@ public class LevelSelector : MonoBehaviour
         sound.GetComponent<SoundPlayer>().Awaken(WinSound, 1f);
         yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("CharacterSelect");
+        menu = false;
     }
 }
