@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1771fd95acb3ec4fb517ebf00fe0285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pushtime: 2
+  Impact: 20
   AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
   hitWall: {fileID: 8300000, guid: 76c3195e8d9f5824696b6b43edf1bc11, type: 3}
   hitPlayer: {fileID: 8300000, guid: 1e5cd64a63894b846af338284067a013, type: 3}

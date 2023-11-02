@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
 
     private Vector2 Dir;
     private Rigidbody2D rb;
-    public float Pushtime;
+    public float Impact;
     private bool flying = true;
     private bool Destroying = false;
     public GameObject AudioPlayer;
@@ -51,7 +51,8 @@ public class Projectile : MonoBehaviour
                     var inst = Instantiate(AudioPlayer);
                     inst.GetComponent<SoundPlayer>().Awaken(hitWeapon, 1f);
                 }
-                StartCoroutine("Destroy");
+                StartCoroutine("Destroy2");
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Dir.x * Impact,Dir.y * Impact), ForceMode2D.Impulse);
                 Destroying = true;
             }
             else
@@ -76,21 +77,6 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Deathbox"))
         {
             Destroy(this.gameObject);
-        }
-    }
-
-    //This first coroutine is for hitting a player and keeps pushing the player for a specified amount of time
-    IEnumerator Destroy()
-    {
-        yield return new WaitForSeconds(Pushtime);
-        flying = false;
-        if (this.gameObject.GetComponent<CapsuleCollider2D>() != null)
-        {
-            this.gameObject.GetComponent<CapsuleCollider2D>().isTrigger = true;
-        }
-        else
-        {
-            this.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
         }
     }
 
