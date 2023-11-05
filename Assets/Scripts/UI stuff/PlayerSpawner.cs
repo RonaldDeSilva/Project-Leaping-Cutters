@@ -8,17 +8,13 @@ public class PlayerSpawner : MonoBehaviour
     private Transform Spawn3;
     private Transform Spawn4;
     //--------------------------------------------------------------------------------------------------
-    public GameObject MysteriousStranger1;
-    public GameObject MysteriousStranger2;
-    public GameObject MysteriousStranger3;
-    public GameObject MysteriousStranger4;
+    public GameObject MysteriousStranger;
     //--------------------------------------------------------------------------------------------------
-    public GameObject BabyBeard1;
-    public GameObject BabyBeard2;
-    public GameObject BabyBeard3;
-    public GameObject BabyBeard4;
+    public GameObject BabyBeard;
+
 
     //-----------------------------------------------------------------------------
+    /*
     public GameObject STUNMysteriousStranger1;
     public GameObject STUNMysteriousStranger2;
     public GameObject STUNMysteriousStranger3;
@@ -28,6 +24,7 @@ public class PlayerSpawner : MonoBehaviour
     public GameObject STUNBabyBeard2;
     public GameObject STUNBabyBeard3;
     public GameObject STUNBabyBeard4;
+    */
 
     void Start()
     {
@@ -39,6 +36,7 @@ public class PlayerSpawner : MonoBehaviour
 
         //Player1 Stuff ---------------------------------------------------------------------------------------
 
+        /*
         if (PlayerTracker.GetComponent<PlayerTracker>().Stun)
         {
             if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
@@ -50,17 +48,22 @@ public class PlayerSpawner : MonoBehaviour
                 Instantiate(STUNBabyBeard1, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
             }
         }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
+        else 
+        */
+        if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
         {
-            Instantiate(MysteriousStranger1, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(1);
         }
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "BabyBeard")
         {
-            Instantiate(BabyBeard1, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(1);
         }
 
         //Player 2 Stuff --------------------------------------------------------------------------------------------------
 
+        /*
         if (PlayerTracker.GetComponent<PlayerTracker>().Stun)
         {
             if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
@@ -72,17 +75,22 @@ public class PlayerSpawner : MonoBehaviour
                 Instantiate(STUNBabyBeard2, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
             }
         }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
+        else 
+        */
+        if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
         {
-            Instantiate(MysteriousStranger2, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(2);
         }
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "BabyBeard")
         {
-            Instantiate(BabyBeard2, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(2);
         }
 
         //Player 3 Stuff --------------------------------------------------------------------------------------------------
 
+        /*
         if (PlayerTracker.GetComponent<PlayerTracker>().Stun)
         {
             if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "MysteriousStranger")
@@ -94,17 +102,22 @@ public class PlayerSpawner : MonoBehaviour
                 Instantiate(STUNBabyBeard3, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
             }
         }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "MysteriousStranger")
+        else 
+        */
+        if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "MysteriousStranger")
         {
-            Instantiate(MysteriousStranger3, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(3);
         }
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "BabyBeard")
         {
-            Instantiate(BabyBeard3, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(3);
         }
 
         //Player 4 Stuff --------------------------------------------------------------------------------------------------
 
+        /*
         if (PlayerTracker.GetComponent<PlayerTracker>().Stun)
         {
             if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "MysteriousStranger")
@@ -116,13 +129,17 @@ public class PlayerSpawner : MonoBehaviour
                 Instantiate(STUNBabyBeard4, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
             }
         }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "MysteriousStranger")
+        else 
+        */
+        if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "MysteriousStranger")
         {
-            Instantiate(MysteriousStranger4, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(4);
         }
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "BabyBeard")
         {
-            Instantiate(BabyBeard4, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(4);
         }
     }
 

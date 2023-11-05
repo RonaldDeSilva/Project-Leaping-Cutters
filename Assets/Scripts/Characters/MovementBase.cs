@@ -50,8 +50,14 @@ public class MovementBase : MonoBehaviour
 
     #region Initialization
 
+    public void Awaken(int Number)
+    {
+        playerNum = Number;
+    }
+
     void Start()
     {
+
         if (playerNum == 1)
         {
             childNum = 0;
@@ -65,6 +71,10 @@ public class MovementBase : MonoBehaviour
             respawnName = "Respawn2";
             Vertical = "Vertical2";
             Horizontal = "Horizontal2";
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(0.682353f, 0.8117647f, 0.1882353f); ;
+            var color2 = new Color(0.3529412f, 0.3843137f, 0.8196079f);
+            GetComponent<SpriteRenderer>().color = color2;
+            transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = color2;
         }
         else if (playerNum == 3)
         {
@@ -72,6 +82,10 @@ public class MovementBase : MonoBehaviour
             respawnName = "Respawn3";
             Vertical = "Vertical3";
             Horizontal = "Horizontal3";
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1607843f, 0.6156863f, 0.7254902f);
+            var color2 = new Color(0.7647059f, 0.4352941f, 0.1568628f);
+            GetComponent<SpriteRenderer>().color = color2;
+            transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = color2;
         }
         else if (playerNum == 4)
         {
@@ -79,6 +93,10 @@ public class MovementBase : MonoBehaviour
             respawnName = "Respawn4";
             Vertical = "Vertical4";
             Horizontal = "Horizontal4";
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(0.8862745f, 0.454902f, 0.8705882f);
+            var color2 = new Color(0.07058824f, 0.6039216f, 0.2235294f);
+            GetComponent<SpriteRenderer>().color = color2;
+            transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = color2;
         }
 
         hinge = GetComponent<HingeJoint2D>();
@@ -349,7 +367,8 @@ public class MovementBase : MonoBehaviour
         sound2.GetComponent<SoundPlayer>().Awaken(RespawningSound, 1f);
         if (lives > 0)
         {
-            Instantiate(Player, Respawn.position, this.transform.rotation);
+            var p = Instantiate(Player, Respawn.position, this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(playerNum);
         }
         Destroy(this.gameObject);
     }

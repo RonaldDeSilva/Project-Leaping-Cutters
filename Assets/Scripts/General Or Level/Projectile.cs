@@ -15,14 +15,16 @@ public class Projectile : MonoBehaviour
     public AudioClip hitWall;
     public AudioClip hitPlayer;
     public AudioClip hitWeapon;
+    private GameObject Player;
 
 
 
     //On Awaken the projectile is given a direction to fly in
-    public void Awaken(Vector2 Direction)
+    public void Awaken(Vector2 Direction, GameObject Play)
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         Dir = Direction;
+        Player = Play;
     }
 
     //Sends the projectile in the proper direction by setting its velocity
@@ -39,7 +41,7 @@ public class Projectile : MonoBehaviour
     {
         if (!Destroying)
         {
-            if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Weapon"))
+            if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Weapon") && collision.gameObject != Player)
             {
                 if (collision.gameObject.CompareTag("Player"))
                 {
@@ -64,7 +66,7 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Weapon") && Destroying)
+        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Weapon") && Destroying && collision.gameObject != Player)
         {
             StopAllCoroutines();
             StartCoroutine("Destroy2");

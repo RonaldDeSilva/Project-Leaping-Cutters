@@ -7,7 +7,7 @@ public class PlayerTracker : MonoBehaviour
     public string Player3 = " ";
     public string Player4 = " ";
 
-    public bool Stun;
+    //public bool Stun;
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -15,6 +15,6 @@ public class PlayerTracker : MonoBehaviour
         Player2 = " ";
         Player3 = " ";
         Player4 = " ";
-        Stun = false;
+        //Stun = false;   
     }
 }

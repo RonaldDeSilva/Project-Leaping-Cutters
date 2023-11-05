@@ -43,19 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc5de5d9d901d24c8f85e59b66601bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MysteriousStranger1: {fileID: 3395498467942670208, guid: 970145f3361b7484e817615ef8997415, type: 3}
-  MysteriousStranger2: {fileID: 4333655517226580149, guid: 352f976d5ef59024dbd9d7b9a35793eb, type: 3}
-  MysteriousStranger3: {fileID: 4743482780514840560, guid: 935d5d42467a12847ac066b84f8ed093, type: 3}
-  MysteriousStranger4: {fileID: 1332311828941687956, guid: b545d1103ed1d284e9cb9a39bbfc14b4, type: 3}
-  BabyBeard1: {fileID: 476146246699851690, guid: cf4bd660902287f43babffb03f1cbc84, type: 3}
-  BabyBeard2: {fileID: 2673667667683416840, guid: 20648e4fe97fbb3459fecb4e4a76c228, type: 3}
-  BabyBeard3: {fileID: 5245672620034258880, guid: 7c0f3d9db04af434db1ac9aab392c3b4, type: 3}
-  BabyBeard4: {fileID: 7019833406366739428, guid: 395e5229c21c739469486b7eab258358, type: 3}
-  STUNMysteriousStranger1: {fileID: 8170338621802915122, guid: fcf1abc5663b70547afeee9fa29a9cee, type: 3}
-  STUNMysteriousStranger2: {fileID: 8545151243283504490, guid: 4d58e7e2c54132c469b398e2d02a8d26, type: 3}
-  STUNMysteriousStranger3: {fileID: 4023837075125967993, guid: 2ea30c40bd939ff47bf7a164ccf7b1e5, type: 3}
-  STUNMysteriousStranger4: {fileID: 5090543459030883543, guid: 648b5b2a201ad494e97b5cc8b9e35674, type: 3}
-  STUNBabyBeard1: {fileID: 8453370194589183359, guid: c939420f987f2934bbd14710f2496a52, type: 3}
-  STUNBabyBeard2: {fileID: 2344144546939701118, guid: f56f10e04f60ca844b079590e7ad99ad, type: 3}
-  STUNBabyBeard3: {fileID: 8233682917699720617, guid: 9d20aa5b0a915f84d87458874318211f, type: 3}
-  STUNBabyBeard4: {fileID: 5989502824510105131, guid: bcdd9bd53622fa04fab899bbfe151287, type: 3}
+  MysteriousStranger: {fileID: 662692897522745152, guid: e767be329b543be44b16bfda54037185, type: 3}
+  BabyBeard: {fileID: 5158307581939245473, guid: 82a1f68a92a193f42b41936985dcf499, type: 3}

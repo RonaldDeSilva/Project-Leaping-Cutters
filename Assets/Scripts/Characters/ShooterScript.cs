@@ -103,6 +103,7 @@ public class ShooterScript : MonoBehaviour
             dashInput = "Dash2";
             shootInput = "Shoot2";
             punchInput = "Punch2";
+            Proj.GetComponent<SpriteRenderer>().color = new Color(0.682353f, 0.8117647f, 0.1882353f);
         }
         else if (playerNum == 3)
         {
@@ -110,6 +111,7 @@ public class ShooterScript : MonoBehaviour
             dashInput = "Dash3";
             shootInput = "Shoot3";
             punchInput = "Punch3";
+            Proj.GetComponent<SpriteRenderer>().color = new Color(0.1607843f, 0.6156863f, 0.7254902f);
         }
         else if (playerNum == 4)
         {
@@ -117,6 +119,7 @@ public class ShooterScript : MonoBehaviour
             dashInput = "Dash4";
             shootInput = "Shoot4";
             punchInput = "Punch4";
+            Proj.GetComponent<SpriteRenderer>().color = new Color(0.8862745f, 0.454902f, 0.8705882f);
         }
     }
 
@@ -218,7 +221,7 @@ public class ShooterScript : MonoBehaviour
         RecoilDir = new Vector2(-newX * RecoilSpd, -newY * RecoilSpd);
         ProjDir = new Vector2(newX * ProjSpd, newY * ProjSpd);
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
-        pj.GetComponent<Projectile>().Awaken(ProjDir);
+        pj.GetComponent<Projectile>().Awaken(ProjDir, this.gameObject);
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 0.6f);
         Recoiling = true;

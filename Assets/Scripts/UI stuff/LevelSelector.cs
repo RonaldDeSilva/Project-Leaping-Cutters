@@ -25,7 +25,7 @@ public class LevelSelector : MonoBehaviour
                 PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " &&
                 PlayerTracker.GetComponent<PlayerTracker>().Player3 != " " && PlayerTracker.GetComponent<PlayerTracker>().Player4 != " ")
             {
-                SceneManager.LoadScene("StunSelector");
+                SceneManager.LoadScene("LevelSelect");
             }
         }
         else if (SceneManager.GetActiveScene().name == "LevelSelect")
@@ -51,6 +51,7 @@ public class LevelSelector : MonoBehaviour
         {
             SceneManager.LoadScene("CharacterSelect");
         }
+        /*
         else if (SceneManager.GetActiveScene().name == "StunSelector")
         {
             var Selector = GameObject.Find("Selector");
@@ -68,6 +69,7 @@ public class LevelSelector : MonoBehaviour
                 }
             }
         }
+        */
         else
         {
             if (Can == null)

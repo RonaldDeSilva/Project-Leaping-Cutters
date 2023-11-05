@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/LevelSelect.unity
     guid: bbefd77566826484b87cf4b26a3daee6
   - enabled: 1
-    path: Assets/Scenes/Menus/StunSelector.unity
-    guid: 0605009c2345ec7419394be0de4b627d
-  - enabled: 1
     path: Assets/Scenes/Maps/ThePit-4Player.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
