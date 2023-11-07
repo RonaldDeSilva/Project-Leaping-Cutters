@@ -179,7 +179,6 @@ public class ShooterScript : MonoBehaviour
         else
         {
             StopAllCoroutines();
-            Fist.SetActive(false);
         }
     }
 
@@ -221,7 +220,7 @@ public class ShooterScript : MonoBehaviour
         RecoilDir = new Vector2(-newX * RecoilSpd, -newY * RecoilSpd);
         ProjDir = new Vector2(newX * ProjSpd, newY * ProjSpd);
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
-        pj.GetComponent<Projectile>().Awaken(ProjDir, this.gameObject);
+        pj.GetComponent<Projectile>().Awaken(ProjDir, this.transform.GetChild(0).gameObject);
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 0.6f);
         Recoiling = true;

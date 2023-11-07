@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class BubbleProj : MonoBehaviour
 {
     //Projectile script which makes the projectiles fly through the air in the proper direction
     //and speed and also delete after hitting an object
@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     public AudioClip hitPlayer;
     public AudioClip hitWeapon;
     private GameObject Player;
+    private float buoyancy = 0f;
 
 
 
@@ -32,7 +33,9 @@ public class Projectile : MonoBehaviour
     {
         if (flying)
         {
-            rb.velocity = Dir;
+            rb.velocity = new Vector2(Dir.x - buoyancy, Dir.y + buoyancy);
+            buoyancy = buoyancy + 0.1f;
+            buoyancy = Mathf.Clamp(buoyancy, 0f, 10f);
         }
     }
 
@@ -54,7 +57,7 @@ public class Projectile : MonoBehaviour
                     inst.GetComponent<SoundPlayer>().Awaken(hitWeapon, 1f);
                 }
                 StartCoroutine("Destroy2");
-                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Dir.x * Impact,Dir.y * Impact), ForceMode2D.Impulse);
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Dir.x * Impact, Dir.y * Impact), ForceMode2D.Impulse);
                 Destroying = true;
             }
             else
@@ -96,5 +99,4 @@ public class Projectile : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
     }
-
 }
