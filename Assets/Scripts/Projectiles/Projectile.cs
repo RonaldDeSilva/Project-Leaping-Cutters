@@ -15,10 +15,15 @@ public class Projectile : MonoBehaviour
     public AudioClip hitPlayer;
     public AudioClip hitWeapon;
     private GameObject Player;
-    private float buoyancy = 0f;
-    public bool Bubble;
     private bool Attached;
     private GameObject AttachedPlayer;
+
+    //Types of Proj
+    public bool Bubble;
+    private float buoyancy = 0f;
+    public bool Orb;
+    private Vector2 OrbDir = new Vector2(0f, 0f);
+    private bool OrbTurned = false;
 
 
 
@@ -26,8 +31,8 @@ public class Projectile : MonoBehaviour
     public void Awaken(Vector2 Direction, GameObject Play)
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
-        Dir = Direction;
         Player = Play;
+        Dir = Direction;
     }
 
     //Sends the projectile in the proper direction by setting its velocity
@@ -37,13 +42,50 @@ public class Projectile : MonoBehaviour
         {
             if (Bubble)
             {
-                rb.velocity = new Vector2(Dir.x - buoyancy, Dir.y + buoyancy);
+                if (Dir.x > 0)
+                {
+                    rb.velocity = new Vector2(Dir.x - Mathf.Clamp(buoyancy, 0, Dir.x), Dir.y + buoyancy);
+                }
+                else if (Dir.x < 0)
+                {
+                    rb.velocity = new Vector2(Dir.x + Mathf.Clamp(buoyancy, 0, -Dir.x), Dir.y + buoyancy);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(Dir.x, Dir.y + buoyancy);
+                }
                 buoyancy = buoyancy + 0.1f;
                 buoyancy = Mathf.Clamp(buoyancy, 0f, 10f);
                 if (Attached)
                 {
                     AttachedPlayer.GetComponent<Rigidbody2D>().velocity = rb.velocity;
+                    transform.position = AttachedPlayer.transform.position;
                 }
+            } 
+            else if (Orb)
+            {
+                var angle = ((Player.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+                var newX = Mathf.Cos(angle);
+                var newY = Mathf.Sin(angle);
+                Dir = new Vector2(newX * Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd, newY * Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd);
+                //if (!OrbTurned)
+                //{
+                    /*
+                    if (Dir.x >= 0 && Dir.y >= 0)
+                    {
+                        rb.velocity = new Vector2(Dir.x - Mathf.Clamp(OrbDir, 0, Dir.x), Dir.y);
+                    }
+                    else if (Dir.x < 0)
+                    {
+                        rb.velocity = new Vector2(Dir.x + Mathf.Clamp(OrbDir, 0, -Dir.x), Dir.y);
+                    }
+                    else
+                    {
+                    */
+                        rb.velocity = new Vector2(Dir.x, Dir.y);
+                    //}
+                    //OrbDir = new Vector2(OrbDir.x + (Mathf.Abs(Dir.x) / 60), OrbDir.y + (Mathf.Abs(Dir.y) / 60));
+                //}
             }
             else
             {
@@ -132,11 +174,15 @@ public class Projectile : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.gameObject.CompareTag("Deathbox") && collision.gameObject != AttachedPlayer 
-            && collision.gameObject != AttachedPlayer.transform.GetChild(0).gameObject
-            && collision.gameObject != AttachedPlayer.transform.GetChild(1).gameObject)
+        if (Bubble && AttachedPlayer != null)
         {
-            Destroy(this.gameObject);
+            if (!collision.gameObject.CompareTag("Deathbox") && !collision.gameObject.CompareTag("Platform")
+                && collision.gameObject != AttachedPlayer
+                && collision.gameObject != AttachedPlayer.transform.GetChild(0).gameObject
+                && collision.gameObject != AttachedPlayer.transform.GetChild(1).gameObject)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
     
@@ -157,8 +203,17 @@ public class Projectile : MonoBehaviour
 
     IEnumerator BubbleDestroy()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
-
+    /*
+    IEnumerator OrbCooldown()
+    {
+        OrbStart = true;
+        yield return new WaitForSeconds(2f);
+        OrbTurned = true;
+        yield return new WaitForSeconds(2f);
+        Destroy(this.gameObject);
+    }
+    */
 }

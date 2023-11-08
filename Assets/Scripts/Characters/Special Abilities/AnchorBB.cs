@@ -69,6 +69,7 @@ public class AnchorBB : MonoBehaviour
             SpecialButton = "Special4";
             childNum = 3;
         }
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.white;
     }
 
     void FixedUpdate()
