@@ -17,13 +17,12 @@ public class Projectile : MonoBehaviour
     private GameObject Player;
     private bool Attached;
     private GameObject AttachedPlayer;
+    private string SpecialButton;
 
     //Types of Proj
     public bool Bubble;
     private float buoyancy = 0f;
     public bool Orb;
-    private Vector2 OrbDir = new Vector2(0f, 0f);
-    private bool OrbTurned = false;
 
 
 
@@ -60,6 +59,10 @@ public class Projectile : MonoBehaviour
                 {
                     AttachedPlayer.GetComponent<Rigidbody2D>().velocity = rb.velocity;
                     transform.position = AttachedPlayer.transform.position;
+                    if (Input.GetAxis(SpecialButton) > 0)
+                    {
+                        Destroy(this.gameObject);
+                    }
                 }
             } 
             else if (Orb)
@@ -68,24 +71,7 @@ public class Projectile : MonoBehaviour
                 var newX = Mathf.Cos(angle);
                 var newY = Mathf.Sin(angle);
                 Dir = new Vector2(newX * Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd, newY * Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd);
-                //if (!OrbTurned)
-                //{
-                    /*
-                    if (Dir.x >= 0 && Dir.y >= 0)
-                    {
-                        rb.velocity = new Vector2(Dir.x - Mathf.Clamp(OrbDir, 0, Dir.x), Dir.y);
-                    }
-                    else if (Dir.x < 0)
-                    {
-                        rb.velocity = new Vector2(Dir.x + Mathf.Clamp(OrbDir, 0, -Dir.x), Dir.y);
-                    }
-                    else
-                    {
-                    */
-                        rb.velocity = new Vector2(Dir.x, Dir.y);
-                    //}
-                    //OrbDir = new Vector2(OrbDir.x + (Mathf.Abs(Dir.x) / 60), OrbDir.y + (Mathf.Abs(Dir.y) / 60));
-                //}
+                rb.velocity = new Vector2(Dir.x, Dir.y);
             }
             else
             {
@@ -111,6 +97,23 @@ public class Projectile : MonoBehaviour
                         GetComponent<CircleCollider2D>().isTrigger = true;
                         transform.position = collision.gameObject.transform.position;
                         AttachedPlayer = collision.gameObject;
+                        var PlayerNum = AttachedPlayer.GetComponent<MovementBase>().playerNum;
+                        if (PlayerNum == 1)
+                        {
+                            SpecialButton = "Special";
+                        }
+                        else if (PlayerNum == 2)
+                        {
+                            SpecialButton = "Special2";
+                        }
+                        else if (PlayerNum == 3)
+                        {
+                            SpecialButton = "Special3";
+                        }
+                        else if (PlayerNum == 4)
+                        {
+                            SpecialButton = "Special4";
+                        }
                     }
                     else
                     {

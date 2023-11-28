@@ -324,7 +324,7 @@ MonoBehaviour:
   DashSpd: 20
   DashCooldown: 3
   Proj: {fileID: 6904130312289336542, guid: b66e2818a5014524b8cc98117b5d9057, type: 3}
-  ProjSpd: 10
+  ProjSpd: 9
   RecoilDistance: 0.075
   RecoilSpd: 0
   ReloadTime: 4
