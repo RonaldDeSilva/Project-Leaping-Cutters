@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class UmbrellaOpenMS : MonoBehaviour
 {
+    #region Parameters
+
     public Sprite UmbrellaOpen;
     public Sprite UmbrellaClosed;
     private bool Activated;
@@ -25,6 +27,9 @@ public class UmbrellaOpenMS : MonoBehaviour
 
     private int childNum;
 
+    #endregion
+
+    #region Initialization
     void Start()
     {
         StopAllCoroutines();
@@ -59,6 +64,9 @@ public class UmbrellaOpenMS : MonoBehaviour
         Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.white;
     }
 
+    #endregion
+
+    #region Input and Activation
     void FixedUpdate()
     {
         if (Input.GetAxis(SpecialButton) > 0 && !Activated && !CooldownPeriod)
@@ -86,6 +94,9 @@ public class UmbrellaOpenMS : MonoBehaviour
 
     }
 
+    #endregion
+
+    #region Coroutines
     IEnumerator Changer()
     {
         Activated = true;
@@ -116,5 +127,5 @@ public class UmbrellaOpenMS : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GracePeriod = false;
     }
-
+    #endregion
 }

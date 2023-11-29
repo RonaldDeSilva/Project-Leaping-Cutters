@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    #region Parameters
+
     //Projectile script which makes the projectiles fly through the air in the proper direction
     //and speed and also delete after hitting an object
 
@@ -18,27 +20,44 @@ public class Projectile : MonoBehaviour
     private bool Attached;
     private GameObject AttachedPlayer;
     private string SpecialButton;
+    private string RightStickInputHorizontal;
+    private string RightStickInputVertical;
+    private float ProjSpeed;
+    private GameObject OrbDirObj;
 
     //Types of Proj
     public bool Bubble;
     private float buoyancy = 0f;
     public bool Orb;
 
+    #endregion
 
-
+    #region Initialization
     //On Awaken the projectile is given a direction to fly in
     public void Awaken(Vector2 Direction, GameObject Play)
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         Player = Play;
         Dir = Direction;
+        if (Orb)
+        {
+            RightStickInputHorizontal = "RStickHorizontal";
+            RightStickInputVertical = "RStickVertical";
+            ProjSpeed = Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd;
+            OrbDirObj = Player.transform.parent.GetChild(3).gameObject;
+        }
     }
 
+    #endregion
+
+    #region Flying Code AKA FixedUpdate
     //Sends the projectile in the proper direction by setting its velocity
     void FixedUpdate()
     {
         if (flying)
         {
+            #region Bubble Code for scuba steve
+
             if (Bubble)
             {
                 if (Dir.x > 0)
@@ -64,15 +83,27 @@ public class Projectile : MonoBehaviour
                         Destroy(this.gameObject);
                     }
                 }
-            } 
+            }
+
+            #endregion
+
+            #region Orb Code for Wizard
+
             else if (Orb)
             {
-                var angle = ((Player.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
+                Debug.Log(Input.GetAxis(RightStickInputVertical) + " " + Input.GetAxis(RightStickInputHorizontal));
+                OrbDirObj.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(Input.GetAxis(RightStickInputVertical), Input.GetAxis(RightStickInputHorizontal)) * Mathf.Rad2Deg);
+                var angle = ((OrbDirObj.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
                 var newX = Mathf.Cos(angle);
                 var newY = Mathf.Sin(angle);
-                Dir = new Vector2(newX * Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd, newY * Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd);
-                rb.velocity = new Vector2(Dir.x, Dir.y);
+                Dir = new Vector2(newX * ProjSpeed, newY * ProjSpeed);
+                //rb.velocity = new Vector2(Dir.x, Dir.y);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                rb.velocity = new Vector2(0, 0);
             }
+
+            #endregion
+
             else
             {
                 rb.velocity = Dir;
@@ -81,9 +112,14 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Collision Code
     //This collision checker decides whether the projectile will keep flying or fall through the floor, based on whether it hits a player or the ground
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        #region Bubble for Scuba Steve
+
         if (Bubble)
         {
             if (!Attached)
@@ -137,6 +173,11 @@ public class Projectile : MonoBehaviour
                 }
             }
         }
+
+        #endregion
+
+        #region Everything Else
+
         else
         {
             if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Weapon") && collision.gameObject != Player)
@@ -164,8 +205,11 @@ public class Projectile : MonoBehaviour
                 }
             }
         }
-    }
 
+        #endregion
+
+    }
+    #region Trigger collision
     //This Trigger exit check destroys bullets that are off screen to keep clutter in the level to a minimum and keep performance good
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -188,7 +232,12 @@ public class Projectile : MonoBehaviour
             }
         }
     }
-    
+
+    #endregion
+
+    #endregion
+
+    #region Destruction Coroutines
     //This Coroutine is for hitting a wall and immediately makes the bullet fall instead of hitting the wall for a while
     IEnumerator Destroy2()
     {
@@ -209,14 +258,6 @@ public class Projectile : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
-    /*
-    IEnumerator OrbCooldown()
-    {
-        OrbStart = true;
-        yield return new WaitForSeconds(2f);
-        OrbTurned = true;
-        yield return new WaitForSeconds(2f);
-        Destroy(this.gameObject);
-    }
-    */
+
+    #endregion
 }

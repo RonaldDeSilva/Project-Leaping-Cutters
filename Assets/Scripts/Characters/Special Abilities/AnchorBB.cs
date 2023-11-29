@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class AnchorBB : MonoBehaviour
 {
+    #region Parameters
+
     private bool Activated;
     private bool CooldownPeriod;
     private bool GracePeriod;
@@ -31,6 +33,9 @@ public class AnchorBB : MonoBehaviour
 
     private int childNum;
 
+    #endregion
+
+    #region Initialization
     void Start()
     {
         StopAllCoroutines();
@@ -71,7 +76,9 @@ public class AnchorBB : MonoBehaviour
         }
         Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.white;
     }
+    #endregion
 
+    #region Input and Activation
     void FixedUpdate()
     {
         if (Input.GetAxis(SpecialButton) > 0 && !Activated && !CooldownPeriod)
@@ -103,6 +110,9 @@ public class AnchorBB : MonoBehaviour
 
     }
 
+    #endregion
+
+    #region Coroutines
     IEnumerator Changer()
     {
         rb.mass = NewWeight;
@@ -140,4 +150,5 @@ public class AnchorBB : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GracePeriod = false;
     }
+    #endregion
 }
