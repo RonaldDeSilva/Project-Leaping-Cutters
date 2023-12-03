@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MysteriousStranger: {fileID: 662692897522745152, guid: e767be329b543be44b16bfda54037185, type: 3}
   BabyBeard: {fileID: 5158307581939245473, guid: 82a1f68a92a193f42b41936985dcf499, type: 3}
+  WizGuy: {fileID: 2947134115435590360, guid: 3e68f1d90bc30c84c92d69f86d1c124e, type: 3}
+  ScubaSteve: {fileID: 5293153883580321367, guid: 5407a095a56b6df4db22b869c2701cf5, type: 3}

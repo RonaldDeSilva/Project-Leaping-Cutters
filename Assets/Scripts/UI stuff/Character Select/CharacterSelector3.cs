@@ -36,5 +36,13 @@ public class CharacterSelector3 : MonoBehaviour
         {
             PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "BabyBeard";
         }
+        else if (collision.gameObject.CompareTag("WizGuy"))
+        {
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "WizGuy";
+        }
+        else if (collision.gameObject.CompareTag("ScubaSteve"))
+        {
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "ScubaSteve";
+        }
     }
 }

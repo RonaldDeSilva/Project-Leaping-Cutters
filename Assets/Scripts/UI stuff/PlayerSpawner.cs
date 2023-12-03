@@ -12,6 +12,9 @@ public class PlayerSpawner : MonoBehaviour
     //--------------------------------------------------------------------------------------------------
     public GameObject BabyBeard;
 
+    public GameObject WizGuy;
+
+    public GameObject ScubaSteve;
 
     //-----------------------------------------------------------------------------
     /*
@@ -59,6 +62,16 @@ public class PlayerSpawner : MonoBehaviour
         {
             GameObject p = Instantiate(BabyBeard, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
             p.GetComponent<MovementBase>().Awaken(1);
+        } 
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "WizGuy")
+        {
+            GameObject p = Instantiate(WizGuy, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(1);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "ScubaSteve")
+        {
+            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(1);
         }
 
         //Player 2 Stuff --------------------------------------------------------------------------------------------------
@@ -85,6 +98,16 @@ public class PlayerSpawner : MonoBehaviour
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "BabyBeard")
         {
             GameObject p = Instantiate(BabyBeard, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(2);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "WizGuy")
+        {
+            GameObject p = Instantiate(WizGuy, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(2);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "ScubaSteve")
+        {
+            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
             p.GetComponent<MovementBase>().Awaken(2);
         }
 
@@ -114,6 +137,16 @@ public class PlayerSpawner : MonoBehaviour
             GameObject p = Instantiate(BabyBeard, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
             p.GetComponent<MovementBase>().Awaken(3);
         }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "WizGuy")
+        {
+            GameObject p = Instantiate(WizGuy, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(3);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "ScubaSteve")
+        {
+            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(3);
+        }
 
         //Player 4 Stuff --------------------------------------------------------------------------------------------------
 
@@ -139,6 +172,16 @@ public class PlayerSpawner : MonoBehaviour
         else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "BabyBeard")
         {
             GameObject p = Instantiate(BabyBeard, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(4);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "WizGuy")
+        {
+            GameObject p = Instantiate(WizGuy, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+            p.GetComponent<MovementBase>().Awaken(4);
+        }
+        else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "ScubaSteve")
+        {
+            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
             p.GetComponent<MovementBase>().Awaken(4);
         }
     }
