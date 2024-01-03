@@ -23,7 +23,6 @@ public class Projectile : MonoBehaviour
     private string RightStickInputHorizontal;
     private string RightStickInputVertical;
     private float ProjSpeed;
-    private GameObject OrbDirObj;
 
     //Types of Proj
     public bool Bubble;
@@ -63,7 +62,6 @@ public class Projectile : MonoBehaviour
                 RightStickInputVertical = "RStickVertical4";
             }
             ProjSpeed = Player.transform.parent.gameObject.GetComponent<ShooterScript>().ProjSpd;
-            OrbDirObj = Player.transform.parent.GetChild(3).gameObject;
         }
     }
 
