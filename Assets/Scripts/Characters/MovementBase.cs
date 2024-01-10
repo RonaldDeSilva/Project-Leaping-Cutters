@@ -18,6 +18,7 @@ public class MovementBase : MonoBehaviour
     private Transform Respawn;
     public GameObject Player;
     private GameObject Can;
+    private Animator anim;
 
     //Attributes
     public float spd;
@@ -101,7 +102,7 @@ public class MovementBase : MonoBehaviour
 
         hinge = GetComponent<HingeJoint2D>();
         Can = GameObject.Find("Canvas");
-        lives = int.Parse(Can.transform.GetChild(childNum).gameObject.GetComponent<Text>().text);
+        lives = int.Parse(Can.transform.GetChild(childNum).GetComponentInChildren<Text>().text.ToString());
         arm = gameObject.transform.GetChild(0).gameObject;
         arm.transform.rotation = new Quaternion(0, 0, 0, 0);
         arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + armHeight, 0);
@@ -115,6 +116,7 @@ public class MovementBase : MonoBehaviour
         arm.GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;
         transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+        anim = Can.transform.GetChild(childNum).gameObject.GetComponent<Animator>();
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
@@ -328,7 +330,15 @@ public class MovementBase : MonoBehaviour
             if (lives >= 1)
             {
                 lives -= 1;
-                Can.gameObject.transform.GetChild(childNum).gameObject.GetComponent<Text>().text = lives.ToString();
+                Can.transform.GetChild(childNum).GetComponentInChildren<Text>().text = lives.ToString();
+                if (lives == 2)
+                {
+                    anim.Play("Lives animation", 0, 0.25f);
+                }
+                else if (lives == 1)
+                {
+                    anim.Play("Lives animation", 0, 0.5f);
+                }
                 GetComponent<ShooterScript>().dying = true;
                 GetComponent<CapsuleCollider2D>().enabled = false;
                 StartCoroutine("Death");
@@ -337,7 +347,8 @@ public class MovementBase : MonoBehaviour
             else
             {
                 lives -= 1;
-                Can.gameObject.transform.GetChild(childNum).gameObject.GetComponent<Text>().text = lives.ToString();
+                Can.transform.GetChild(childNum).GetComponentInChildren<Text>().text = lives.ToString();
+                anim.Play("Lives animation", 0, 1f);
                 GetComponent<ShooterScript>().dying = true;
                 GetComponent<CapsuleCollider2D>().enabled = false;
                 StartCoroutine("Death2");
