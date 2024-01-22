@@ -18,7 +18,6 @@ public class MovementBase : MonoBehaviour
     private Transform Respawn;
     public GameObject Player;
     private GameObject Can;
-    private Animator anim;
 
     //Attributes
     public float spd;
@@ -116,7 +115,6 @@ public class MovementBase : MonoBehaviour
         arm.GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;
         transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
-        anim = Can.transform.GetChild(childNum).gameObject.GetComponent<Animator>();
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
@@ -327,17 +325,17 @@ public class MovementBase : MonoBehaviour
     {
         if (collision.CompareTag("Deathbox") && !dying)
         {
-            if (lives >= 1)
+            if (lives > 1)
             {
                 lives -= 1;
                 Can.transform.GetChild(childNum).GetComponentInChildren<Text>().text = lives.ToString();
                 if (lives == 2)
                 {
-                    anim.Play("Lives animation", 0, 0.25f);
+                    Can.transform.GetChild(childNum).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().Lives2;
                 }
                 else if (lives == 1)
                 {
-                    anim.Play("Lives animation", 0, 0.5f);
+                    Can.transform.GetChild(childNum).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().Lives1;
                 }
                 GetComponent<ShooterScript>().dying = true;
                 GetComponent<CapsuleCollider2D>().enabled = false;
@@ -348,21 +346,20 @@ public class MovementBase : MonoBehaviour
             {
                 lives -= 1;
                 Can.transform.GetChild(childNum).GetComponentInChildren<Text>().text = lives.ToString();
-                anim.Play("Lives animation", 0, 1f);
+                Can.transform.GetChild(childNum).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().Lives0;
                 GetComponent<ShooterScript>().dying = true;
                 GetComponent<CapsuleCollider2D>().enabled = false;
                 StartCoroutine("Death2");
                 dying = true;
             }
-
         }
     }
 
     IEnumerator Death()
     {
         hinge.motor = motorRef3;
-        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
-        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown5;
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown5;
         var sound = Instantiate(AudioPlayer);
         GetComponent<SpriteRenderer>().enabled = false;
         arm.GetComponent<SpriteRenderer>().enabled = false;
@@ -389,8 +386,8 @@ public class MovementBase : MonoBehaviour
     IEnumerator Death2()
     {
         hinge.motor = motorRef3;
-        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
-        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.blue;
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown5;
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown5;
         var sound = Instantiate(AudioPlayer); 
         if (SceneManager.GetActiveScene().name == "BabyBeards_Ship")
         {
@@ -402,7 +399,6 @@ public class MovementBase : MonoBehaviour
         }
         Destroy(this.gameObject);
         yield return new WaitForSeconds(0.1f);
-        
     }
 
     #endregion

@@ -52,7 +52,7 @@ public class Specialabilitybasewithnospecifics : MonoBehaviour
             SpecialButton = "Special4";
             childNum = 3;
         }
-        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.white;
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().SpecialCooldown5;
     }
     #endregion
 
@@ -81,14 +81,22 @@ public class Specialabilitybasewithnospecifics : MonoBehaviour
         var sound2 = Instantiate(AudioPlayer);
         sound2.GetComponent<SoundPlayer>().Awaken(ActivationSound, 1f);
         Activated = true;
-        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.black;
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().SpecialCooldown0;
         yield return new WaitForSeconds(1f);
     }
 
     IEnumerator SpecialCooldown()
     {
-        yield return new WaitForSeconds(Cooldown);
-        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(Cooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().SpecialCooldown1;
+        yield return new WaitForSeconds(Cooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().SpecialCooldown2;
+        yield return new WaitForSeconds(Cooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().SpecialCooldown3;
+        yield return new WaitForSeconds(Cooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().SpecialCooldown4;
+        yield return new WaitForSeconds(Cooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(3).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().SpecialCooldown5;
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(CooldownSound, 1f);
         CooldownPeriod = false;

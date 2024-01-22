@@ -77,11 +77,9 @@ public class LevelSelector : MonoBehaviour
                 Can = GameObject.Find("Canvas").GetComponent<Canvas>();
             }
             var dead = 0;
-            int[] list = new int[4];
             for (int i = 0; i < 4; i++)
             {
-                list[i] = int.Parse(Can.gameObject.transform.GetChild(i).gameObject.GetComponent<Text>().text);
-                if (int.Parse(Can.gameObject.transform.GetChild(i).gameObject.GetComponent<Text>().text) <= 0)
+                if (int.Parse(Can.gameObject.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Text>().text) <= 0)
                 {
                     dead += 1;
                 }

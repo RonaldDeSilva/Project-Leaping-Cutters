@@ -192,10 +192,10 @@ public class ShooterScript : MonoBehaviour
         var newY = Mathf.Sin(angle);
         DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
-        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.black;
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(DashingSound, 1f);
         yield return new WaitForSeconds(DashDistance);
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown0;
         Dashed = true;
         StartCoroutine("DashCooldownTimer");
     }
@@ -203,10 +203,18 @@ public class ShooterScript : MonoBehaviour
     IEnumerator DashCooldownTimer()
     {
         Dashing = false;
-        yield return new WaitForSeconds(DashCooldown);
+        yield return new WaitForSeconds(DashCooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown1;
+        yield return new WaitForSeconds(DashCooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown2;
+        yield return new WaitForSeconds(DashCooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown3;
+        yield return new WaitForSeconds(DashCooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown4;
+        yield return new WaitForSeconds(DashCooldown / 5);
+        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown5;
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(DashCooldownSound, 1f);
-        Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().color = Color.white;
         Dashed = false;
     }
     #endregion
@@ -224,8 +232,8 @@ public class ShooterScript : MonoBehaviour
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 0.6f);
         Recoiling = true;
-        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.black;
         yield return new WaitForSeconds(RecoilDistance);
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown0;
         Reloading = true;
         StartCoroutine("ShootCooldownTimer");
     }
@@ -233,7 +241,16 @@ public class ShooterScript : MonoBehaviour
     IEnumerator ShootCooldownTimer()
     {
         Recoiling = false;
-        yield return new WaitForSeconds(ReloadTime);
+        yield return new WaitForSeconds(ReloadTime / 5);
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown1;
+        yield return new WaitForSeconds(ReloadTime / 5);
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown2;
+        yield return new WaitForSeconds(ReloadTime / 5);
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown3;
+        yield return new WaitForSeconds(ReloadTime / 5);
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown4;
+        yield return new WaitForSeconds(ReloadTime / 5);
+        Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown5;
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(ReloadingSound, 1f);
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.white;
