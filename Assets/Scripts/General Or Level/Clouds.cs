@@ -8,13 +8,13 @@ public class Clouds : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!spawnedNewGuy && transform.position.x > -0.5)
+        if (!spawnedNewGuy && transform.position.x > -0.6f)
         {
             Instantiate(Cloud, new Vector3(-73.2f, 0, 0), new Quaternion(0,0,0,0));
             spawnedNewGuy = true;
         }
 
-        transform.position = new Vector3(transform.position.x + (2 * Time.deltaTime), 0, 0);
+        transform.position = new Vector3(transform.position.x + (2 * Time.fixedDeltaTime), 0, 0);
 
         if (transform.position.x > 54.8)
         {
