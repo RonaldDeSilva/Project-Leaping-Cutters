@@ -4,9 +4,11 @@ using System.Collections;
 public class SelectorScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public string collided;
+    public string collided = "";
     private SpriteRenderer sr;
-    
+    public Color ButtonCol;
+    public Color OrigButtonCol;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,7 +21,7 @@ public class SelectorScript : MonoBehaviour
         {
             var hor = Input.GetAxis("HorizontalAll");
             var ver = Input.GetAxis("VerticalAll");
-            rb.velocity = new Vector2(hor * 3f, -ver * 3f);
+            rb.velocity = new Vector2(hor * 2f, -ver * 2f);
         }
         else
         {
@@ -31,6 +33,13 @@ public class SelectorScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collided = collision.gameObject.tag;
+        collision.gameObject.GetComponent<SpriteRenderer>().color = ButtonCol;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        collided = "";
+        collision.gameObject.GetComponent<SpriteRenderer>().color = OrigButtonCol;
     }
 
     IEnumerator Colors()

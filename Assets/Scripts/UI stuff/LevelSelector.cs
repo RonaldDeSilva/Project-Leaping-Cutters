@@ -10,6 +10,7 @@ public class LevelSelector : MonoBehaviour
     public GameObject AudioPlayer;
     public AudioClip WinSound;
     private bool menu = false;
+    private GameObject Countdown;
 
     void Awake()
     {
@@ -18,58 +19,75 @@ public class LevelSelector : MonoBehaviour
 
     void Update()
     {
+        #region Character Select
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
-
+            Countdown = GameObject.Find("CountDown");
             if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
                 PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " &&
                 PlayerTracker.GetComponent<PlayerTracker>().Player3 != " " && PlayerTracker.GetComponent<PlayerTracker>().Player4 != " ")
             {
-                SceneManager.LoadScene("LevelSelect");
+                if (!Countdown.GetComponent<Countdown>().Counting)
+                {
+                    Countdown.GetComponent<Countdown>().StartCoroutine("CountingDown");
+                }
+
+                if (Countdown.GetComponent<Countdown>().Counted == true)
+                {
+                    SceneManager.LoadScene("LevelSelect");
+                }
+            }
+            else
+            {
+                Countdown.GetComponent<Countdown>().StopAllCoroutines();
+                Countdown.GetComponent<Countdown>().Counting = false;
             }
         }
+        #endregion
+
+        #region Level Select
         else if (SceneManager.GetActiveScene().name == "LevelSelect")
         {
             var Selector = GameObject.Find("Selector");
-            if (Selector.GetComponent<SelectorScript>().collided != null)
+            Countdown = GameObject.Find("CountDown");
+            if (Selector.GetComponent<SelectorScript>().collided != "")
             {
-                if (Selector.GetComponent<SelectorScript>().collided == "ThePit")
+                if (!Countdown.GetComponent<Countdown>().Counting)
                 {
-                    SceneManager.LoadScene("ThePit-4Player");
+                    Countdown.GetComponent<Countdown>().StartCoroutine("CountingDown");
                 }
-                else if (Selector.GetComponent<SelectorScript>().collided == "BabyBeardsShip")
+                if (Countdown.GetComponent<Countdown>().Counted == true)
                 {
-                    SceneManager.LoadScene("BabyBeards_Ship");
-                }
-                else if (Selector.GetComponent<SelectorScript>().collided == "Peak")
-                {
-                    SceneManager.LoadScene("Peak");
+                    if (Selector.GetComponent<SelectorScript>().collided == "ThePit")
+                    {
+                        SceneManager.LoadScene("ThePit-4Player");
+                    }
+                    else if (Selector.GetComponent<SelectorScript>().collided == "BabyBeardsShip")
+                    {
+                        SceneManager.LoadScene("BabyBeards_Ship");
+                    }
+                    else if (Selector.GetComponent<SelectorScript>().collided == "Peak")
+                    {
+                        SceneManager.LoadScene("Peak");
+                    }
                 }
             }
+            else
+            {
+                Countdown.GetComponent<Countdown>().StopAllCoroutines();
+                Countdown.GetComponent<Countdown>().Counting = false;
+            }
         }
+        #endregion
+
+        #region Start Screen
         else if (SceneManager.GetActiveScene().name == "StartScreen")
         {
             SceneManager.LoadScene("CharacterSelect");
         }
-        /*
-        else if (SceneManager.GetActiveScene().name == "StunSelector")
-        {
-            var Selector = GameObject.Find("Selector");
-            if (Selector.GetComponent<SelectorScript>().collided != null)
-            {
-                if (Selector.GetComponent<SelectorScript>().collided == "Stun")
-                {
-                    PlayerTracker.GetComponent<PlayerTracker>().Stun = true;
-                    SceneManager.LoadScene("LevelSelect");
-                }
-                else if (Selector.GetComponent<SelectorScript>().collided == "Normal")
-                {
-                    PlayerTracker.GetComponent<PlayerTracker>().Stun = false;
-                    SceneManager.LoadScene("LevelSelect");
-                }
-            }
-        }
-        */
+        #endregion
+
+        #region In A Level
         else
         {
             if (Can == null)
@@ -91,8 +109,7 @@ public class LevelSelector : MonoBehaviour
                 menu = true;
             }
         }
-        
-        
+        #endregion
     }
 
     IEnumerator Menu()

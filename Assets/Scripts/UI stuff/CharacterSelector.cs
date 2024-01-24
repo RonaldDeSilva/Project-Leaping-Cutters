@@ -80,79 +80,19 @@ public class CharacterSelector : MonoBehaviour
         collision.gameObject.GetComponent<SpriteRenderer>().color = ButtonCol;
         if (PlayerNum == 1)
         {
-            if (collision.gameObject.CompareTag("MysteriousStranger"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = "MysteriousStranger";
-            }
-            else if (collision.gameObject.CompareTag("BabyBeard"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = "BabyBeard";
-            }
-            else if (collision.gameObject.CompareTag("WizGuy"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = "WizGuy";
-            }
-            else if (collision.gameObject.CompareTag("ScubaSteve"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = "ScubaSteve";
-            }
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = collision.gameObject.tag;
         }
         else if (PlayerNum == 2)
         {
-            if (collision.gameObject.CompareTag("MysteriousStranger"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = "MysteriousStranger";
-            }
-            else if (collision.gameObject.CompareTag("BabyBeard"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = "BabyBeard";
-            }
-            else if (collision.gameObject.CompareTag("WizGuy"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = "WizGuy";
-            }
-            else if (collision.gameObject.CompareTag("ScubaSteve"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = "ScubaSteve";
-            }
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = collision.gameObject.tag;
         }
         else if (PlayerNum == 3)
         {
-            if (collision.gameObject.CompareTag("MysteriousStranger"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "MysteriousStranger";
-            }
-            else if (collision.gameObject.CompareTag("BabyBeard"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "BabyBeard";
-            }
-            else if (collision.gameObject.CompareTag("WizGuy"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "WizGuy";
-            }
-            else if (collision.gameObject.CompareTag("ScubaSteve"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "ScubaSteve";
-            }
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = collision.gameObject.tag;
         }
         else if (PlayerNum == 4)
         {
-            if (collision.gameObject.CompareTag("MysteriousStranger"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = "MysteriousStranger";
-            }
-            else if (collision.gameObject.CompareTag("BabyBeard"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = "BabyBeard";
-            }
-            else if (collision.gameObject.CompareTag("WizGuy"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = "WizGuy";
-            }
-            else if (collision.gameObject.CompareTag("ScubaSteve"))
-            {
-                PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = "ScubaSteve";
-            }
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = collision.gameObject.tag;
         }
     }
     
@@ -177,19 +117,19 @@ public class CharacterSelector : MonoBehaviour
 
         if (PlayerNum == 1)
         {
-            PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = "";
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player1 = " ";
         }
         else if (PlayerNum == 2)
         {
-            PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = "";
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player2 = " ";
         }
         else if (PlayerNum == 3)
         {
-            PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = "";
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player3 = " ";
         }
         else if (PlayerNum == 4)
         {
-            PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = "";
+            PlayerTrackerThing.GetComponent<PlayerTracker>().Player4 = " ";
         }
     }
 }

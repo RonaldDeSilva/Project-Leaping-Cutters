@@ -18,6 +18,7 @@ TagManager:
   - Peak
   - ScubaSteve
   - WizGuy
+  - ' '
   layers:
   - Default
   - TransparentFX
