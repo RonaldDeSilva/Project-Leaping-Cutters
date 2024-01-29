@@ -22,97 +22,226 @@ public class PlayerSpawner : MonoBehaviour
         Spawn4 = GameObject.Find("Respawn4").transform;
         PlayerTracker = GameObject.Find("PlayerTrackerThing");
 
-        //Player1 Stuff ---------------------------------------------------------------------------------------
+        #region 4 Players
 
-        if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
+        if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 4)
         {
-            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(1);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "BabyBeard")
-        {
-            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(1);
-        } 
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "WizGuy")
-        {
-            GameObject p = Instantiate(WizGuy, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(1);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "ScubaSteve")
-        {
-            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(1);
-        }
+            //Player1 Stuff ---------------------------------------------------------------------------------------
 
-        //Player 2 Stuff --------------------------------------------------------------------------------------------------
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
 
-        if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
-        {
-            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(2);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "BabyBeard")
-        {
-            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(2);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "WizGuy")
-        {
-            GameObject p = Instantiate(WizGuy, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(2);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "ScubaSteve")
-        {
-            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(2);
-        }
+            //Player 2 Stuff --------------------------------------------------------------------------------------------------
 
-        //Player 3 Stuff --------------------------------------------------------------------------------------------------
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
 
-        if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "MysteriousStranger")
-        {
-            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(3);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "BabyBeard")
-        {
-            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(3);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "WizGuy")
-        {
-            GameObject p = Instantiate(WizGuy, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(3);
-        }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "ScubaSteve")
-        {
-            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(3);
-        }
+            //Player 3 Stuff --------------------------------------------------------------------------------------------------
 
-        //Player 4 Stuff --------------------------------------------------------------------------------------------------
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
 
-        if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "MysteriousStranger")
-        {
-            GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(4);
+            //Player 4 Stuff --------------------------------------------------------------------------------------------------
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(4);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(4);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(4);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(4);
+            }
         }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "BabyBeard")
+        #endregion
+        #region 3 Players
+        else if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 3)
         {
-            GameObject p = Instantiate(BabyBeard, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(4);
+            //Player1 Stuff ---------------------------------------------------------------------------------------
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+
+            //Player 2 Stuff --------------------------------------------------------------------------------------------------
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+
+            //Player 3 Stuff --------------------------------------------------------------------------------------------------
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player3 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn3.position.x, Spawn3.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(3);
+            }
         }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "WizGuy")
+        #endregion
+        #region 2 Players
+        else if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 2)
         {
-            GameObject p = Instantiate(WizGuy, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(4);
+            //Player1 Stuff ---------------------------------------------------------------------------------------
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player1 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn1.position.x, Spawn1.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(1);
+            }
+
+            //Player 2 Stuff --------------------------------------------------------------------------------------------------
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "MysteriousStranger")
+            {
+                GameObject p = Instantiate(MysteriousStranger, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "BabyBeard")
+            {
+                GameObject p = Instantiate(BabyBeard, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "WizGuy")
+            {
+                GameObject p = Instantiate(WizGuy, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().Player2 == "ScubaSteve")
+            {
+                GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn2.position.x, Spawn2.position.y, 0), this.transform.rotation);
+                p.GetComponent<MovementBase>().Awaken(2);
+            }
         }
-        else if (PlayerTracker.GetComponent<PlayerTracker>().Player4 == "ScubaSteve")
-        {
-            GameObject p = Instantiate(ScubaSteve, new Vector3(Spawn4.position.x, Spawn4.position.y, 0), this.transform.rotation);
-            p.GetComponent<MovementBase>().Awaken(4);
-        }
+        #endregion
     }
 
 }

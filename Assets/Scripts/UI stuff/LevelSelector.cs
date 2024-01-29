@@ -23,24 +23,70 @@ public class LevelSelector : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             Countdown = GameObject.Find("CountDown");
-            if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
-                PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " &&
-                PlayerTracker.GetComponent<PlayerTracker>().Player3 != " " && PlayerTracker.GetComponent<PlayerTracker>().Player4 != " ")
+            if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 4)
             {
-                if (!Countdown.GetComponent<Countdown>().Counting)
+                if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
+                    PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " &&
+                    PlayerTracker.GetComponent<PlayerTracker>().Player3 != " " && PlayerTracker.GetComponent<PlayerTracker>().Player4 != " ")
                 {
-                    Countdown.GetComponent<Countdown>().StartCoroutine("CountingDown");
-                }
+                    if (!Countdown.GetComponent<Countdown>().Counting)
+                    {
+                        Countdown.GetComponent<Countdown>().StartCoroutine("CountingDown");
+                    }
 
-                if (Countdown.GetComponent<Countdown>().Counted == true)
+                    if (Countdown.GetComponent<Countdown>().Counted == true)
+                    {
+                        SceneManager.LoadScene("LevelSelect");
+                    }
+                }
+                else
                 {
-                    SceneManager.LoadScene("LevelSelect");
+                    Countdown.GetComponent<Countdown>().StopAllCoroutines();
+                    Countdown.GetComponent<Countdown>().Counting = false;
+                }
+            } 
+            else if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 3)
+            {
+                if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
+                    PlayerTracker.GetComponent<PlayerTracker>().Player2 != " " &&
+                    PlayerTracker.GetComponent<PlayerTracker>().Player3 != " ")
+                {
+                    if (!Countdown.GetComponent<Countdown>().Counting)
+                    {
+                        Countdown.GetComponent<Countdown>().StartCoroutine("CountingDown");
+                    }
+
+                    if (Countdown.GetComponent<Countdown>().Counted == true)
+                    {
+                        SceneManager.LoadScene("LevelSelect");
+                    }
+                }
+                else
+                {
+                    Countdown.GetComponent<Countdown>().StopAllCoroutines();
+                    Countdown.GetComponent<Countdown>().Counting = false;
                 }
             }
-            else
+            else if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 2)
             {
-                Countdown.GetComponent<Countdown>().StopAllCoroutines();
-                Countdown.GetComponent<Countdown>().Counting = false;
+                if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
+                    PlayerTracker.GetComponent<PlayerTracker>().Player2 != " ")
+                {
+                    if (!Countdown.GetComponent<Countdown>().Counting)
+                    {
+                        Countdown.GetComponent<Countdown>().StartCoroutine("CountingDown");
+                    }
+
+                    if (Countdown.GetComponent<Countdown>().Counted == true)
+                    {
+                        SceneManager.LoadScene("LevelSelect");
+                    }
+                }
+                else
+                {
+                    Countdown.GetComponent<Countdown>().StopAllCoroutines();
+                    Countdown.GetComponent<Countdown>().Counting = false;
+                }
             }
         }
         #endregion
@@ -94,19 +140,57 @@ public class LevelSelector : MonoBehaviour
             {
                 Can = GameObject.Find("Canvas").GetComponent<Canvas>();
             }
-            var dead = 0;
-            for (int i = 0; i < 4; i++)
+
+            if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 4)
             {
-                if (int.Parse(Can.gameObject.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Text>().text) <= 0)
+                var dead = 0;
+                for (int i = 0; i < 4; i++)
                 {
-                    dead += 1;
+                    if (int.Parse(Can.gameObject.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Text>().text) <= 0)
+                    {
+                        dead += 1;
+                    }
+                }
+
+                if (dead >= 3 && menu == false)
+                {
+                    StartCoroutine("Menu");
+                    menu = true;
                 }
             }
-
-            if (dead >= 3 && menu == false)
+            else if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 3)
             {
-                StartCoroutine("Menu");
-                menu = true;
+                var dead = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (int.Parse(Can.gameObject.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Text>().text) <= 0)
+                    {
+                        dead += 1;
+                    }
+                }
+
+                if (dead >= 2 && menu == false)
+                {
+                    StartCoroutine("Menu");
+                    menu = true;
+                }
+            }
+            else if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 2)
+            {
+                var dead = 0;
+                for (int i = 0; i < 2; i++)
+                {
+                    if (int.Parse(Can.gameObject.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Text>().text) <= 0)
+                    {
+                        dead += 1;
+                    }
+                }
+
+                if (dead >= 1 && menu == false)
+                {
+                    StartCoroutine("Menu");
+                    menu = true;
+                }
             }
         }
         #endregion
