@@ -259,13 +259,14 @@ public class ShooterScript : MonoBehaviour
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------
     #region Punch Coroutines
-    
+
     IEnumerator Punch()
     {
         var angle = ((arm.transform.localEulerAngles.z + 90) * Mathf.Deg2Rad);
         var newX = Mathf.Cos(angle);
         var newY = Mathf.Sin(angle);
         PunchDir = new Vector2(newX * PunchSpd, newY * PunchSpd);
+        PunchDir = new Vector2(PunchDir.x * Mathf.Clamp(Mathf.Abs(rb.velocity.x), 1, 1.5f), PunchDir.y * Mathf.Clamp(Mathf.Abs(rb.velocity.y), 1, 1.5f));
         ArmJoint.enabled = false;
         Fist.GetComponent<CopyRot>().Off = true;
         Punching = true;
@@ -275,7 +276,7 @@ public class ShooterScript : MonoBehaviour
         Fist.GetComponent<Rigidbody2D>().mass = FistWeight;
         Fist.GetComponent<CapsuleCollider2D>().isTrigger = false;
         yield return new WaitForSeconds(PunchDuration);
-        Punched = true; 
+        Punched = true;
         Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
         Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
         StartCoroutine("Return");

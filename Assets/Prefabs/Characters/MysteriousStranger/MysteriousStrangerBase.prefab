@@ -264,6 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 662692897522745152}
   spd: 400
+  dying: 0
   playerNum: 1
   armHeight: 1.346
   AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
@@ -297,9 +298,9 @@ MonoBehaviour:
   RecoilDistance: 0.075
   RecoilSpd: 20
   ReloadTime: 4
-  PunchSpd: 16
+  PunchSpd: 23
   PunchCooldown: 0.5
-  PunchDuration: 0.3
+  PunchDuration: 0.13
   FistWeight: 40
   FistLocation: {fileID: 2602654169306063019}
   AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
