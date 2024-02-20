@@ -39,13 +39,11 @@ public class Experimentalpunch : MonoBehaviour
     private bool Punched = false;
     private bool Returning = false;
     private Vector2 PunchDir;
-    private Transform FistLocation;
-    private Vector3 ArmLocation;
-    private Quaternion ArmRotation;
     private GameObject Fist;
     private HingeJoint2D ArmJoint;
     private SpringJoint2D SpringJoint;
     public GameObject ArmSpot;
+    private bool PunchRecoil = false;
 
     //Player number specific Attributes
     private int playerNum;
@@ -165,9 +163,8 @@ public class Experimentalpunch : MonoBehaviour
             //Input for the Punch ability
             if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
             {
-                ArmLocation = arm.transform.position;
-                ArmRotation = arm.transform.rotation;
                 this.GetComponent<MovementBase>().dying = true;
+                ArmSpot.GetComponent<CopyRot>().Off = true;
                 StartCoroutine("Punch");
                 Punched = true;
                 
@@ -176,14 +173,34 @@ public class Experimentalpunch : MonoBehaviour
             if (Punching)
             {
                 arm.GetComponent<Rigidbody2D>().velocity = PunchDir;
-                Debug.Log(ArmLocation);
+                if (!PunchRecoil)
+                {
+                    var List = new Collider2D[5];
+                    var isTrue = false;
+                    arm.GetComponent<CapsuleCollider2D>().OverlapCollider(new ContactFilter2D(), List);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (List[i] != null)
+                        {
+                            if (List[i].gameObject.CompareTag("Platform"))
+                            {
+                                isTrue = true;
+                            }
+                        }
+                    }
+
+                    if (isTrue)
+                    {
+                        rb.AddForce(-PunchDir * 10, ForceMode2D.Impulse);
+                        PunchRecoil = true;
+                    }
+                }
             }
-            
+
             if (Returning)
             {
                 var returnVel = new Vector2((this.transform.position.x - arm.transform.position.x) * (PunchSpd / 2), (this.transform.position.y - arm.transform.position.y) * (PunchSpd / 2));
                 arm.GetComponent<Rigidbody2D>().velocity = returnVel;
-                Debug.Log(ArmRotation);
             }
             
         }
@@ -277,26 +294,21 @@ public class Experimentalpunch : MonoBehaviour
         var newX = Mathf.Cos(angle);
         var newY = Mathf.Sin(angle);
         PunchDir = new Vector2(newX * PunchSpd, newY * PunchSpd);
-        PunchDir = new Vector2(PunchDir.x * Mathf.Clamp(Mathf.Abs(rb.velocity.x), 1, 1.5f), PunchDir.y * Mathf.Clamp(Mathf.Abs(rb.velocity.y), 1, 1.5f));
-        ArmSpot.GetComponent<CopyRot>().Off = true;
+        PunchDir = new Vector2(PunchDir.x * Mathf.Clamp(Mathf.Abs(rb.velocity.x), 1f, 1.5f), PunchDir.y * Mathf.Clamp(Mathf.Abs(rb.velocity.y), 1f, 1.5f));
         ArmJoint.enabled = false;
-        SpringJoint.enabled = false; 
-        //Fist.GetComponent<CopyRot>().Off = true;
+        SpringJoint.enabled = false;
+        PunchRecoil = false;
         Punching = true;
         Punched = false;
         arm.GetComponent<Rigidbody2D>().freezeRotation = true;
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(ArmShootSound, 1f);
-        //yield return new WaitForSeconds(0.08f);
-        //Fist.GetComponent<Rigidbody2D>().mass = FistWeight;
-        //Fist.GetComponent<CapsuleCollider2D>().isTrigger = false;
         yield return new WaitForSeconds(PunchDuration);
         Punched = true;
-        //Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
-        //Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
         Punching = false;
         StartCoroutine("Return");
     }
+
 
     IEnumerator Return()
     {
@@ -309,11 +321,12 @@ public class Experimentalpunch : MonoBehaviour
         Returning = false;
         arm.transform.position = ArmSpot.transform.position;
         arm.transform.rotation = ArmSpot.transform.rotation;
-        ArmSpot.GetComponent<CopyRot>().Off = false;
-        SpringJoint.enabled = true;
         arm.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
         ArmJoint.enabled = true;
         this.GetComponent<MovementBase>().dying = false;
+        yield return new WaitForSeconds(0.08f);
+        SpringJoint.enabled = true;
+        ArmSpot.GetComponent<CopyRot>().Off = false;
         yield return new WaitForSeconds(PunchCooldown);
         Punched = false;
     }

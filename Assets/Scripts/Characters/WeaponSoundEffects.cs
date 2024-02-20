@@ -48,6 +48,8 @@ public class WeaponSoundEffects : MonoBehaviour
                     sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
                     HitTimer1 = 0.3f;
                     StartCoroutine("HitResetter1");
+                    //transform.parent.GetComponent<Experimentalpunch>().StartCoroutine("PunchBodyImpact");
+
                 }
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
                 {
@@ -78,6 +80,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     HitTimer2 = 0.3f;
                     sound5.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
                     StartCoroutine("HitResetter2");
+                    //transform.parent.GetComponent<Experimentalpunch>().StartCoroutine("PunchBodyImpact");
                 }
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
                 {
@@ -108,6 +111,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     sound7.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
                     HitTimer3 = 0.3f;
                     StartCoroutine("HitResetter3");
+                    //transform.parent.GetComponent<Experimentalpunch>().StartCoroutine("PunchBodyImpact");
                 }
                 else if (collision.gameObject.CompareTag("Weapon") && collision.gameObject != AlreadyHitMe && collision.gameObject != AlreadyHitMe2 && collision.gameObject != AlreadyHitMe3)
                 {

@@ -15,12 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/LevelSelect.unity
     guid: bbefd77566826484b87cf4b26a3daee6
   - enabled: 1
-    path: Assets/Scenes/Maps/ThePit-4Player.unity
+    path: Assets/Scenes/Maps/Finished/ThePit-4Player.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Maps/BabyBeards_Ship.unity
+    path: Assets/Scenes/Maps/Finished/BabyBeards_Ship.unity
     guid: 4ceab01fa69cf21408cb37c49d37ba9d
   - enabled: 1
-    path: Assets/Scenes/Maps/Peak.unity
+    path: Assets/Scenes/Maps/In Progress Or Potential/Peak.unity
     guid: b0bbc2bdbd6b7794da6133cda414a959
   m_configObjects: {}

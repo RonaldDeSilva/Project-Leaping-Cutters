@@ -377,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 5158307581939245473}
   spd: 400
+  dying: 0
   playerNum: 1
   armHeight: 0.9
   AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
@@ -625,7 +626,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c7366ee91a70b4d9dce38d144a7906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thing: {fileID: 5158307581281084204}
   Off: 0
+  CopyPos: 0
 --- !u!233 &8977365418553804990
 HingeJoint2D:
   m_ObjectHideFlags: 0
