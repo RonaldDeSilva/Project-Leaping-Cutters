@@ -1092,7 +1092,7 @@ MonoBehaviour:
   PunchCooldown: 0.5
   PunchDuration: 0.13
   FistWeight: 40
-  ArmSpot: {fileID: 37626579}
+  ArmSpot: {fileID: 0}
   AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
   GunShotSound: {fileID: 8300000, guid: f9ab3f320f24d364aa2c55ef1f57639f, type: 3}
   ReloadingSound: {fileID: 8300000, guid: d3248dea439b2c647bbe6167b0be2537, type: 3}
@@ -1101,6 +1101,39 @@ MonoBehaviour:
   DashingSound: {fileID: 8300000, guid: 7c3c0793888fd1b42a5aa24d3d3e47f6, type: 3}
   DashCooldownSound: {fileID: 8300000, guid: 29987594a6423514cad079ce077870a4, type: 3}
   dying: 0
+  XCoordinates:
+  - -0.019
+  - 0.97
+  - 1.509
+  - 1.113
+  - 0.229
+  - -0.612
+  - -1.259
+  - -0.948
+  - -0.0511
+  - 0.169
+  YCoordinates:
+  - 1.344
+  - 1.061
+  - 0.0322
+  - -1.0138
+  - -1.4269
+  - -1.222
+  - -0.221
+  - 0.85
+  - 1.34
+  - 1.35
+  ZRotCoordinates:
+  - 0.8
+  - 317.4
+  - 268
+  - 220.6
+  - 179.5
+  - 143.3
+  - 92.5
+  - 45.3
+  - 2.1
+  - 353
 --- !u!70 &662692897779319592
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

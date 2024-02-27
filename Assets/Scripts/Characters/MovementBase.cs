@@ -178,6 +178,10 @@ public class MovementBase : MonoBehaviour
                         {
                             hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
                         }
+                        else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 360, 1.5f))
+                        {
+                            hinge.motor = new JointMotor2D { motorSpeed = spd / 15, maxMotorTorque = 10000 };
+                        }
                     }
                     else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
                     {
@@ -205,6 +209,10 @@ public class MovementBase : MonoBehaviour
                         {
                             hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
                         }
+                        else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z + 180, 1.5f))
+                        {
+                            hinge.motor = new JointMotor2D { motorSpeed = spd / 15, maxMotorTorque = 10000 };
+                        }
                     }
                     else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
                     {
@@ -221,6 +229,10 @@ public class MovementBase : MonoBehaviour
                     else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 3.5f))
                     {
                         hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 1.5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = -spd / 15, maxMotorTorque = 10000 };
                     }
                 }
                 else if (armRot.z < controllerRot.z && !ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 1.5f))
@@ -246,6 +258,10 @@ public class MovementBase : MonoBehaviour
                         else if (!ApproximatelyFunction.FastApproximately(armRot.z + 360, controllerRot.z, 3.5f))
                         {
                             hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
+                        }
+                        else if (!ApproximatelyFunction.FastApproximately(armRot.z + 360, controllerRot.z, 1.5f))
+                        {
+                            hinge.motor = new JointMotor2D { motorSpeed = -spd / 15, maxMotorTorque = 10000 };
                         }
                     }
                     else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 20f))
@@ -274,6 +290,10 @@ public class MovementBase : MonoBehaviour
                         {
                             hinge.motor = new JointMotor2D { motorSpeed = -spd / 10, maxMotorTorque = 10000 };
                         }
+                        else if (!ApproximatelyFunction.FastApproximately(armRot.z + 180, controllerRot.z, 1.5f))
+                        {
+                            hinge.motor = new JointMotor2D { motorSpeed = -spd / 15, maxMotorTorque = 10000 };
+                        }
                     }
                     else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 10f))
                     {
@@ -290,6 +310,10 @@ public class MovementBase : MonoBehaviour
                     else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 3.5f))
                     {
                         hinge.motor = new JointMotor2D { motorSpeed = spd / 10, maxMotorTorque = 10000 };
+                    }
+                    else if (!ApproximatelyFunction.FastApproximately(armRot.z, controllerRot.z, 1.5f))
+                    {
+                        hinge.motor = new JointMotor2D { motorSpeed = spd / 15, maxMotorTorque = 10000 };
                     }
                 }
                 else

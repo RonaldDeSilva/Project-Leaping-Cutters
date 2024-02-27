@@ -42,8 +42,8 @@ public class Experimentalpunch : MonoBehaviour
     private GameObject Fist;
     private HingeJoint2D ArmJoint;
     private SpringJoint2D SpringJoint;
-    public GameObject ArmSpot;
     private bool PunchRecoil = false;
+    public GameObject ArmSpot;
 
     //Player number specific Attributes
     private int playerNum;
@@ -61,6 +61,10 @@ public class Experimentalpunch : MonoBehaviour
     public AudioClip DashingSound;
     public AudioClip DashCooldownSound;
     public bool dying;
+
+    public float[] XCoordinates = new float[10];
+    public float[] YCoordinates = new float[10];
+    public float[] ZRotCoordinates = new float[10];
 
 
     #endregion
@@ -130,6 +134,7 @@ public class Experimentalpunch : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(arm.transform.eulerAngles);
         if (!dying)
         {
             //Input for the dash ability
@@ -164,7 +169,7 @@ public class Experimentalpunch : MonoBehaviour
             if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
             {
                 this.GetComponent<MovementBase>().dying = true;
-                ArmSpot.GetComponent<CopyRot>().Off = true;
+                //ArmSpot.GetComponent<CopyRot>().Off = true;
                 StartCoroutine("Punch");
                 Punched = true;
                 
@@ -312,21 +317,30 @@ public class Experimentalpunch : MonoBehaviour
 
     IEnumerator Return()
     {
-
         Returning = true;
         yield return new WaitForSeconds(PunchDuration / 2);
+        var closest = 200f;
+        var num = 0;
+        for (int i = 0; i < 10; i++)
+        {
+            if (Mathf.Abs(arm.transform.eulerAngles.z - ZRotCoordinates[i]) < closest)
+            {
+                num = i;
+                closest = Mathf.Abs(arm.transform.eulerAngles.z - ZRotCoordinates[i]);
+            }
+        }
         arm.GetComponent<Rigidbody2D>().freezeRotation = false;
         var sound = Instantiate(AudioPlayer);
         sound.GetComponent<SoundPlayer>().Awaken(ArmReturnSound, 1f);
         Returning = false;
-        arm.transform.position = ArmSpot.transform.position;
-        arm.transform.rotation = ArmSpot.transform.rotation;
+        arm.transform.localPosition = new Vector3(XCoordinates[num], YCoordinates[num], 0);
+        arm.transform.eulerAngles = new Vector3(0,0, ZRotCoordinates[num]);
         arm.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        SpringJoint.enabled = true;
         ArmJoint.enabled = true;
         this.GetComponent<MovementBase>().dying = false;
         yield return new WaitForSeconds(0.08f);
-        SpringJoint.enabled = true;
-        ArmSpot.GetComponent<CopyRot>().Off = false;
+        //ArmSpot.GetComponent<CopyRot>().Off = false;
         yield return new WaitForSeconds(PunchCooldown);
         Punched = false;
     }
