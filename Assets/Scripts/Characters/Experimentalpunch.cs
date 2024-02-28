@@ -43,7 +43,6 @@ public class Experimentalpunch : MonoBehaviour
     private HingeJoint2D ArmJoint;
     private SpringJoint2D SpringJoint;
     private bool PunchRecoil = false;
-    public GameObject ArmSpot;
 
     //Player number specific Attributes
     private int playerNum;
@@ -134,7 +133,6 @@ public class Experimentalpunch : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(arm.transform.eulerAngles);
         if (!dying)
         {
             //Input for the dash ability
@@ -169,7 +167,6 @@ public class Experimentalpunch : MonoBehaviour
             if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
             {
                 this.GetComponent<MovementBase>().dying = true;
-                //ArmSpot.GetComponent<CopyRot>().Off = true;
                 StartCoroutine("Punch");
                 Punched = true;
                 
@@ -196,7 +193,8 @@ public class Experimentalpunch : MonoBehaviour
 
                     if (isTrue)
                     {
-                        rb.AddForce(-PunchDir * 10, ForceMode2D.Impulse);
+                        //rb.AddForce(-PunchDir * 10, ForceMode2D.Impulse);
+                        rb.velocity = -PunchDir;
                         PunchRecoil = true;
                     }
                 }
@@ -340,7 +338,6 @@ public class Experimentalpunch : MonoBehaviour
         ArmJoint.enabled = true;
         this.GetComponent<MovementBase>().dying = false;
         yield return new WaitForSeconds(0.08f);
-        //ArmSpot.GetComponent<CopyRot>().Off = false;
         yield return new WaitForSeconds(PunchCooldown);
         Punched = false;
     }

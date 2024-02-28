@@ -194,8 +194,38 @@ public class Projectile : MonoBehaviour
 
         #endregion
 
-        #region Everything Else
+        #region Orb for Wizard
 
+        else if (Orb)
+        {
+            if (collision.gameObject != Player && collision.gameObject != Player.transform.parent.gameObject)
+            {
+                if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Weapon"))
+                {
+                    if (collision.gameObject.CompareTag("Player"))
+                    {
+                        var inst = Instantiate(AudioPlayer);
+                        inst.GetComponent<SoundPlayer>().Awaken(hitPlayer, 1f);
+                    }
+                    else
+                    {
+                        var inst = Instantiate(AudioPlayer);
+                        inst.GetComponent<SoundPlayer>().Awaken(hitWeapon, 1f);
+                    }
+                    StartCoroutine("Destroy2");
+                    collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Dir.x * Impact, Dir.y * Impact), ForceMode2D.Impulse);
+                }
+                else
+                {
+                    var inst = Instantiate(AudioPlayer);
+                    inst.GetComponent<SoundPlayer>().Awaken(hitWall, 1f);
+                    StartCoroutine("Destroy2");
+                }
+            }
+        }
+        #endregion
+
+        #region Everything else
         else
         {
             if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Weapon") && collision.gameObject != Player)
@@ -256,7 +286,7 @@ public class Projectile : MonoBehaviour
     #endregion
 
     #region Destruction Coroutines
-    //This Coroutine is for hitting a wall and immediately makes the bullet fall instead of hitting the wall for a while
+    //This Coroutine is for hitting something and immediately makes the bullet fall instead of hitting the wall for a while
     IEnumerator Destroy2()
     {
         flying = false;
