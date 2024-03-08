@@ -80,7 +80,7 @@ public class Experimentalpunch : MonoBehaviour
         ArmJoint = this.GetComponent<HingeJoint2D>();
         SpringJoint = arm.GetComponent<SpringJoint2D>();
         ArmJoint.enabled = true;
-        Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
+        //Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
         Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
         Fist.GetComponent<CopyRot>().Off = false;
         Fist.SetActive(true);

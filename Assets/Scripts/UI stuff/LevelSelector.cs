@@ -11,6 +11,7 @@ public class LevelSelector : MonoBehaviour
     public AudioClip WinSound;
     private bool menu = false;
     private GameObject Countdown;
+    private GameObject Title;
 
     void Awake()
     {
@@ -129,7 +130,22 @@ public class LevelSelector : MonoBehaviour
         #region Start Screen
         else if (SceneManager.GetActiveScene().name == "StartScreen")
         {
-            SceneManager.LoadScene("CharacterSelect");
+            Title = GameObject.Find("Title Selector");
+            if (Input.GetAxis("Dash") > 0 || Input.GetAxis("Dash2") > 0 || Input.GetAxis("Dash3") > 0 || Input.GetAxis("Dash4") > 0)
+            {
+                if (Title.GetComponent<TitleSelector>().CurrentSpot == "Start")
+                {
+                    SceneManager.LoadScene("CharacterSelect");
+                }
+                else if (Title.GetComponent<TitleSelector>().CurrentSpot == "Settings")
+                {
+                    //Put Settings page here
+                }
+                else if (Title.GetComponent<TitleSelector>().CurrentSpot == "Quit")
+                {
+                    Application.Quit();
+                }
+            }
         }
         #endregion
 
