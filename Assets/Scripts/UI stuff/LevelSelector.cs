@@ -139,13 +139,20 @@ public class LevelSelector : MonoBehaviour
                 }
                 else if (Title.GetComponent<TitleSelector>().CurrentSpot == "Settings")
                 {
-                    //Put Settings page here
+                    SceneManager.LoadScene("Settings");
                 }
                 else if (Title.GetComponent<TitleSelector>().CurrentSpot == "Quit")
                 {
                     Application.Quit();
                 }
             }
+        }
+        #endregion
+
+        #region Settings
+        else if (SceneManager.GetActiveScene().name == "Settings")
+        {
+            
         }
         #endregion
 

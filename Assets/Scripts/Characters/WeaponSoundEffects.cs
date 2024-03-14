@@ -36,7 +36,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.7f);
+                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.6f);
                     HitTimer1 = 1f;
                     StartCoroutine("HitResetter1");
                 }
@@ -45,8 +45,8 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe = collision.gameObject;
                     HitCount += 1;
                     var sound2 = Instantiate(AudioPlayer);
-                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
-                    HitTimer1 = 0.3f;
+                    sound2.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.45f);
+                    HitTimer1 = 0.5f;
                     StartCoroutine("HitResetter1");
                     //transform.parent.GetComponent<Experimentalpunch>().StartCoroutine("PunchBodyImpact");
 
@@ -68,7 +68,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe2 = collision.gameObject;
                     HitCount += 1;
                     var sound4 = Instantiate(AudioPlayer);
-                    sound4.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.7f);
+                    sound4.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.6f);
                     HitTimer2 = 1f;
                     StartCoroutine("HitResetter2");
                 }
@@ -77,8 +77,8 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe2 = collision.gameObject;
                     HitCount += 1;
                     var sound5 = Instantiate(AudioPlayer);
-                    HitTimer2 = 0.3f;
-                    sound5.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
+                    HitTimer2 = 0.5f;
+                    sound5.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.45f);
                     StartCoroutine("HitResetter2");
                     //transform.parent.GetComponent<Experimentalpunch>().StartCoroutine("PunchBodyImpact");
                 }
@@ -99,7 +99,7 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound6 = Instantiate(AudioPlayer);
-                    sound6.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.7f);
+                    sound6.GetComponent<SoundPlayer>().Awaken(WeaponHittingPlayer, 0.6f);
                     HitTimer3 = 1f;
                     StartCoroutine("HitResetter3");
                 }
@@ -108,8 +108,8 @@ public class WeaponSoundEffects : MonoBehaviour
                     AlreadyHitMe3 = collision.gameObject;
                     HitCount = 1;
                     var sound7 = Instantiate(AudioPlayer);
-                    sound7.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.6f);
-                    HitTimer3 = 0.3f;
+                    sound7.GetComponent<SoundPlayer>().Awaken(WeaponHittingWall, 0.45f);
+                    HitTimer3 = 0.5f;
                     StartCoroutine("HitResetter3");
                     //transform.parent.GetComponent<Experimentalpunch>().StartCoroutine("PunchBodyImpact");
                 }
@@ -125,6 +125,7 @@ public class WeaponSoundEffects : MonoBehaviour
             }
         }
     }
+
 
     IEnumerator HitResetter1()
     {

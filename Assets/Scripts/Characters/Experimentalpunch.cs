@@ -81,8 +81,8 @@ public class Experimentalpunch : MonoBehaviour
         SpringJoint = arm.GetComponent<SpringJoint2D>();
         ArmJoint.enabled = true;
         //Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
-        Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
-        Fist.GetComponent<CopyRot>().Off = false;
+        //Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
+        //Fist.GetComponent<CopyRot>().Off = false;
         Fist.SetActive(true);
         playerNum = GetComponent<MovementBase>().playerNum;
         Recoiling = false;
@@ -224,7 +224,7 @@ public class Experimentalpunch : MonoBehaviour
         DashDir = new Vector2(newX * DashSpd, newY * DashSpd);
         Dashing = true;
         var sound = Instantiate(AudioPlayer);
-        sound.GetComponent<SoundPlayer>().Awaken(DashingSound, 1f);
+        sound.GetComponent<SoundPlayer>().Awaken(DashingSound, 0.8f);
         yield return new WaitForSeconds(DashDistance);
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown0;
         Dashed = true;
@@ -245,7 +245,7 @@ public class Experimentalpunch : MonoBehaviour
         yield return new WaitForSeconds(DashCooldown / 5);
         Can.transform.GetChild(childNum).GetChild(1).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().DashCooldown5;
         var sound = Instantiate(AudioPlayer);
-        sound.GetComponent<SoundPlayer>().Awaken(DashCooldownSound, 1f);
+        sound.GetComponent<SoundPlayer>().Awaken(DashCooldownSound, 0.8f);
         Dashed = false;
     }
     #endregion
@@ -261,7 +261,7 @@ public class Experimentalpunch : MonoBehaviour
         var pj = Instantiate(Proj, new Vector3(arm.transform.GetChild(0).transform.position.x, arm.transform.GetChild(0).transform.position.y, 0), arm.transform.rotation);
         pj.GetComponent<Projectile>().Awaken(ProjDir, this.transform.GetChild(0).gameObject);
         var sound = Instantiate(AudioPlayer);
-        sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 0.6f);
+        sound.GetComponent<SoundPlayer>().Awaken(GunShotSound, 0.28f);
         Recoiling = true;
         yield return new WaitForSeconds(RecoilDistance);
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown0;
@@ -283,7 +283,7 @@ public class Experimentalpunch : MonoBehaviour
         yield return new WaitForSeconds(ReloadTime / 5);
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().sprite = Can.GetComponent<LivesTextures>().ReloadCooldown5;
         var sound = Instantiate(AudioPlayer);
-        sound.GetComponent<SoundPlayer>().Awaken(ReloadingSound, 1f);
+        sound.GetComponent<SoundPlayer>().Awaken(ReloadingSound, 0.8f);
         Can.transform.GetChild(childNum).GetChild(2).gameObject.GetComponent<Image>().color = Color.white;
         Reloading = false;
     }
@@ -305,7 +305,7 @@ public class Experimentalpunch : MonoBehaviour
         Punched = false;
         arm.GetComponent<Rigidbody2D>().freezeRotation = true;
         var sound = Instantiate(AudioPlayer);
-        sound.GetComponent<SoundPlayer>().Awaken(ArmShootSound, 1f);
+        sound.GetComponent<SoundPlayer>().Awaken(ArmShootSound, 0.8f);
         yield return new WaitForSeconds(PunchDuration);
         Punched = true;
         Punching = false;
@@ -329,7 +329,7 @@ public class Experimentalpunch : MonoBehaviour
         }
         arm.GetComponent<Rigidbody2D>().freezeRotation = false;
         var sound = Instantiate(AudioPlayer);
-        sound.GetComponent<SoundPlayer>().Awaken(ArmReturnSound, 1f);
+        sound.GetComponent<SoundPlayer>().Awaken(ArmReturnSound, 0.8f);
         Returning = false;
         arm.transform.localPosition = new Vector3(XCoordinates[num], YCoordinates[num], 0);
         arm.transform.eulerAngles = new Vector3(0,0, ZRotCoordinates[num]);
