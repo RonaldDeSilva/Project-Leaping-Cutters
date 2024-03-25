@@ -34,12 +34,11 @@ public class Experimentalpunch : MonoBehaviour
     public float PunchSpd;
     public float PunchCooldown;
     public float PunchDuration;
-    public float FistWeight;
     private bool Punching = false;
     private bool Punched = false;
     private bool Returning = false;
     private Vector2 PunchDir;
-    private GameObject Fist;
+    private HingeJoint2D Fist;
     private HingeJoint2D ArmJoint;
     private SpringJoint2D SpringJoint;
     private bool PunchRecoil = false;
@@ -76,14 +75,10 @@ public class Experimentalpunch : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Can = GameObject.Find("Canvas");
         arm = gameObject.transform.GetChild(0).gameObject;
-        Fist = gameObject.transform.GetChild(1).gameObject;
+        Fist = gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<HingeJoint2D>();
         ArmJoint = this.GetComponent<HingeJoint2D>();
         SpringJoint = arm.GetComponent<SpringJoint2D>();
         ArmJoint.enabled = true;
-        //Fist.GetComponent<CapsuleCollider2D>().isTrigger = true;
-        //Fist.GetComponent<Rigidbody2D>().mass = 0.0001f;
-        //Fist.GetComponent<CopyRot>().Off = false;
-        Fist.SetActive(true);
         playerNum = GetComponent<MovementBase>().playerNum;
         Recoiling = false;
         Dashed = false;
@@ -162,6 +157,8 @@ public class Experimentalpunch : MonoBehaviour
             }
 
             //---------------------------------------------------------------------------------------------------------------------------
+            
+            #region Punching
 
             //Input for the Punch ability
             if (Input.GetAxis(punchInput) > 0 && !Recoiling && !Dashing && !Punching && !Punched && !Returning)
@@ -171,7 +168,9 @@ public class Experimentalpunch : MonoBehaviour
                 Punched = true;
                 
             }
+            
 
+            
             if (Punching)
             {
                 arm.GetComponent<Rigidbody2D>().velocity = PunchDir;
@@ -205,7 +204,7 @@ public class Experimentalpunch : MonoBehaviour
                 var returnVel = new Vector2((this.transform.position.x - arm.transform.position.x) * (PunchSpd / 2), (this.transform.position.y - arm.transform.position.y) * (PunchSpd / 2));
                 arm.GetComponent<Rigidbody2D>().velocity = returnVel;
             }
-            
+            #endregion
         }
         else
         {
@@ -300,6 +299,7 @@ public class Experimentalpunch : MonoBehaviour
         PunchDir = new Vector2(PunchDir.x * Mathf.Clamp(Mathf.Abs(rb.velocity.x), 1f, 1.5f), PunchDir.y * Mathf.Clamp(Mathf.Abs(rb.velocity.y), 1f, 1.5f));
         ArmJoint.enabled = false;
         SpringJoint.enabled = false;
+        Fist.enabled = false;
         PunchRecoil = false;
         Punching = true;
         Punched = false;
@@ -336,6 +336,7 @@ public class Experimentalpunch : MonoBehaviour
         arm.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
         SpringJoint.enabled = true;
         ArmJoint.enabled = true;
+        Fist.enabled = true;
         this.GetComponent<MovementBase>().dying = false;
         yield return new WaitForSeconds(0.08f);
         yield return new WaitForSeconds(PunchCooldown);
