@@ -419,7 +419,7 @@ Transform:
   m_GameObject: {fileID: 440987402}
   m_LocalRotation: {x: -0, y: -0, z: 0.152605, w: 0.9882873}
   m_LocalPosition: {x: -0.17, y: 0.303, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_Children:
   - {fileID: 2138986205}
   m_Father: {fileID: 662692897128726949}
@@ -440,15 +440,15 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0.66}
-  m_ConnectedAnchor: {x: -0.24963188, y: 0.5547037}
+  m_ConnectedAnchor: {x: -0.25958538, y: 0.58616686}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: 267.72
+    m_UpperAngle: 481.21
 --- !u!50 &440987405
 Rigidbody2D:
   serializedVersion: 4
@@ -464,7 +464,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -536,7 +536,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.66}
-  m_ConnectedAnchor: {x: 0.078130715, y: -0.83673775}
+  m_ConnectedAnchor: {x: 0.042133834, y: -0.76867855}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -993,6 +993,7 @@ GameObject:
   - component: {fileID: 2138986208}
   - component: {fileID: 2138986207}
   - component: {fileID: 2138986206}
+  - component: {fileID: 2138986209}
   m_Layer: 0
   m_Name: Forearm
   m_TagString: Untagged
@@ -1008,8 +1009,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138986204}
   m_LocalRotation: {x: -0, y: -0, z: -0.28067443, w: 0.9598031}
-  m_LocalPosition: {x: 0.385, y: 0.087, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.51, y: 0.2, z: 0}
+  m_LocalScale: {x: 0.8, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 440987403}
   m_RootOrder: 0
@@ -1021,7 +1022,7 @@ HingeJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138986204}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 662692897779319593}
@@ -1029,7 +1030,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0.87}
-  m_ConnectedAnchor: {x: -0.044335365, y: -0.9802977}
+  m_ConnectedAnchor: {x: 0.052776337, y: -0.7494625}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1053,7 +1054,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1110,6 +1111,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!235 &2138986209
+WheelJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138986204}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 662692897779319593}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0.93}
+  m_ConnectedAnchor: {x: 0.06188774, y: -0.7155657}
+  m_Suspension:
+    m_DampingRatio: 0.7
+    m_Frequency: 2
+    m_Angle: 90
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
 --- !u!114 &234257635007521466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,7 +1337,6 @@ MonoBehaviour:
   PunchSpd: 23
   PunchCooldown: 0.5
   PunchDuration: 0.13
-  FistWeight: 40
   AudioPlayer: {fileID: 7144562999985675470, guid: bfa9f9cc773c52f4d932611452ccbff8, type: 3}
   GunShotSound: {fileID: 8300000, guid: f9ab3f320f24d364aa2c55ef1f57639f, type: 3}
   ReloadingSound: {fileID: 8300000, guid: d3248dea439b2c647bbe6167b0be2537, type: 3}
