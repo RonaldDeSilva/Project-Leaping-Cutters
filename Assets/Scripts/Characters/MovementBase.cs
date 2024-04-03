@@ -103,8 +103,8 @@ public class MovementBase : MonoBehaviour
         Can = GameObject.Find("Canvas");
         lives = int.Parse(Can.transform.GetChild(childNum).GetComponentInChildren<Text>().text.ToString());
         arm = gameObject.transform.GetChild(0).gameObject;
-        arm.transform.rotation = new Quaternion(0, 0, 0, 0);
-        arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + armHeight, 0);
+        //arm.transform.rotation = new Quaternion(0, 0, 0, 0);
+        //arm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + armHeight, 0);
         AlreadyHitMe = null;
         AlreadyHitMe2 = null;
         AlreadyHitMe3 = null;
