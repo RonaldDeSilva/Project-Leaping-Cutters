@@ -301,7 +301,7 @@ public class Experimentalpunch : MonoBehaviour
         ArmJoint.enabled = false;
         SpringJoint.enabled = false;
         Fist.GetComponents<HingeJoint2D>()[0].enabled = false;
-        Fist.GetComponent<Rigidbody2D>().freezeRotation = true;
+        Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         PrevPosition = transform.rotation;
         PunchRecoil = false;
         Punching = true;
@@ -341,7 +341,7 @@ public class Experimentalpunch : MonoBehaviour
         SpringJoint.enabled = true;
         ArmJoint.enabled = true;
         Fist.GetComponents<HingeJoint2D>()[0].enabled = true;
-        Fist.GetComponent<Rigidbody2D>().freezeRotation = false;
+        Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         this.GetComponent<MovementBase>().dying = false;
         yield return new WaitForSeconds(0.08f);
         yield return new WaitForSeconds(PunchCooldown);

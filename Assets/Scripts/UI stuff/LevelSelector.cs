@@ -128,7 +128,7 @@ public class LevelSelector : MonoBehaviour
         #endregion
 
         #region Start Screen
-        else if (SceneManager.GetActiveScene().name == "StartScreen")
+        else if (SceneManager.GetActiveScene().name == "StartScreen" || SceneManager.GetActiveScene().name == "StartScreen1")
         {
             Title = GameObject.Find("Title Selector");
             if (Input.GetAxis("Dash") > 0 || Input.GetAxis("Dash2") > 0 || Input.GetAxis("Dash3") > 0 || Input.GetAxis("Dash4") > 0)

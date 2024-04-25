@@ -57,7 +57,7 @@ public class Settings : MonoBehaviour
 
     public void BackButton()
     {
-        SceneManager.LoadScene("StartScreen");
+        SceneManager.LoadScene("StartScreen1");
     }
 
     public void SaveSettings()
