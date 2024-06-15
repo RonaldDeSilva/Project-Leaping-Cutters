@@ -37,6 +37,7 @@ public class Experimentalpunch : MonoBehaviour
     private bool Punching = false;
     private bool Punched = false;
     private bool Returning = false;
+    private bool ArmGrabbingWeapon = false;
     private Vector2 PunchDir;
     private GameObject Fist;
     private HingeJoint2D ArmJoint;
@@ -76,7 +77,7 @@ public class Experimentalpunch : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Can = GameObject.Find("Canvas");
         arm = gameObject.transform.GetChild(0).gameObject;
-        //Fist = gameObject.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
+        Fist = gameObject.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
         ArmJoint = this.GetComponent<HingeJoint2D>();
         SpringJoint = arm.GetComponent<SpringJoint2D>();
         ArmJoint.enabled = true;
@@ -89,6 +90,7 @@ public class Experimentalpunch : MonoBehaviour
         Punched = false;
         Returning = false;
         dying = false;
+        ArmGrabbingWeapon = false;
 
         if (playerNum == 1)
         {
@@ -205,6 +207,16 @@ public class Experimentalpunch : MonoBehaviour
                 var returnVel = new Vector2((this.transform.position.x - arm.transform.position.x) * (PunchSpd / 2), (this.transform.position.y - arm.transform.position.y) * (PunchSpd / 2));
                 arm.GetComponent<Rigidbody2D>().velocity = returnVel;
             }
+
+            if (ArmGrabbingWeapon)
+            {
+                Fist.GetComponent<Rigidbody2D>().velocity = new Vector2((arm.transform.GetChild(1).position.x - Fist.transform.position.x), arm.transform.GetChild(1).position.y - Fist.transform.position.y);
+                if (ApproximatelyFunction.FastApproximately(arm.transform.GetChild(1).position.x, Fist.transform.position.x, 0.1f) && ApproximatelyFunction.FastApproximately(arm.transform.GetChild(1).position.y, Fist.transform.position.y, 0.1f))
+                {
+                    Fist.GetComponents<HingeJoint2D>()[0].enabled = true;
+                    ArmGrabbingWeapon = false;
+                }
+            }
             #endregion
         }
         else
@@ -300,8 +312,8 @@ public class Experimentalpunch : MonoBehaviour
         PunchDir = new Vector2(PunchDir.x * Mathf.Clamp(Mathf.Abs(rb.velocity.x), 1f, 1.5f), PunchDir.y * Mathf.Clamp(Mathf.Abs(rb.velocity.y), 1f, 1.5f));
         ArmJoint.enabled = false;
         SpringJoint.enabled = false;
-        //Fist.GetComponents<HingeJoint2D>()[0].enabled = false;
-        //Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        Fist.GetComponents<HingeJoint2D>()[0].enabled = false;
+        Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         PrevPosition = transform.rotation;
         PunchRecoil = false;
         Punching = true;
@@ -340,10 +352,10 @@ public class Experimentalpunch : MonoBehaviour
         arm.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
         SpringJoint.enabled = true;
         ArmJoint.enabled = true;
-        //Fist.GetComponents<HingeJoint2D>()[0].enabled = true;
-        //Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        this.GetComponent<MovementBase>().dying = false;
+        Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        ArmGrabbingWeapon = true;
         yield return new WaitForSeconds(0.08f);
+        this.GetComponent<MovementBase>().dying = false;
         yield return new WaitForSeconds(PunchCooldown);
         Punched = false;
     }

@@ -12,10 +12,14 @@ public class LevelSelector : MonoBehaviour
     private bool menu = false;
     private GameObject Countdown;
     private GameObject Title;
+    private GameObject music;
+    private bool doOnce = false;
+
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        music = GameObject.Find("Music Player");
     }
 
     void Update()
@@ -23,7 +27,15 @@ public class LevelSelector : MonoBehaviour
         #region Character Select
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
-            Countdown = GameObject.Find("CountDown");
+            if (!doOnce)
+            {
+                Countdown = GameObject.Find("CountDown");
+                if (music.GetComponent<AudioSource>().clip.name != "Jumpy Slice")
+                {
+                    music.GetComponent<MusicPlayer>().MenuMusic();
+                }
+                doOnce = true;
+            }
             if (PlayerTracker.GetComponent<PlayerTracker>().numPlayers == 4)
             {
                 if (PlayerTracker.GetComponent<PlayerTracker>().Player1 != " " &&
@@ -37,6 +49,7 @@ public class LevelSelector : MonoBehaviour
 
                     if (Countdown.GetComponent<Countdown>().Counted == true)
                     {
+                        doOnce = false;
                         SceneManager.LoadScene("LevelSelect");
                     }
                 }
@@ -59,6 +72,7 @@ public class LevelSelector : MonoBehaviour
 
                     if (Countdown.GetComponent<Countdown>().Counted == true)
                     {
+                        doOnce = false;
                         SceneManager.LoadScene("LevelSelect");
                     }
                 }
@@ -80,6 +94,7 @@ public class LevelSelector : MonoBehaviour
 
                     if (Countdown.GetComponent<Countdown>().Counted == true)
                     {
+                        doOnce = false;
                         SceneManager.LoadScene("LevelSelect");
                     }
                 }
@@ -95,8 +110,13 @@ public class LevelSelector : MonoBehaviour
         #region Level Select
         else if (SceneManager.GetActiveScene().name == "LevelSelect")
         {
+            
             var Selector = GameObject.Find("Selector");
-            Countdown = GameObject.Find("CountDown");
+            if (!doOnce)
+            {
+                Countdown = GameObject.Find("CountDown");
+                doOnce = true;
+            }
             if (Selector.GetComponent<SelectorScript>().collided != "")
             {
                 if (!Countdown.GetComponent<Countdown>().Counting)
@@ -107,14 +127,20 @@ public class LevelSelector : MonoBehaviour
                 {
                     if (Selector.GetComponent<SelectorScript>().collided == "ThePit")
                     {
+                        doOnce = false; 
+                        music.GetComponent<MusicPlayer>().PitMusic();
                         SceneManager.LoadScene("ThePit-4Player");
                     }
                     else if (Selector.GetComponent<SelectorScript>().collided == "BabyBeardsShip")
                     {
+                        doOnce = false;
+                        music.GetComponent<MusicPlayer>().BabyBeardMusic();
                         SceneManager.LoadScene("BabyBeards_Ship");
                     }
                     else if (Selector.GetComponent<SelectorScript>().collided == "Peak")
                     {
+                        doOnce = false;
+                        music.GetComponent<MusicPlayer>().WizardMusic();
                         SceneManager.LoadScene("Peak");
                     }
                 }
@@ -130,15 +156,25 @@ public class LevelSelector : MonoBehaviour
         #region Start Screen
         else if (SceneManager.GetActiveScene().name == "StartScreen" || SceneManager.GetActiveScene().name == "StartScreen1")
         {
-            Title = GameObject.Find("Title Selector");
+            if (!doOnce)
+            {
+                Title = GameObject.Find("Title Selector");
+                if (music.GetComponent<AudioSource>().clip.name != "Jumpy Slice")
+                {
+                    music.GetComponent<MusicPlayer>().MenuMusic();
+                }
+                doOnce = true;
+            }
             if (Input.GetAxis("Dash") > 0 || Input.GetAxis("Dash2") > 0 || Input.GetAxis("Dash3") > 0 || Input.GetAxis("Dash4") > 0)
             {
                 if (Title.GetComponent<TitleSelector>().CurrentSpot == "Start")
                 {
+                    doOnce = false;
                     SceneManager.LoadScene("CharacterSelect");
                 }
                 else if (Title.GetComponent<TitleSelector>().CurrentSpot == "Settings")
                 {
+                    doOnce = false;
                     SceneManager.LoadScene("Settings");
                 }
                 else if (Title.GetComponent<TitleSelector>().CurrentSpot == "Quit")
@@ -152,7 +188,7 @@ public class LevelSelector : MonoBehaviour
         #region Settings
         else if (SceneManager.GetActiveScene().name == "Settings")
         {
-            
+            // do something here maybe
         }
         #endregion
 
