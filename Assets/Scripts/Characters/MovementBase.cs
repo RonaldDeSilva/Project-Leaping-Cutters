@@ -114,7 +114,7 @@ public class MovementBase : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = true;
         arm.GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;
-        transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+        //transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
 
         motorRef1 = new JointMotor2D { motorSpeed = -spd, maxMotorTorque = 10000 };
         motorRef2 = new JointMotor2D { motorSpeed = spd, maxMotorTorque = 10000 };
@@ -330,13 +330,13 @@ public class MovementBase : MonoBehaviour
             {
                 this.GetComponent<SpriteRenderer>().flipX = true;
                 transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                //transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().flipX = true;
             }
             else
             {
                 this.GetComponent<SpriteRenderer>().flipX = false;
                 transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                //transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().flipX = false;
             }
         }
     }
@@ -387,7 +387,7 @@ public class MovementBase : MonoBehaviour
         var sound = Instantiate(AudioPlayer);
         GetComponent<SpriteRenderer>().enabled = false;
         arm.GetComponent<SpriteRenderer>().enabled = false;
-        transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
+        //transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
         if (SceneManager.GetActiveScene().name == "BabyBeards_Ship")
         {
             sound.GetComponent<SoundPlayer>().Awaken(DeathSound1, 0.9f);

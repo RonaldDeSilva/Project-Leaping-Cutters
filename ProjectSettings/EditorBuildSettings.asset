@@ -27,6 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Maps/Finished/BabyBeards_Ship.unity
     guid: 4ceab01fa69cf21408cb37c49d37ba9d
   - enabled: 1
-    path: Assets/Scenes/Maps/In Progress Or Potential/Peak.unity
+    path: Assets/Scenes/Maps/Finished/Peak.unity
     guid: b0bbc2bdbd6b7794da6133cda414a959
   m_configObjects: {}

@@ -76,7 +76,7 @@ public class Experimentalpunch : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Can = GameObject.Find("Canvas");
         arm = gameObject.transform.GetChild(0).gameObject;
-        Fist = gameObject.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
+        //Fist = gameObject.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
         ArmJoint = this.GetComponent<HingeJoint2D>();
         SpringJoint = arm.GetComponent<SpringJoint2D>();
         ArmJoint.enabled = true;
@@ -300,8 +300,8 @@ public class Experimentalpunch : MonoBehaviour
         PunchDir = new Vector2(PunchDir.x * Mathf.Clamp(Mathf.Abs(rb.velocity.x), 1f, 1.5f), PunchDir.y * Mathf.Clamp(Mathf.Abs(rb.velocity.y), 1f, 1.5f));
         ArmJoint.enabled = false;
         SpringJoint.enabled = false;
-        Fist.GetComponents<HingeJoint2D>()[0].enabled = false;
-        Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        //Fist.GetComponents<HingeJoint2D>()[0].enabled = false;
+        //Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         PrevPosition = transform.rotation;
         PunchRecoil = false;
         Punching = true;
@@ -340,8 +340,8 @@ public class Experimentalpunch : MonoBehaviour
         arm.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
         SpringJoint.enabled = true;
         ArmJoint.enabled = true;
-        Fist.GetComponents<HingeJoint2D>()[0].enabled = true;
-        Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        //Fist.GetComponents<HingeJoint2D>()[0].enabled = true;
+        //Fist.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         this.GetComponent<MovementBase>().dying = false;
         yield return new WaitForSeconds(0.08f);
         yield return new WaitForSeconds(PunchCooldown);
